@@ -16,8 +16,8 @@ import re
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-SITE = 'https://vincentwei1021.github.io/video-shotcraft'
-REPO = 'https://github.com/Vincentwei1021/video-shotcraft'
+SITE = 'https://shotcraft-gallery.nionionote.com'
+REPO = 'https://github.com/tron-wang/video-shotcraft'
 
 lib = json.loads((HERE / 'api' / 'library.json').read_text(encoding='utf-8'))
 

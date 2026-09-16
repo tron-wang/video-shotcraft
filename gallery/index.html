@@ -6,20 +6,20 @@
   <meta name="color-scheme" content="dark">
   <meta name="google-site-verification" content="Qu8vMAC99goV9xnwf_0ZlGGimtmj24TWFNVUiTz2mhM">
   <meta name="description" content="video-shotcraft is an AI agent skill for Claude Code &amp; Codex that makes cinematic product promo videos with Remotion. 161 shot recipe cards organized by function, tuned demos, and a production-ready template.">
-  <link rel="canonical" href="https://vincentwei1021.github.io/video-shotcraft/">
+  <link rel="canonical" href="https://shotcraft-gallery.nionionote.com/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="video-shotcraft">
   <meta property="og:title" content="video-shotcraft — AI Video Skill for Claude Code &amp; Codex">
   <meta property="og:description" content="An agent skill for crafting cinematic product videos with Remotion: 161 shot recipe cards, 218 motion previews, and a production-ready promo template.">
-  <meta property="og:url" content="https://vincentwei1021.github.io/video-shotcraft/">
-  <meta property="og:image" content="https://vincentwei1021.github.io/video-shotcraft/og-image.jpg?v=20260726b">
+  <meta property="og:url" content="https://shotcraft-gallery.nionionote.com/">
+  <meta property="og:image" content="https://shotcraft-gallery.nionionote.com/og-image.jpg?v=20260726b">
   <meta property="og:image:width" content="1280">
   <meta property="og:image:height" content="640">
   <meta property="og:image:alt" content="video-shotcraft Gallery — shot recipes and motion samples">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="video-shotcraft — AI Video Skill for Claude Code &amp; Codex">
   <meta name="twitter:description" content="An agent skill for crafting cinematic product videos with Remotion: 161 shot recipe cards, 218 motion previews, and a production-ready promo template.">
-  <meta name="twitter:image" content="https://vincentwei1021.github.io/video-shotcraft/og-image.jpg?v=20260726b">
+  <meta name="twitter:image" content="https://shotcraft-gallery.nionionote.com/og-image.jpg?v=20260726b">
   <link rel="icon" href="./logo-mark.svg" type="image/svg+xml">
   <title>video-shotcraft — AI Video Skill for Claude Code &amp; Codex | Cinematic Product Videos with Remotion</title>
   <script type="application/ld+json">
@@ -28,12 +28,12 @@
     "@type": "SoftwareApplication",
     "name": "video-shotcraft",
     "description": "An AI agent skill for Claude Code and Codex that crafts cinematic product promo videos with Remotion: 161 shot recipe cards organized by function, 218 styles, 218 motion previews, and a production-ready 36.2-second video template.",
-    "url": "https://vincentwei1021.github.io/video-shotcraft/",
-    "sameAs": ["https://github.com/Vincentwei1021/video-shotcraft"],
+    "url": "https://shotcraft-gallery.nionionote.com/",
+    "sameAs": ["https://github.com/tron-wang/video-shotcraft"],
     "applicationCategory": "MultimediaApplication",
     "operatingSystem": "macOS, Linux, Windows",
     "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
-    "softwareHelp": "https://github.com/Vincentwei1021/video-shotcraft#readme",
+    "softwareHelp": "https://github.com/tron-wang/video-shotcraft#readme",
     "license": "https://www.apache.org/licenses/LICENSE-2.0",
     "author": {"@type": "Person", "name": "Wei Yihao", "url": "https://github.com/Vincentwei1021"}
   }
@@ -238,8 +238,7 @@
       gap: 1rem;
       margin-top: 2.6rem;
     }
-    .button-primary,
-    .button-github {
+    .button-primary {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -279,57 +278,7 @@
       from { transform: translateX(-110%); }
       to { transform: translateX(110%); }
     }
-    .button-github {
-      position: relative;
-      border: 1px solid rgba(240, 237, 229, 0.35);
-      color: var(--text);
-      background: rgba(14, 14, 12, 0.5);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-    .button-github:hover {
-      transform: translateY(-2px);
-      background: rgba(240, 237, 229, 0.12);
-      border-color: rgba(211, 146, 60, 0.65);
-      box-shadow: 0 10px 34px rgba(211, 146, 60, 0.22);
-    }
-    .button-github svg { width: 20px; height: 20px; fill: currentColor; flex-shrink: 0; }
-    .star-glyph {
-      color: var(--accent);
-      transition: transform 180ms ease;
-    }
-    /* the star does one anticipation-free pop-and-settle, echoing the cards'
-       spring落定 vocabulary */
-    .button-github:hover .star-glyph { animation: star-pop 420ms cubic-bezier(0.34, 1.56, 0.64, 1); }
-    @keyframes star-pop {
-      0% { transform: scale(1) rotate(0deg); }
-      45% { transform: scale(1.45) rotate(-14deg); }
-      100% { transform: scale(1) rotate(0deg); }
-    }
-    /* star count: floating badge, only revealed on hover/focus */
-    .star-count {
-      position: absolute;
-      top: -0.85rem;
-      right: 0.9rem;
-      padding: 0.18rem 0.65rem;
-      border-radius: 999px;
-      border: 1px solid rgba(211, 146, 60, 0.5);
-      background: rgba(14, 14, 12, 0.92);
-      color: var(--accent);
-      font-size: 0.78rem;
-      font-weight: 700;
-      font-variant-numeric: tabular-nums;
-      opacity: 0;
-      transform: translateY(4px);
-      transition: opacity 160ms ease, transform 160ms ease;
-      pointer-events: none;
-    }
-    .star-count::before { content: "★ "; }
-    .button-github:hover .star-count:not(:empty),
-    .button-github:focus-visible .star-count:not(:empty) {
-      opacity: 1;
-      transform: translateY(0);
-    }
+
 
     .hero-stats {
       display: flex;
@@ -378,8 +327,7 @@
       line-height: 1.9;
       text-wrap: balance;
     }
-    html[lang="zh-CN"] .button-primary,
-    html[lang="zh-CN"] .button-github { letter-spacing: 0.08em; }
+    html[lang="zh-CN"] .button-primary { letter-spacing: 0.08em; }
     html[lang="zh-CN"] .hero-stats span { letter-spacing: 0.06em; }
 
     @media (max-width: 900px) {
@@ -388,15 +336,15 @@
     @media (max-width: 620px) {
       .wall { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(8, 1fr); }
       .hero-actions { flex-direction: column; width: 100%; max-width: 340px; }
-      .button-primary, .button-github { justify-content: center; }
+      .button-primary { justify-content: center; }
       /* the enlarged wordmark plus the language switch overflow a 390px bar */
       .brand { font-size: 0.85rem; letter-spacing: 0.08em; }
       .brand-mark { width: 28px; height: 28px; }
     }
     @media (prefers-reduced-motion: reduce) {
       .wall-tile video { transition: none; }
-      .button-primary:hover, .button-github:hover { transform: none; }
-      .button-primary:hover::after, .button-github:hover .star-glyph { animation: none; }
+      .button-primary:hover { transform: none; }
+      .button-primary:hover::after { animation: none; }
     }
 
     /* amber ring, not the browser's default blue against an amber system */
@@ -405,8 +353,7 @@
       outline-offset: 3px;
       border-radius: 4px;
     }
-    .button-primary:focus-visible,
-    .button-github:focus-visible { outline-offset: 4px; }
+    .button-primary:focus-visible { outline-offset: 4px; }
   </style>
 </head>
 <body>
@@ -435,12 +382,6 @@
     <p class="hero-sub" data-l10n="heroSub">Every motion you see behind this page is a tuned, ready-to-use shot recipe card — your agent picks the shots, animates real product screenshots with Remotion, syncs the beats, and delivers the film.</p>
     <div class="hero-actions">
       <a class="button-primary" href="./library.html" data-l10n="ctaLibrary">Browse all motions</a>
-      <a class="button-github" href="https://github.com/Vincentwei1021/video-shotcraft" target="_blank" rel="noreferrer">
-        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.42 7.42 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
-        <span data-l10n="ctaStar">Star on GitHub</span>
-        <span class="star-glyph" aria-hidden="true">★</span>
-        <span class="star-count" id="starCount" aria-label="GitHub stars"></span>
-      </a>
     </div>
     <ul class="hero-stats" aria-label="Library statistics">
       <li><strong id="statCards">161</strong><span data-l10n="statCards">recipe cards</span></li>
@@ -451,7 +392,7 @@
   </main>
 
   <footer class="hero-foot">
-    <span data-l10n="footer">Apache-2.0 · Built with Remotion · </span><a href="https://github.com/Vincentwei1021/video-shotcraft" target="_blank" rel="noreferrer">github.com/Vincentwei1021/video-shotcraft</a>
+    <span data-l10n="footer">Apache-2.0 · Built with Remotion · </span><a href="https://github.com/tron-wang/video-shotcraft" target="_blank" rel="noreferrer">github.com/tron-wang/video-shotcraft</a>
   </footer>
 
   <script>
@@ -461,7 +402,6 @@
         heroTitle: '161 cinematic shot recipes.<br><em>One prompt</em> to a finished promo.',
         heroSub: 'Every motion you see behind this page is a tuned, ready-to-use shot recipe card — your agent picks the shots, animates real product screenshots with Remotion, syncs the beats, and delivers the film.',
         ctaLibrary: 'Browse all motions',
-        ctaStar: 'Star on GitHub',
         statCards: 'recipe cards',
         statStyles: 'styles',
         statSamples: 'motion previews',
@@ -474,7 +414,6 @@
         heroTitle: '161 张镜头配方卡<br>宣传片<em>一键直出</em>',
         heroSub: '页面背后滚动的每个动效，都是一张调校好、即取即用的镜头配方卡。agent 负责选镜头、给真实产品截图做动画、卡上节奏，直接交付成片。',
         ctaLibrary: '浏览全部动效',
-        ctaStar: '收藏 GitHub',
         statCards: '镜头配方卡',
         statStyles: '动效样式',
         statSamples: '动态样片',
@@ -568,28 +507,6 @@
       // here — a still would pre-fill the grid and kill it
       setTimeout(() => mountVideo(tile, `./media/${name}.mp4`), index * 180);
     });
-
-    /* ---- live GitHub star count (cached 1h to spare the rate limit) ---- */
-    (() => {
-      const el = document.querySelector('#starCount');
-      const fmt = (n) => (n >= 1000 ? `${(n / 1000).toFixed(1).replace(/\.0$/, '')}k` : String(n));
-      const CACHE_KEY = 'video-shotcraft-stars';
-      try {
-        const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
-        if (cached && Date.now() - cached.at < 3600_000) {
-          el.textContent = fmt(cached.stars);
-          return;
-        }
-      } catch {}
-      fetch('https://api.github.com/repos/Vincentwei1021/video-shotcraft')
-        .then((response) => (response.ok ? response.json() : Promise.reject()))
-        .then((repo) => {
-          if (typeof repo.stargazers_count !== 'number') return;
-          el.textContent = fmt(repo.stargazers_count);
-          try { localStorage.setItem(CACHE_KEY, JSON.stringify({stars: repo.stargazers_count, at: Date.now()})); } catch {}
-        })
-        .catch(() => {});
-    })();
 
     fetch('./api/library.json', {cache: 'no-store'})
       .then((response) => response.json())

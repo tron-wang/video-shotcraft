@@ -123,7 +123,7 @@ Styleframe 用来确认静态视觉语言，不能单独证明缓动、运镜速
 
 ## 5. Gallery 镜头名称解析
 
-Gallery（https://vincentwei1021.github.io/video-shotcraft/）只是用户浏览和挑选
+Gallery（https://shotcraft-gallery.nionionote.com/）只是用户浏览和挑选
 动态样片的界面，镜头定义和实现源码已经包含在本仓库。用户不需要描述动画，
 只需复制并提供镜头名。
 

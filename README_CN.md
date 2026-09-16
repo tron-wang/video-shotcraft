@@ -8,13 +8,9 @@
 
 <h1>video-shotcraft</h1>
 
-[![GitHub stars](https://img.shields.io/github/stars/Vincentwei1021/video-shotcraft)](https://github.com/Vincentwei1021/video-shotcraft/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/Vincentwei1021/video-shotcraft)](https://github.com/Vincentwei1021/video-shotcraft/network/members)
-[![Gallery](https://img.shields.io/badge/Gallery-在线样片-d3923c)](https://vincentwei1021.github.io/video-shotcraft/)
-[![AtomGit Star](https://atomgit.com/VincentWei/video-shotcraft/star/badge.svg)](https://atomgit.com/VincentWei/video-shotcraft)
-
-<a href="https://trendshift.io/repositories/88911?utm_source=trendshift-badge&utm_medium=badge&utm_campaign=badge-trendshift-88911" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/88911/daily?language=TypeScript" alt="Vincentwei1021%2Fvideo-shotcraft | Trendshift" width="250" height="55"/></a>
-<a href="https://trendshift.io/repositories/88911?utm_source=trendshift-badge&utm_medium=badge&utm_campaign=badge-trendshift-88911" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/88911/weekly?language=TypeScript" alt="Vincentwei1021%2Fvideo-shotcraft | Trendshift" width="250" height="55"/></a>
+[![GitHub stars](https://img.shields.io/github/stars/tron-wang/video-shotcraft)](https://github.com/tron-wang/video-shotcraft/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/tron-wang/video-shotcraft)](https://github.com/tron-wang/video-shotcraft/network/members)
+[![Gallery](https://img.shields.io/badge/Gallery-在线样片-d3923c)](https://shotcraft-gallery.nionionote.com/)
 
 **让 agent 帮你制作电影感产品视频的 skill：161 张镜头配方卡 · 218 个样式 · 218 条动态样片 · 已验收成片模板**
 
@@ -27,20 +23,9 @@
 和声音设计，产出一支电影感的宣传片 / 营销视频 / 发布视频 / 功能演示——
 真实页面截图、2.5D 运镜、节奏卡点和电影级 SFX 全部包含。
 
-🖼️ [**在线 Gallery：浏览全部 218 条动态样片 »**](https://vincentwei1021.github.io/video-shotcraft/)
+🖼️ [**在线 Gallery：浏览全部 218 条动态样片 »**](https://shotcraft-gallery.nionionote.com/)
 
 ## ✨ 最近更新
-
-> [!IMPORTANT]
-> ### 🔥 2026-08 · 系列新成员：口播版 **video-talkcraft**
-> [**video-talkcraft**](https://github.com/Vincentwei1021/video-talkcraft)
-> 是本系列的口播视频版：给它一份口播稿 + 一条成品配音，所有动效节拍都钉在
-> 人声上——本地对齐字级时间戳（逐字中位误差 20–40 ms）、**78 张动效配方卡**、
-> 七层反 PPT 镜头系统（连续相机曲线、视差层、idle/yield 生命周期、呼吸环境层）、
-> 硬切字幕、三道 QA 闸门。同一套配方卡 + Remotion 工作流，按口播内容重新调校。
->
-> 🎙️ [**项目主页 »**](https://github.com/Vincentwei1021/video-talkcraft) ·
-> 🖼️ [**在线浏览 78 条口播动效样片 »**](https://vincentwei1021.github.io/video-talkcraft/)
 
 > [!IMPORTANT]
 > ### 🛠️ 2026-09 · 新功能：**动效工作台**——成片交付后在浏览器里继续改
@@ -73,7 +58,7 @@ https://github.com/user-attachments/assets/cba2df8a-4b2e-4247-bace-d0b1dea9c2bd
 
 ▶️ [在 YouTube 观看高清版](https://youtu.be/gcVvRM_P3SM)
 
-> 在线浏览全部镜头卡与动态样片：**[Gallery](https://vincentwei1021.github.io/video-shotcraft/)**
+> 在线浏览全部镜头卡与动态样片：**[Gallery](https://shotcraft-gallery.nionionote.com/)**
 > —— 支持搜索、筛选、切换样式和多选复制镜头卡名称。
 
 ## 🚀 快速开始
@@ -82,18 +67,18 @@ https://github.com/user-attachments/assets/cba2df8a-4b2e-4247-bace-d0b1dea9c2bd
 在 Claude Code / Codex 等 agent 里说：
 
 ```text
-帮我安装这个 skill：https://github.com/Vincentwei1021/video-shotcraft
+帮我安装这个 skill：https://github.com/tron-wang/video-shotcraft
 ```
 
 agent 会克隆仓库并链接到 skills 目录。也可以用 [skills](https://skills.sh/) CLI
 或手动安装：
 
 ```bash
-npx skills add Vincentwei1021/video-shotcraft
+npx skills add tron-wang/video-shotcraft
 ```
 
 ```bash
-git clone https://github.com/Vincentwei1021/video-shotcraft.git
+git clone https://github.com/tron-wang/video-shotcraft.git
 cd video-shotcraft
 ln -s "$(pwd)" ~/.claude/skills/video-shotcraft   # Claude Code
 # 或
@@ -109,7 +94,7 @@ ln -s "$(pwd)" ~/.codex/skills/video-shotcraft    # Codex
 ```
 
 如果没有指定镜头卡，skill 会先介绍现成成片模板并询问是否采用；
-也可以先在 [Gallery](https://vincentwei1021.github.io/video-shotcraft/) 里挑好镜头再开始。
+也可以先在 [Gallery](https://shotcraft-gallery.nionionote.com/) 里挑好镜头再开始。
 
 ## 📼 成片模板：Ink Press（墨压）
 
@@ -220,6 +205,7 @@ Pitch、Miro、Superhuman、Loom** 等产品的宣传片。镜头卡记录的是
 
 特别感谢：
 
+- **Wei Yihao 的 video-shotcraft**——本 fork 所基于的原始项目（Apache-2.0）。
 - **[Remotion](https://www.remotion.dev/)** —— 驱动本库全部 demo 与模板的
   React 视频框架。请注意 Remotion 有自己的
   [许可协议](https://github.com/remotion-dev/remotion/blob/main/LICENSE.md)
@@ -230,21 +216,3 @@ Pitch、Miro、Superhuman、Loom** 等产品的宣传片。镜头卡记录的是
   经典动画时序原则），多张镜头卡受其启发。
 - **Claude Code** —— 本库自身的构建、迭代与验收全程由 AI coding agent
   完成，用的正是这个 skill 所传授的工作流。
-
-## 关注我
-
-<p>
-  <a href="https://x.com/VincentWei93"><img alt="在 X 关注 Vincent" src="https://img.shields.io/badge/X-Follow_Me-000000?style=for-the-badge&logo=x&logoColor=white"></a>
-  <a href="https://www.douyin.com/user/MS4wLjABAAAAK1pkjBxilk2Oi_9h_vFyD-lTAu9CTlvhmOtkosDvvxg"><img alt="在抖音关注 Vincent" src="https://img.shields.io/badge/Douyin-Follow_Me-000000?style=for-the-badge&logo=tiktok&logoColor=white"></a>
-  <a href="https://xhslink.cn/m/At9iP2d5C1V"><img alt="在小红书关注 Vincent" src="https://img.shields.io/badge/Red_Note-Follow_Me-FF2442?style=for-the-badge&logo=xiaohongshu&logoColor=white"></a>
-</p>
-
-## ⭐ Star 历史
-
-<a href="https://www.star-history.com/?repos=Vincentwei1021%2Fvideo-shotcraft&type=date&legend=top-left">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=Vincentwei1021/video-shotcraft&type=date&theme=dark&legend=top-left&sealed_token=DQ8_yn0k8in6tP80CRd9Ghuk1fcdEW7poFh9ticGB3wMNO-E_i6g51sUiQWCAQYP0u0bjRweuIfGoRS8FnrIz86oFp1lcl5zu2vrEJrQOoNvwdUSwmm8XNPkAiln1o-EBAX0uU8k6ReIlSRufGLqpoxsWshMSZ9mmok6ox5XXIUO77b7zOgp2yRIH6yR" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=Vincentwei1021/video-shotcraft&type=date&legend=top-left&sealed_token=DQ8_yn0k8in6tP80CRd9Ghuk1fcdEW7poFh9ticGB3wMNO-E_i6g51sUiQWCAQYP0u0bjRweuIfGoRS8FnrIz86oFp1lcl5zu2vrEJrQOoNvwdUSwmm8XNPkAiln1o-EBAX0uU8k6ReIlSRufGLqpoxsWshMSZ9mmok6ox5XXIUO77b7zOgp2yRIH6yR" />
-    <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=Vincentwei1021/video-shotcraft&type=date&legend=top-left&sealed_token=DQ8_yn0k8in6tP80CRd9Ghuk1fcdEW7poFh9ticGB3wMNO-E_i6g51sUiQWCAQYP0u0bjRweuIfGoRS8FnrIz86oFp1lcl5zu2vrEJrQOoNvwdUSwmm8XNPkAiln1o-EBAX0uU8k6ReIlSRufGLqpoxsWshMSZ9mmok6ox5XXIUO77b7zOgp2yRIH6yR" />
-  </picture>
-</a>

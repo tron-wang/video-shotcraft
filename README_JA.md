@@ -8,12 +8,8 @@
 
 <h1>video-shotcraft</h1>
 
-[![GitHub stars](https://img.shields.io/github/stars/Vincentwei1021/video-shotcraft)](https://github.com/Vincentwei1021/video-shotcraft/stargazers)
-[![AtomGit Star](https://atomgit.com/VincentWei/video-shotcraft/star/badge.svg)](https://atomgit.com/VincentWei/video-shotcraft)
-[![Gallery](https://img.shields.io/badge/Gallery-live%20previews-d3923c)](https://vincentwei1021.github.io/video-shotcraft/)
-
-<a href="https://trendshift.io/repositories/88911?utm_source=trendshift-badge&utm_medium=badge&utm_campaign=badge-trendshift-88911" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/88911/daily?language=TypeScript" alt="Vincentwei1021%2Fvideo-shotcraft | Trendshift" width="250" height="55"/></a>
-<a href="https://trendshift.io/repositories/88911?utm_source=trendshift-badge&utm_medium=badge&utm_campaign=badge-trendshift-88911" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/88911/weekly?language=TypeScript" alt="Vincentwei1021%2Fvideo-shotcraft | Trendshift" width="250" height="55"/></a>
+[![GitHub stars](https://img.shields.io/github/stars/tron-wang/video-shotcraft)](https://github.com/tron-wang/video-shotcraft/stargazers)
+[![Gallery](https://img.shields.io/badge/Gallery-live%20previews-d3923c)](https://shotcraft-gallery.nionionote.com/)
 
 **映画のような製品動画を制作するためのエージェントスキル：161 種類のショットレシピカード · 218 種類のスタイル · 218 本のモーションプレビュー · 実制作に対応したテンプレート**
 
@@ -27,23 +23,9 @@
 マーケティング、ローンチ、デモ動画を制作します。実際のページキャプチャ、2.5D カメラワーク、
 ビートに同期したカット、映画品質の SFX も含まれます。
 
-🖼️ [**ライブ Gallery で 218 本のモーションプレビューをすべて見る »**](https://vincentwei1021.github.io/video-shotcraft/)
+🖼️ [**ライブ Gallery で 218 本のモーションプレビューをすべて見る »**](https://shotcraft-gallery.nionionote.com/)
 
 ## ✨ 最新情報
-
-> [!IMPORTANT]
-> ### 🔥 2026-08 · シリーズ新作：ナレーション動画版 **video-talkcraft**
-> [**video-talkcraft**](https://github.com/Vincentwei1021/video-talkcraft) は
-> 本シリーズのナレーション動画版です。原稿と完成したボイスオーバーを渡すと、
-> すべてのモーションビートが音声にロックされます——ローカルで単語レベルの
-> タイムスタンプを整列（1 文字あたりの誤差は中央値 20–40 ms）、
-> **モーションレシピカード 78 枚**、7 層のアンチ・スライドショー ショット
-> システム（連続カメラカーブ、パララックス面、idle/yield ライフサイクル、
-> 呼吸する環境レイヤー）、ベタ切り字幕、3 段階の QA ゲート。レシピカード +
-> Remotion のワークフローは同じまま、ナレーション向けに再調整しました。
->
-> 🎙️ [**プロジェクトページ »**](https://github.com/Vincentwei1021/video-talkcraft) ·
-> 🖼️ [**78 本のナレーション用モーションプレビューを見る »**](https://vincentwei1021.github.io/video-talkcraft/)
 
 > [!IMPORTANT]
 > ### 🛠️ 2026-09 · 新機能：**モーションワークベンチ**——納品後もブラウザで編集を続ける
@@ -83,7 +65,7 @@ https://github.com/user-attachments/assets/cba2df8a-4b2e-4247-bace-d0b1dea9c2bd
 
 ▶️ [YouTube で HD 版を見る](https://youtu.be/gcVvRM_P3SM)
 
-> すべてのショットカードとモーションプレビューをオンラインで閲覧：**[Gallery](https://vincentwei1021.github.io/video-shotcraft/)**
+> すべてのショットカードとモーションプレビューをオンラインで閲覧：**[Gallery](https://shotcraft-gallery.nionionote.com/)**
 > — 検索、絞り込み、バリエーションの切り替え、選択したショットカード名のコピーが可能です。
 
 ## 🚀 クイックスタート
@@ -92,18 +74,18 @@ https://github.com/user-attachments/assets/cba2df8a-4b2e-4247-bace-d0b1dea9c2bd
 Claude Code、Codex、または同様のエージェントで、次のように伝えます。
 
 ```text
-Install this skill for me: https://github.com/Vincentwei1021/video-shotcraft
+Install this skill for me: https://github.com/tron-wang/video-shotcraft
 ```
 
 エージェントがリポジトリをクローンし、スキルディレクトリにリンクします。または、
 [skills](https://skills.sh/) CLI を使うか、手動でインストールします。
 
 ```bash
-npx skills add Vincentwei1021/video-shotcraft
+npx skills add tron-wang/video-shotcraft
 ```
 
 ```bash
-git clone https://github.com/Vincentwei1021/video-shotcraft.git
+git clone https://github.com/tron-wang/video-shotcraft.git
 cd video-shotcraft
 ln -s "$(pwd)" ~/.claude/skills/video-shotcraft   # Claude Code
 # or
@@ -120,7 +102,7 @@ Design a product close-up inspired by spotlight-hero-card.
 
 ショットカードを指定しない場合、スキルは最初に内蔵の動画テンプレートを
 紹介し、それを使うか確認します。作業を始める前に
-[Gallery](https://vincentwei1021.github.io/video-shotcraft/) でショットを選ぶこともできます。
+[Gallery](https://shotcraft-gallery.nionionote.com/) でショットを選ぶこともできます。
 
 ## 📼 動画テンプレート：Ink Press
 
@@ -238,6 +220,7 @@ Figma、Framer、Bear、Raycast、Pitch、Miro、Superhuman、Loom** のプロ�
 
 特に以下のプロジェクトとコミュニティに感謝します。
 
+- **Wei Yihao による video-shotcraft**——この fork の元になったオリジナルプロジェクト（Apache-2.0）。
 - **[Remotion](https://www.remotion.dev/)** — すべてのデモとテンプレートを支える
   React ベースの動画フレームワークです。Remotion には独自の
   [ライセンス](https://github.com/remotion-dev/remotion/blob/main/LICENSE.md)
@@ -248,21 +231,3 @@ Figma、Framer、Bear、Raycast、Pitch、Miro、Superhuman、Loom** のプロ�
   （Vlambeer のスクリーンシェイクに関する講演、古典的なアニメーションのタイミングなど）。
 - **Claude Code** — このライブラリ自体も、スキルが教えるものと同じワークフローを使い、
   AI コーディングエージェントによって構築、反復改善、QA されました。
-
-## フォロー
-
-<p>
-  <a href="https://x.com/VincentWei93"><img alt="X で Vincent をフォロー" src="https://img.shields.io/badge/X-Follow_Me-000000?style=for-the-badge&logo=x&logoColor=white"></a>
-  <a href="https://www.douyin.com/user/MS4wLjABAAAAK1pkjBxilk2Oi_9h_vFyD-lTAu9CTlvhmOtkosDvvxg"><img alt="抖音で Vincent をフォロー" src="https://img.shields.io/badge/Douyin-Follow_Me-000000?style=for-the-badge&logo=tiktok&logoColor=white"></a>
-  <a href="https://xhslink.cn/m/At9iP2d5C1V"><img alt="Red Note で Vincent をフォロー" src="https://img.shields.io/badge/Red_Note-Follow_Me-FF2442?style=for-the-badge&logo=xiaohongshu&logoColor=white"></a>
-</p>
-
-## ⭐ Star 履歴
-
-<a href="https://www.star-history.com/?repos=Vincentwei1021%2Fvideo-shotcraft&type=date&legend=top-left">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=Vincentwei1021/video-shotcraft&type=date&theme=dark&legend=top-left&sealed_token=DQ8_yn0k8in6tP80CRd9Ghuk1fcdEW7poFh9ticGB3wMNO-E_i6g51sUiQWCAQYP0u0bjRweuIfGoRS8FnrIz86oFp1lcl5zu2vrEJrQOoNvwdUSwmm8XNPkAiln1o-EBAX0uU8k6ReIlSRufGLqpoxsWshMSZ9mmok6ox5XXIUO77b7zOgp2yRIH6yR" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=Vincentwei1021/video-shotcraft&type=date&legend=top-left&sealed_token=DQ8_yn0k8in6tP80CRd9Ghuk1fcdEW7poFh9ticGB3wMNO-E_i6g51sUiQWCAQYP0u0bjRweuIfGoRS8FnrIz86oFp1lcl5zu2vrEJrQOoNvwdUSwmm8XNPkAiln1o-EBAX0uU8k6ReIlSRufGLqpoxsWshMSZ9mmok6ox5XXIUO77b7zOgp2yRIH6yR" />
-    <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=Vincentwei1021/video-shotcraft&type=date&legend=top-left&sealed_token=DQ8_yn0k8in6tP80CRd9Ghuk1fcdEW7poFh9ticGB3wMNO-E_i6g51sUiQWCAQYP0u0bjRweuIfGoRS8FnrIz86oFp1lcl5zu2vrEJrQOoNvwdUSwmm8XNPkAiln1o-EBAX0uU8k6ReIlSRufGLqpoxsWshMSZ9mmok6ox5XXIUO77b7zOgp2yRIH6yR" />
-  </picture>
-</a>

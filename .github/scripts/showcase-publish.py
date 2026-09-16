@@ -23,7 +23,7 @@ from pathlib import Path
 
 RELEASE_TAG = 'showcase-media'
 MAX_BYTES = 300 * 1024 * 1024  # 单支投稿上限 300MB
-SHOWCASE_URL = 'https://vincentwei1021.github.io/video-shotcraft/showcase.html'
+SHOWCASE_URL = 'https://shotcraft-gallery.nionionote.com/showcase.html'
 
 # 与 showcase.yml 各字段 label 一致
 FIELD_TITLE = '作品名'
