@@ -171,22 +171,6 @@
       align-items: center;
       gap: 0.55rem;
     }
-    .topbar-nav-link {
-      display: inline-flex;
-      align-items: center;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 0.38rem 0.95rem;
-      color: var(--muted);
-      background: rgba(14, 14, 12, 0.35);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      font-size: 0.8rem;
-      text-decoration: none;
-      white-space: nowrap;
-      transition: color 150ms ease, border-color 150ms ease;
-    }
-    .topbar-nav-link:hover { color: var(--text); border-color: rgba(211, 146, 60, 0.65); }
 
     /* ---- hero ---- */
     .hero {
@@ -366,7 +350,6 @@
       <span>VIDEO SHOTCRAFT</span>
     </a>
     <nav class="topbar-nav" aria-label="Site">
-      <a class="topbar-nav-link" href="./showcase.html" data-l10n="navShowcase">Showcase</a>
       <button class="language-toggle" id="languageToggle" type="button" aria-label="Switch to Chinese">
         <span class="language-toggle-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="9.2"/><path d="M2.8 12h18.4M12 2.8c2.5 2.6 3.8 5.7 3.8 9.2S14.5 18.6 12 21.2c-2.5-2.6-3.8-5.7-3.8-9.2S9.5 5.4 12 2.8Z"/></svg>
@@ -407,7 +390,6 @@
         statSamples: 'motion previews',
         statTemplate: 'ready template',
         footer: 'Apache-2.0 · Built with Remotion · ',
-        navShowcase: 'Showcase',
       },
       zh: {
         kicker: '一个 Claude Code / Codex 的 agent skill',
@@ -419,7 +401,6 @@
         statSamples: '动态样片',
         statTemplate: '现成模板',
         footer: 'Apache-2.0 · 基于 Remotion 构建 · ',
-        navShowcase: '社区作品展示',
       },
     };
 
