@@ -63,3 +63,25 @@
 | x.com/tvnxty（Firecrawl 宣传片） | `product-card-progressive-assemble`、`research-card-stack-scroll` |
 | 抖音 观机社 | `logo-shrink-wordmark-lockup`、`white-flash-logo-simplify-cut` |
 | 用户参考图定制（brand-scan） | `assemble-then-type-flyin`、`scanline-annotate-focus`、`scanline-assemble-flyin` |
+
+---
+
+# 2026-09 新增 4 张（vibe-motion/skills 手法参考）
+
+同样遵循"仅参考、重新实现"：四张卡的 demo 均为从零重写的自包含 Remotion 组件，
+未复制来源仓库的代码、素材、截图或数据。来源仓库在研究时（2026-09-16，GitHub API
+查询）**均未声明开源许可证**，因此这里记录的只是手法溯源，不代表获得了任何授权。
+
+| 研究批次 | 来源 | 类型 | 状态 |
+|---|---|---|---|
+| vibe-motion/skills | https://github.com/vibe-motion/skills 及其 skill 引用的 vibe-motion/fisheye-motion、vibe-motion/threejs-earth、sxhzju/wechat-2d | 开源 skill 集合（未声明许可证） | 手法参考，重新实现；未使用其代码或素材 |
+| world-atlas / Natural Earth | https://github.com/topojson/world-atlas（ISC）← Natural Earth 1:110m 陆地数据（公有领域） | 地理数据 | `globe-route-flight` 的 1.5° 陆地掩码由 land-110m 栅格化得到 |
+
+逐卡说明：
+
+| 来源 | 卡片 | 与来源的差异 |
+|---|---|---|
+| vibe-motion/skills `fisheye-motion` | `screen-photo-fisheye-focus` | 来源是 WebGL shader + 畸变中心随聚焦点移动；本卡改为 Canvas 2D 逐像素、光轴钉画面中心平移取景点。桶形畸变、双扫描线拍频摩尔纹、暗角的公式结构与起始参数值参考了来源的默认值 |
+| vibe-motion/skills `threejs-earth-render` | `globe-route-flight` | 来源是 three.js 贴图地球 + Puppeteer 抓帧；本卡改为正交投影点阵地球（无 three.js），新增镜头偏离大圆、航线领跑镜头追随、一条曲线管推拉 |
+| vibe-motion/skills `wechat-2d-render` | `chat-bubble-thread` | 来源是微信风格聊天 + 视频消息；本卡去品牌化，新增正在输入三点提示、输入框打字发送、富卡片次级动作、无状态滚动累加 |
+| vibe-motion/skills `remotion-candlestick` | `candlestick-grow-rescale` | 来源是 Yahoo Finance 真实数据 + Canvas 逐帧绘制；本卡改为确定性占位数据 + SVG，实体改为从开盘价长向收盘价，新增无状态 y 轴平滑与最新价标签 |
