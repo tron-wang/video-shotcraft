@@ -55,6 +55,33 @@ rsync -a --exclude sync-from-cards.py --exclude build-seo.py --exclude fetch-med
 [ -f "${SITE}/api/showcase.json" ] || printf '{"items": []}\n' > "${SITE}/api/showcase.json"
 printf '%s\n' "${sha}" > "${SITE}/VERSION"
 
+# 中文版轉台灣繁體：repo 內維持簡體（跟上游與 sync-from-cards.py 相容），只轉部署包。
+# 必須在打 ?v=hash 之前做，hash 才會對應轉換後的內容。
+command -v opencc >/dev/null || { echo "❌ 缺 opencc（brew install opencc）"; exit 1; }
+python3 - "${SITE}" <<'PY'
+import pathlib, subprocess, sys
+site = pathlib.Path(sys.argv[1])
+# s2twp 的詞彙轉換之外，再修幾個台灣介面不慣用的結果
+FIXES = [('迴圈', '循環'), ('示例', '範例'), ('臺', '台'), ('當前', '目前'), ('文本', '文字'),
+         ('全屏', '全螢幕'), ('自定義', '自訂'), ('暫未匹配到', '暫未找到'), ('匹配', '符合'),
+         ('主頁', '首頁'), ('檢測到', '偵測到'), ('關注與支援', '關注與支持'),
+         ('zh-CN', 'zh-TW'), ('PingFang SC', 'PingFang TC'), ('Microsoft YaHei', 'Microsoft JhengHei')]
+targets = [*site.glob('*.html'), *site.glob('*.js'), site / 'styles.css', site / 'api' / 'library.json']
+for path in targets:
+    if not path.exists():
+        continue
+    src = path.read_text(encoding='utf-8')
+    out = subprocess.run(['opencc', '-c', 's2twp'], input=src, capture_output=True,
+                         text=True, check=True).stdout
+    for a, b in FIXES:
+        out = out.replace(a, b)
+    if src.endswith('\n') and not out.endswith('\n'):
+        out += '\n'
+    if out != src:
+        path.write_text(out, encoding='utf-8')
+print('🈶 中文版已轉台灣繁體')
+PY
+
 python3 - "${SITE}" <<'PY'
 import hashlib, json, os, pathlib, re, sys
 site = pathlib.Path(sys.argv[1])
