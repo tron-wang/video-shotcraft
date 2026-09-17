@@ -8,7 +8,7 @@ export const demoProject = (): ProjectData => {
     id: uid("clip"), cardId, start, duration, inOffset: 0, speed: 1, opacity: 1, scale: 1, x: 0, y: 0, props, label,
   });
   return {
-    name: "未命名工程",
+    name: "未命名專案",
     fps: 30,
     width: 1920,
     height: 1080,
@@ -21,10 +21,10 @@ export const demoProject = (): ProjectData => {
       },
       {
         id: uid("track"),
-        name: "镜头",
+        name: "鏡頭",
         clips: [
           clip("inkpress-title-card", 0, 55, { text: "Every shot, *tuned* in one place." }, "字卡"),
-          clip("demo:CounterConfetti", 55, 138, {}, "数字冲刺纸屑"),
+          clip("demo:CounterConfetti", 55, 138, {}, "數字衝刺紙屑"),
           clip("demo:CrashImpactReal", 193, 120, {}, "急推撞停"),
           clip("inkpress-title-card", 313, 55, { text: "Drag a card. *Tweak* it. Export." }, "字卡"),
         ],

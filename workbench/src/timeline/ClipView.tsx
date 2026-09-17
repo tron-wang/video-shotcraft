@@ -3,6 +3,7 @@ import { inOffsetFps } from "../cards/types";
 import type { ClipData } from "../types";
 import { CARDS } from "../cards/registry";
 import { useStore } from "../store";
+import { tw } from "../zh";
 
 const SNAP_PX = 6;
 
@@ -119,7 +120,7 @@ export const ClipView: React.FC<{
       onPointerDown={onBodyDown}
     >
       <div className="clip-label">
-        <span className="clip-name">{clip.label ?? card?.name ?? clip.cardId}</span>
+        <span className="clip-name">{clip.label ?? (card ? tw(card.name) : clip.cardId)}</span>
         <span className="clip-meta">
           {durSec}s
           {clip.speed !== 1 && <em className="badge">{clip.speed}×</em>}

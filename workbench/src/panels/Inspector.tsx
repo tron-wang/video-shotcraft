@@ -3,6 +3,7 @@ import type { PropField } from "../cards/types";
 import { cardFps, inOffsetFps, sourceLength } from "../cards/types";
 import { CARDS } from "../cards/registry";
 import { findClip, useStore } from "../store";
+import { tw } from "../zh";
 
 /** 单个属性控件：按 schema 字段类型渲染 */
 const PropControl: React.FC<{
@@ -90,7 +91,7 @@ const PropControl: React.FC<{
         >
           {field.options.map((o) => (
             <option key={o.value} value={o.value}>
-              {o.label}
+              {tw(o.label)}
             </option>
           ))}
         </select>
@@ -131,18 +132,18 @@ export const Inspector: React.FC = () => {
   if (!hit) {
     return (
       <div className="inspector">
-        <div className="panel-title">属性</div>
+        <div className="panel-title">屬性</div>
         <div className="inspector-empty dim">
-          选中时间轨上的片段后，
+          選取時間軌上的片段後，
           <br />
-          在这里调整它的文字、颜色、
+          在這裡調整它的文字、顏色、
           <br />
-          动画节奏、变速与图层属性。
+          動畫節奏、變速與圖層屬性。
           <br />
           <br />
-          快捷键：空格 播放 · S 分割
+          快捷鍵：空格 播放 · S 分割
           <br />
-          Delete 删除 · ⌘Z 撤销 · ⌘D 复制
+          Delete 刪除 · ⌘Z 復原 · ⌘D 複製
         </div>
       </div>
     );
@@ -166,7 +167,7 @@ export const Inspector: React.FC = () => {
   return (
     <div className="inspector">
       <div className="panel-title">
-        {card?.name ?? clip.cardId}
+        {card ? tw(card.name) : clip.cardId}
         <span className="dim" style={{ marginLeft: 8, fontWeight: 400 }}>
           {track.name}
         </span>
@@ -175,9 +176,9 @@ export const Inspector: React.FC = () => {
       <div className="inspector-scroll">
         {card && card.schema.length > 0 && (
           <section>
-            <div className="sec-title">内容与样式</div>
+            <div className="sec-title">內容與樣式</div>
             {card.schema.map((field) => (
-              <Row key={field.key} label={field.label}>
+              <Row key={field.key} label={tw(field.label)}>
                 <PropControl
                   field={field}
                   value={clip.props[field.key] ?? field.default}
@@ -190,8 +191,8 @@ export const Inspector: React.FC = () => {
         )}
 
         <section>
-          <div className="sec-title">时间与变速</div>
-          <Row label="起点">
+          <div className="sec-title">時間與變速</div>
+          <Row label="起點">
             <span className="ctl-row">
               <input
                 type="number"
@@ -206,7 +207,7 @@ export const Inspector: React.FC = () => {
               <span className="unit">s</span>
             </span>
           </Row>
-          <Row label="时长">
+          <Row label="時長">
             <span className="ctl-row">
               <input
                 type="number"
@@ -223,7 +224,7 @@ export const Inspector: React.FC = () => {
               <span className="unit">s</span>
             </span>
           </Row>
-          <Row label="变速">
+          <Row label="變速">
             <span className="ctl-row">
               <input
                 type="range"
@@ -253,7 +254,7 @@ export const Inspector: React.FC = () => {
               ))}
             </span>
           </Row>
-          <Row label="裁入点">
+          <Row label="裁入點">
             <span className="ctl-row">
               <input
                 type="number"
@@ -274,7 +275,7 @@ export const Inspector: React.FC = () => {
             <Row label="">
               <button
                 className="mini"
-                title="时长恢复为卡片原始时长（按当前变速换算）"
+                title="時長恢復為卡片原始時長（按目前變速換算）"
                 onClick={() => {
                   begin();
                   updateClip(clip.id, {
@@ -285,20 +286,20 @@ export const Inspector: React.FC = () => {
                   });
                 }}
               >
-                ↺ 恢复原始时长
+                ↺ 恢復原始時長
               </button>
             </Row>
           )}
           {fpsMismatch && (
             <div className="dim" style={{ fontSize: 11, lineHeight: 1.5, padding: "4px 0 2px" }}>
-              此卡按 {srcFps}fps 编排，工程 {fps}fps：上轨时已换算时长并以 {(srcFps / fps).toFixed(2)}× 变速保持节奏。
-              卡内若按 useVideoConfig().fps 计时（spring 等），节奏仍会偏 {(fps / srcFps).toFixed(2)}×。
+              此卡按 {srcFps}fps 編排，專案 {fps}fps：上軌時已換算時長並以 {(srcFps / fps).toFixed(2)}× 變速保持節奏。
+              卡內若按 useVideoConfig().fps 計時（spring 等），節奏仍會偏 {(fps / srcFps).toFixed(2)}×。
             </div>
           )}
         </section>
 
         <section>
-          <div className="sec-title">图层</div>
+          <div className="sec-title">圖層</div>
           <Row label="不透明度">
             <span className="ctl-row">
               <input
@@ -313,7 +314,7 @@ export const Inspector: React.FC = () => {
               <span className="slider-val">{Math.round(clip.opacity * 100)}%</span>
             </span>
           </Row>
-          <Row label="缩放">
+          <Row label="縮放">
             <span className="ctl-row">
               <input
                 type="range"
@@ -355,7 +356,7 @@ export const Inspector: React.FC = () => {
 
         <section>
           <button className="btn danger" onClick={() => removeClip(clip.id)}>
-            删除片段
+            刪除片段
           </button>
         </section>
       </div>

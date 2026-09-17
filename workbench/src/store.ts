@@ -164,7 +164,7 @@ export const useStore = create<WorkbenchState>((set, get) => ({
     get().commit();
     set((s) => ({
       project: mutateProject(s.project, (d) => {
-        d.tracks.unshift({ id: uid("track"), name: `轨道 ${d.tracks.length + 1}`, clips: [] });
+        d.tracks.unshift({ id: uid("track"), name: `軌道 ${d.tracks.length + 1}`, clips: [] });
       }),
     }));
   },
