@@ -1,6 +1,6 @@
 # video-shotcraft
 
-> video-shotcraft is an AI agent skill for Claude Code and Codex that crafts cinematic product promo videos with Remotion. It ships 161 shot recipe cards covering 218 styles with 218 motion previews, reusable Remotion components, SFX assets, a six-stage production methodology, and a production-ready 36.2-second promo template (Ink Press).
+> video-shotcraft is an AI agent skill for Claude Code and Codex that crafts cinematic product promo videos with Remotion. It ships 162 shot recipe cards covering 219 styles with 219 motion previews, reusable Remotion components, SFX assets, a six-stage production methodology, and a production-ready 36.2-second promo template (Ink Press).
 
 Each shot recipe card documents a motion technique: purpose, energy level, suggested duration, tuned parameters, implementation notes, and known pitfalls, paired with a tuned Remotion (TSX) reference implementation.
 
@@ -70,6 +70,7 @@ Each shot recipe card documents a motion technique: purpose, energy level, sugge
 - [draw-svg-trace](https://shotcraft-gallery.nionionote.com/library.html#draw-svg-trace): An ink stroke traces an element outline, closes with a dark flash, and hands focus to the revealed content.
 - [element-body-moves](https://shotcraft-gallery.nionionote.com/library.html#element-body-moves): Two ways to give interface elements physicality: elastic axial stretch and a contact shadow that separates during lift.
 - [floating-glossy-label-pills](https://shotcraft-gallery.nionionote.com/library.html#floating-glossy-label-pills): Four wireframe dashboard panels topped with glossy pills queue up horizontally and step right in three beats, the centered one scaling up sharp while its neighbours shrink, sink and blur at the frame edges.
+- [iso-poster-stack-cycle](https://shotcraft-gallery.nionionote.com/library.html#iso-poster-stack-cycle): A stack of posters sits in an orthographic isometric view; on each beat the front poster dissolves in place while drifting toward the camera, the rest of the stack slides forward one slot with a one-frame cascade, and a new poster fades in at the back — six posters loop seamlessly.
 - [integration-hub-map](https://shotcraft-gallery.nionionote.com/library.html#integration-hub-map): A page flips 180 degrees into an integration hub where five app icons pop in together and rainbow light tubes connect with pulses flowing through them.
 - [list-reveal](https://shotcraft-gallery.nionionote.com/library.html#list-reveal): Menu rows scale into place one after another with a faint overshoot while the whole list drifts slowly upward, keeping the per-item entrance and the group motion on two independent layers.
 - [list-stack-press](https://shotcraft-gallery.nionionote.com/library.html#list-stack-press): List cards fly up from below, compress the growing stack on every landing, and advance a synchronized counter.

@@ -85,3 +85,21 @@
 | vibe-motion/skills `threejs-earth-render` | `globe-route-flight` | 来源是 three.js 贴图地球 + Puppeteer 抓帧；本卡改为正交投影点阵地球（无 three.js），新增镜头偏离大圆、航线领跑镜头追随、一条曲线管推拉 |
 | vibe-motion/skills `wechat-2d-render` | `chat-bubble-thread` | 来源是微信风格聊天 + 视频消息；本卡去品牌化，新增正在输入三点提示、输入框打字发送、富卡片次级动作、无状态滚动累加 |
 | vibe-motion/skills `remotion-candlestick` | `candlestick-grow-rescale` | 来源是 Yahoo Finance 真实数据 + Canvas 逐帧绘制；本卡改为确定性占位数据 + SVG，实体改为从开盘价长向收盘价，新增无状态 y 轴平滑与最新价标签 |
+
+---
+
+# 2026-09 新增 1 张（Codrops 专访 Resn 的示范影片手法参考）
+
+同样遵循"仅参考、重新实现"：demo 为从零重写的自包含 Remotion 组件，只研究动效手法
+（时序、缓动、编排），未使用原片的任何画面、海报设计、文案或品牌元素；示例海报全部是
+中性占位设计。原片是商业项目的公开展示，**未获复刻许可**。
+
+| 研究批次 | 来源 | 类型 | 状态 |
+|---|---|---|---|
+| Codrops · Inside Resn's Digital Experiences | https://tympanus.net/codrops/2026/09/14/inside-resns-digital-experiences/ 文中嵌入的示范影片 `Awwwards_SquareSpace_1.mp4`（约 8.6s，Resn 为 Squarespace 制作的品牌指南站 https://brand.squarespace.com/ 的海报陈列段落） | 商业项目展示（公开发布，未获复刻许可） | 手法参考，重新实现；无原素材 |
+
+逐卡说明：
+
+| 来源 | 卡片 | 与来源的差异 |
+|---|---|---|
+| Resn × Squarespace Foundations 海报陈列 | `iso-poster-stack-cycle` | 来源是网页里的交互陈列（真实活动海报）；本卡改为逐帧确定性的视频镜头：6 张中性占位海报、固定拍长无缝循环、槽位由帧直接推出，新增后排逐槽晚起步、淡出提前 3f 且与朝镜头滑移分用两条曲线、逐槽压暗的参数化 |
