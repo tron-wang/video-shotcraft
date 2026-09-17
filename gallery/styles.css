@@ -287,6 +287,26 @@ main {
 
 .library-main { min-width: 0; }
 
+/* 模板区：导航里第二个小标题 + 成片范例卡（长片带声音，用原生 controls，不自动播放） */
+[data-template-nav][hidden] { display: none; }
+.sidebar-heading--section { margin-top: 1.6rem; }
+.library.is-templates { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.template-card .preview video { object-fit: contain; background: #0e0e0c; }
+.template-card .summary { -webkit-line-clamp: unset; min-height: 0; }
+.template-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.45rem;
+}
+.template-meta span {
+  padding: 0.12rem 0.45rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 0.68rem;
+}
+
 .intro {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
@@ -840,6 +860,7 @@ kbd { padding: 0.2rem 0.34rem; border: 1px solid var(--line); border-radius: 5px
   .controls { top: 120px; }
   kbd { display: none; }
   .library { grid-template-columns: 1fr; }
+  .library.is-templates { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {

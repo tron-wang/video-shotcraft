@@ -55,6 +55,26 @@ rsync -a --exclude sync-from-cards.py --exclude build-seo.py --exclude fetch-med
 [ -f "${SITE}/api/showcase.json" ] || printf '{"items": []}\n' > "${SITE}/api/showcase.json"
 printf '%s\n' "${sha}" > "${SITE}/VERSION"
 
+# 團隊站首頁直接是鏡頭庫：原 landing 頁不上線，/ 與 /library.html 內容相同
+cp "${SITE}/library.html" "${SITE}/index.html"
+
+# 模板區（gallery/templates/，gitignore）：有清單就確認每支影片與封面都在
+if [ -f "${SITE}/templates/templates.json" ]; then
+  python3 - "${SITE}" <<'PY'
+import json, pathlib, sys
+site = pathlib.Path(sys.argv[1])
+items = json.loads((site / 'templates' / 'templates.json').read_text(encoding='utf-8'))['templates']
+missing = [p for item in items for p in (item.get('video'), item.get('poster'))
+           if p and not (site / p.lstrip('./')).exists()]
+if missing:
+    print('❌ 模板區缺檔：', *missing, sep='\n  ')
+    sys.exit(1)
+print(f'🎬 模板區：{len(items)} 支成片範例')
+PY
+else
+  echo "ℹ️  沒有 gallery/templates/templates.json，模板區不顯示"
+fi
+
 # 中文版轉台灣繁體：repo 內維持簡體（跟上游與 sync-from-cards.py 相容），只轉部署包。
 # 必須在打 ?v=hash 之前做，hash 才會對應轉換後的內容。
 command -v opencc >/dev/null || { echo "❌ 缺 opencc（brew install opencc）"; exit 1; }

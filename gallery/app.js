@@ -1,6 +1,8 @@
 const translations = window.GALLERY_I18N;
 const staticGallery = true;
 const libraryEndpoint = staticGallery ? './api/library.json' : '/api/library';
+// 模板区的成片范例清单；本地私有素材不进库，读不到就隐藏整个模板区
+const templatesEndpoint = './templates/templates.json';
 const savedLanguage = (() => {
   try {
     return localStorage.getItem('video-shot-gallery-language');
@@ -30,6 +32,7 @@ const initialCategory = (() => {
 
 const state = {
   library: null,
+  templates: [],
   query: '',
   filter: initialCategory,
   revision: '',
@@ -274,7 +277,59 @@ function restoreFocus(mark) {
   card.querySelector(selector)?.focus({preventScroll: true});
 }
 
+const TEMPLATE_KINDS = {product: 'kindProduct', web: 'kindWeb', program: 'kindProgram', article: 'kindArticle'};
+const localized = (value) => (value && typeof value === 'object'
+  ? value[state.language] || value.en || value.zh
+  : value) || '';
+
+function templateMarkup(item) {
+  const title = localized(item.title);
+  const minutes = Math.floor(item.duration / 60);
+  const seconds = String(Math.round(item.duration % 60)).padStart(2, '0');
+  const tags = [
+    TEMPLATE_KINDS[item.kind] ? text(TEMPLATE_KINDS[item.kind]) : '',
+    `${minutes}:${seconds}`,
+    text(item.orientation === 'portrait' ? 'portrait' : 'landscape'),
+  ].filter(Boolean);
+  return `
+    <article class="shot-card template-card" id="template-${escapeHtml(item.id)}">
+      <figure class="preview">
+        <video src="${escapeHtml(item.video)}" poster="${escapeHtml(item.poster || '')}" controls playsinline preload="none"
+          aria-label="${escapeHtml(title)}"></video>
+      </figure>
+      <div class="card-body">
+        <div class="card-title">
+          <h3>${escapeHtml(title)}</h3>
+          <div class="template-meta">${tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join('')}</div>
+        </div>
+        <p class="summary">${escapeHtml(localized(item.description))}</p>
+      </div>
+    </article>`;
+}
+
+function templateMatches(item) {
+  if (!state.query) return true;
+  const searchable = [item.id, item.title?.zh, item.title?.en, item.description?.zh, item.description?.en]
+    .join(' ').toLowerCase();
+  return searchable.includes(state.query.toLowerCase());
+}
+
+function renderTemplates() {
+  const items = state.templates.filter(templateMatches);
+  elements.library.classList.add('is-templates');
+  elements.library.innerHTML = items.map(templateMarkup).join('');
+  elements.library.setAttribute('aria-busy', 'false');
+  elements.emptyState.hidden = items.length > 0;
+  elements.emptyState.querySelector('p').textContent = text('templateEmpty');
+}
+
 function render() {
+  if (state.filter === 'templates') {
+    renderTemplates();
+    return;
+  }
+  elements.library.classList.remove('is-templates');
+  elements.emptyState.querySelector('p').textContent = text('empty');
   if (!state.library) return;
   const focusMark = captureFocus();
   const cards = state.library.cards.filter(cardMatches);
@@ -317,6 +372,32 @@ function showToast(message) {
   toastTimer = setTimeout(() => elements.toast.classList.remove('is-visible'), 2600);
 }
 
+async function loadTemplates() {
+  try {
+    const response = await fetch(templatesEndpoint, {cache: 'no-store'});
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    state.templates = (await response.json()).templates || [];
+  } catch {
+    state.templates = [];
+  }
+  document.querySelectorAll('[data-template-nav]').forEach((node) => {
+    node.hidden = state.templates.length === 0;
+  });
+  renderCategoryCounts();
+  if (state.filter === 'templates') {
+    // 直接用 ?cat=templates 进来但清单读不到：退回全部镜头
+    if (!state.templates.length) {
+      state.filter = 'all';
+      elements.filters.querySelectorAll('[data-filter]').forEach((item) => {
+        const active = item.dataset.filter === 'all';
+        item.classList.toggle('is-active', active);
+        item.setAttribute('aria-pressed', String(active));
+      });
+    }
+    render();
+  }
+}
+
 async function loadLibrary({silent = false} = {}) {
   try {
     const response = await fetch(libraryEndpoint, {cache: 'no-store'});
@@ -331,10 +412,10 @@ async function loadLibrary({silent = false} = {}) {
     elements.styleCount.textContent = library.stats.styleCount;
     elements.previewCount.textContent = library.stats.previewCount;
     renderCategoryCounts();
-    if (changed) {
+    if (changed && state.filter !== 'templates') {
       render();
       showToast(text('updated'));
-    } else if (!silent) {
+    } else if (!silent && state.filter !== 'templates') {
       render();
     }
   } catch (error) {
@@ -352,7 +433,7 @@ async function loadLibrary({silent = false} = {}) {
 
 function renderCategoryCounts() {
   if (!state.library) return;
-  const counts = {all: state.library.cards.length};
+  const counts = {all: state.library.cards.length, templates: state.templates.length};
   const hasNew = {all: state.library.cards.some(isNewCard)};
   state.library.cards.forEach((card) => {
     (card.tags || [card.category]).forEach((tag) => {
@@ -607,4 +688,5 @@ if (state.filter !== 'all') {
 applyLanguage();
 showLoadingCards();
 loadLibrary();
+loadTemplates();
 if (!staticGallery) setInterval(() => loadLibrary({silent: true}), 8000);

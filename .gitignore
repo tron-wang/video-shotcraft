@@ -25,3 +25,6 @@ PRODUCT.md
 
 # 自架部署的主機設定（見 assets/scripts/deploy-gallery.sh），不進公開 repo
 gallery/.deploy.env
+
+# 模板區的成片範例（影片、封面、templates.json）是使用者自己的作品，只隨自架部署上傳，不進公開 repo
+gallery/templates/
