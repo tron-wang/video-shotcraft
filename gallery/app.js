@@ -282,13 +282,17 @@ const localized = (value) => (value && typeof value === 'object'
   ? value[state.language] || value.en || value.zh
   : value) || '';
 
+// 固定类型走翻译表；清单里另给 kindLabel {zh,en} 时用自定义类型
+const templateKind = (item) => (item.kindLabel ? localized(item.kindLabel)
+  : TEMPLATE_KINDS[item.kind] ? text(TEMPLATE_KINDS[item.kind]) : '');
+
 function templateMarkup(item) {
   const title = localized(item.title);
+  // 卡片主标题是分类（实体产品介绍…），作品名退到副标题
+  const kind = templateKind(item);
   const minutes = Math.floor(item.duration / 60);
   const seconds = String(Math.round(item.duration % 60)).padStart(2, '0');
   const tags = [
-    // 固定类型走翻译表；清单里另给 kindLabel {zh,en} 时用自定义类型
-    item.kindLabel ? localized(item.kindLabel) : TEMPLATE_KINDS[item.kind] ? text(TEMPLATE_KINDS[item.kind]) : '',
     `${minutes}:${seconds}`,
     text(item.orientation === 'portrait' ? 'portrait' : 'landscape'),
   ].filter(Boolean);
@@ -300,7 +304,8 @@ function templateMarkup(item) {
       </figure>
       <div class="card-body">
         <div class="card-title">
-          <h3>${escapeHtml(title)}</h3>
+          <h3>${escapeHtml(kind || title)}</h3>
+          ${kind ? `<p class="template-name">${escapeHtml(title)}</p>` : ''}
           <div class="template-meta">${tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join('')}</div>
         </div>
         <p class="summary">${escapeHtml(localized(item.description))}</p>
@@ -310,7 +315,7 @@ function templateMarkup(item) {
 
 function templateMatches(item) {
   if (!state.query) return true;
-  const searchable = [item.id, item.title?.zh, item.title?.en, item.description?.zh, item.description?.en]
+  const searchable = [item.id, templateKind(item), item.title?.zh, item.title?.en, item.description?.zh, item.description?.en]
     .join(' ').toLowerCase();
   return searchable.includes(state.query.toLowerCase());
 }
