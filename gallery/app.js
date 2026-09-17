@@ -297,14 +297,14 @@ function templateMarkup(item) {
     text(item.orientation === 'portrait' ? 'portrait' : 'landscape'),
   ].filter(Boolean);
   return `
-    <article class="shot-card template-card" id="template-${escapeHtml(item.id)}">
+    <article class="shot-card template-card" id="template-${escapeHtml(item.id)}" data-kind="${escapeHtml(item.kind || '')}">
       <figure class="preview">
         <video src="${escapeHtml(item.video)}" poster="${escapeHtml(item.poster || '')}" controls playsinline preload="none"
           aria-label="${escapeHtml(title)}"></video>
       </figure>
       <div class="card-body">
         <div class="card-title">
-          <h3>${escapeHtml(kind || title)}</h3>
+          <h3${kind ? ' class="template-kind"' : ''}>${escapeHtml(kind || title)}</h3>
           ${kind ? `<p class="template-name">${escapeHtml(title)}</p>` : ''}
           <div class="template-meta">${tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join('')}</div>
         </div>
