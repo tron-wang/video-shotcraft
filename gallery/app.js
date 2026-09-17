@@ -287,7 +287,8 @@ function templateMarkup(item) {
   const minutes = Math.floor(item.duration / 60);
   const seconds = String(Math.round(item.duration % 60)).padStart(2, '0');
   const tags = [
-    TEMPLATE_KINDS[item.kind] ? text(TEMPLATE_KINDS[item.kind]) : '',
+    // 固定类型走翻译表；清单里另给 kindLabel {zh,en} 时用自定义类型
+    item.kindLabel ? localized(item.kindLabel) : TEMPLATE_KINDS[item.kind] ? text(TEMPLATE_KINDS[item.kind]) : '',
     `${minutes}:${seconds}`,
     text(item.orientation === 'portrait' ? 'portrait' : 'landscape'),
   ].filter(Boolean);
