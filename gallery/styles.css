@@ -294,7 +294,7 @@ main {
 .template-card .preview video { object-fit: contain; background: #0e0e0c; }
 .template-card .summary { -webkit-line-clamp: unset; min-height: 0; }
 /* 分类是模板卡的主标题：每类一个识别色，卡顶色条 + 彩色胶囊，扫一眼就分得出类型 */
-.template-card { --kind: var(--accent); border-top: 3px solid var(--kind); }
+.shot-card.template-card { --kind: var(--accent); border-top: 3px solid var(--kind); }
 .template-card[data-kind="product"] { --kind: #e07b39; }
 .template-card[data-kind="web"] { --kind: #3b82f6; }
 .template-card[data-kind="program"] { --kind: #c9971c; }
