@@ -134,8 +134,12 @@ export const MarkerSweepShot: React.FC<MarkerSweepProps> = ({
   const total = rects.reduce((s, r) => s + r.w, 0);
   let remain = Math.max(0, p) * total;
   let tipLine = -1;
+  // 不到 0.5px 的余量当 0：progress 停在两行（或两句）交界时，浮点误差会漏 ~1e-13px 到下一行，
+  // 「len > 0 就画」会在下一句开头画出一个零长度、只剩圆头与外扩的小墨点——旁白还没讲到就先露头（实际踩过）
+  const MIN_DRAW = 0.5;
   const lens = rects.map((r, i) => {
-    const len = Math.min(r.w, Math.max(0, remain));
+    let len = Math.min(r.w, Math.max(0, remain));
+    if (len < MIN_DRAW) len = 0;
     remain -= len;
     if (len > 0) tipLine = i;
     return len;
