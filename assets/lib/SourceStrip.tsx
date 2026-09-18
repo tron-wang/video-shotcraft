@@ -14,6 +14,8 @@ export const SourceStrip: React.FC<{
   plate?: string;
   accent?: string;
   fontFamily?: string;
+  /** 整条最大宽度（px）。直式预设 820：右缘停在 x=880，不进平台按钮区。超出只截 label，结尾省略号。 */
+  maxWidth?: number;
 }> = ({
   label,
   prefix = '來源',
@@ -22,6 +24,7 @@ export const SourceStrip: React.FC<{
   plate = 'rgba(16,18,22,0.78)',
   accent = '#e0b04b',
   fontFamily = '"PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif',
+  maxWidth,
 }) => {
   const frame = useCurrentFrame();
   const { width, height } = useVideoConfig();
@@ -38,6 +41,8 @@ export const SourceStrip: React.FC<{
         left: portrait ? 60 : 120,
         top: portrait ? 1630 : 1000,
         display: 'flex',
+        maxWidth: maxWidth ?? (portrait ? 820 : 900),
+        boxSizing: 'border-box',
         alignItems: 'center',
         gap: 14,
         padding: portrait ? '12px 22px' : '10px 20px',
@@ -52,9 +57,9 @@ export const SourceStrip: React.FC<{
         pointerEvents: 'none',
       }}
     >
-      <span style={{ width: 6, height: portrait ? 30 : 26, borderRadius: 3, background: accent }} />
-      <span style={{ opacity: 0.72 }}>{prefix}</span>
-      <span>{label}</span>
+      <span style={{ flex: 'none', width: 6, height: portrait ? 30 : 26, borderRadius: 3, background: accent }} />
+      <span style={{ flex: 'none', opacity: 0.72 }}>{prefix}</span>
+      <span style={{ minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{label}</span>
     </div>
   );
 };

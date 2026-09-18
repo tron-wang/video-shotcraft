@@ -50,6 +50,8 @@ if (need.length) {
 const timing = JSON.parse(fs.readFileSync(P('audio/timing.json'), 'utf8'));
 const rawShots = JSON.parse(fs.readFileSync(P('src/shotlist.json'), 'utf8'));
 const shots = rawShots.shots || rawShots;
+const configFile = path.join(SKILL, 'narration.config.json');
+const config = fs.existsSync(configFile) ? JSON.parse(fs.readFileSync(configFile, 'utf8')) : {};
 const article = fs.existsSync(P('sources/article.json')) ? JSON.parse(fs.readFileSync(P('sources/article.json'), 'utf8')) : {};
 
 const write = (rel, content, { generated = false } = {}) => {
@@ -139,7 +141,7 @@ export const FONT = { display: '${T.display}', body: '${T.body}' };
 export const RADIUS = ${T.radius};
 export const FRAME_STYLE = '${T.frame}' as const; // clip-frame-reveal 的框式，全片只用这一种
 export const SOURCE_LABEL = ${JSON.stringify(article.source_label || article.site || '')};
-export const SHOW_SOURCE_STRIP = true;
+export const SHOW_SOURCE_STRIP = ${config.show_source_strip !== false}; // narration.config.json 的 show_source_strip
 `);
 
 // ── 场景占位 ──
