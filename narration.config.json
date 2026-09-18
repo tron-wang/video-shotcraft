@@ -1,0 +1,5 @@
+{
+  "trusted_domains": ["blocktempo.com"],
+  "show_source_strip": true,
+  "site_labels": { "blocktempo.com": "動區動趨 BlockTempo" }
+}
