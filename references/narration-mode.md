@@ -296,7 +296,7 @@ node <skill>/assets/scripts/source-media.mjs --credits     # → out/CREDITS.md
 | `source-strip` | text | evidence | 来源条（生产用 `assets/lib/SourceStrip.tsx`） |
 | `stat-punch` | text / video / photo | data | 词锚处大数字砸入 |
 | `bar-grow-compare` | chart | data | 2–4 根长条依词锚逐根生长，零基线 |
-| `quote-plate` | text / photo / video | quote | 引言逐片语浮现，署名最后到 |
+| `quote-plate` | text / photo / video | quote | 左缘直条 + 引言逐片语擦出，署名最后到；压实拍只拉局部暗幕 |
 | `chapter-slate` | text | chapter | 一章一色一线稿 + 左下角标 |
 | `clip-frame-reveal` | video / photo | broll | 实拍素材主题边框（paper / film / hairline） |
 | `photo-drift-stack` | photo | broll | 2–3 张相纸错位堆叠、极缓漂移 |
