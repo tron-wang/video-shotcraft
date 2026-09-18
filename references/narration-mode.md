@@ -16,7 +16,7 @@
 - **时间不手敲**：所有动效起点只能来自 `timing.ts` 的 `tLine / tChar / tWord`，禁止写死秒数或帧号。
 
 > **实作状态（2026-09-18）**：⓪–⑧ 的脚本与 `assets/lib/` 组件都已可用；既有 162 张卡已标 `input` / `narration`
-> （gallery 有「口播可用」筛选，口播专用卡带橘色角标）。12 张资讯型新卡全部落地，在 `references/shots/narration/`，
+> （gallery 有「口播可用」筛选，口播专用卡带橘色角标）。12 张资讯型新卡全部落地（后加 post-focus-card，现 13 张），在 `references/shots/narration/`，
 > demo 在 `demos/narration/`。要再加新卡照 `docs/narration-card-brief.md`。
 
 ---
@@ -213,7 +213,7 @@ node <skill>/assets/scripts/source-social.mjs --capture <编号或贴文网址> 
   **画面内必须有来源条「影片來源 <平台> @帐号」**，进 `out/CREDITS.md`，交付时逐则提醒并建议先留言 / 私讯取得同意。
   使用者自己的帐号写进 `narration.config.json` 的 `trusted_social`（如 `"threads:@blocktempo"`）→ 不警示、不标注。
 - **用法**：原片静音（人声是口播）、不去水印、不改内容；贴文影片多为 720p，全幅放大会略软——压暗叠数字可以，
-  要当主画面就放进画框（`clip-frame-reveal`）；贴文画面 `post.png` 可当证据镜的素材（`page-anchor-tour` / `loupe-peek`）。
+  要当主画面就放进画框（`clip-frame-reveal`）；贴文画面 `post.png` 当证据镜素材时**用 `post-focus-card`**（整则置中、宽约 860、四周留白、≤ 2 个记号）；不要用 `page-anchor-tour` 在单则贴文里放大巡游（放太大、没留白、效果太多）。
 - 选片规则里的「无可辨识人脸特写」同样适用：路人入镜的贴文影片，挑远景段落、别定格在人脸上。
 
 **4.4 配额检查**（任一 FAIL 不进 ⑦）
@@ -284,7 +284,7 @@ node <skill>/assets/scripts/source-media.mjs --credits     # → out/CREDITS.md
 4. 同一张卡全片最多当两次主角；连续两镜不用同一卡。
 5. 选定后**必读卡全文与 demo 原始码**，把「已知坑」逐条抄进该镜的 `checks`。
 
-**资讯型卡片**（`references/shots/narration/`，12 张）：
+**资讯型卡片**（`references/shots/narration/`，13 张）：
 
 | 卡 | input | narration | 一句话 |
 |---|---|---|---|
@@ -293,6 +293,7 @@ node <skill>/assets/scripts/source-media.mjs --credits     # → out/CREDITS.md
 | `marker-sweep` | screenshot / text | evidence | 荧光笔按词锚逐词扫过一句 |
 | `ink-circle-note` | screenshot / photo | evidence | 手绘圈注 + 箭头 + 短注，钉在内容坐标系 |
 | `loupe-peek` | screenshot / photo | evidence | 圆形放大镜看一眼即撤 |
+| `post-focus-card` | screenshot | evidence | 社群贴文整则置中留白，立体浮入 + 随旁白轻推到重点画一笔；**X / Threads 贴文画面首选** |
 | `source-strip` | text | evidence | 来源条（生产用 `assets/lib/SourceStrip.tsx`） |
 | `stat-punch` | text / video / photo | data | 词锚处大数字砸入 |
 | `bar-grow-compare` | chart | data | 2–4 根长条依词锚逐根生长，零基线 |
