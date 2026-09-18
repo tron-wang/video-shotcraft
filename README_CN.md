@@ -172,8 +172,8 @@ video-shotcraft/
     ├── lib/                 # 可复制使用的 Remotion 组件
     ├── scripts/             # 页面素材采集脚本
     └── audio/               # 音频资产
-        ├── bgm/             # 5 首 BGM 备选
-        └── sfx/<类别>/      # 149 个音效，按场景分 16 类
+        ├── bgm/             # 4 首 BGM 备选
+        └── sfx/<类别>/      # 146 个音效，按场景分 16 类
 ```
 
 完整工作流和实现要求见 [SKILL.md](SKILL.md)、

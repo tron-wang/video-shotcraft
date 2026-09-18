@@ -184,8 +184,8 @@ video-shotcraft/
     ├── lib/                 # Reusable Remotion components
     ├── scripts/             # Page-asset capture scripts
     └── audio/               # Audio assets
-        ├── bgm/             # 5 BGM options
-        └── sfx/<category>/  # 149 SFX across 16 scene categories
+        ├── bgm/             # 4 BGM options
+        └── sfx/<category>/  # 146 SFX across 16 scene categories
 ```
 
 For the complete workflow and implementation requirements, see [SKILL.md](SKILL.md),

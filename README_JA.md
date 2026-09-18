@@ -183,8 +183,8 @@ video-shotcraft/
     ├── lib/                 # Reusable Remotion components
     ├── scripts/             # Page-asset capture scripts
     └── audio/               # 音声アセット
-        ├── bgm/             # BGM 候補 5 曲
-        └── sfx/<カテゴリ>/  # 効果音 149 個、シーン別 16 カテゴリ
+        ├── bgm/             # BGM 候補 4 曲
+        └── sfx/<カテゴリ>/  # 効果音 146 個、シーン別 16 カテゴリ
 ```
 
 完全なワークフローと実装要件については、[SKILL.md](SKILL.md)、

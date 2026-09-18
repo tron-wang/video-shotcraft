@@ -27,7 +27,7 @@ name: type-and-filter
 | 搜索框 | 页面底色补丁盖掉纹理里的 placeholder（保留放大镜图标），文字层叠上去打 | 直接在截图纹理上叠字会和烤入的 placeholder 重影 |
 
 ## 声音
-打字段钉 keyboard.mp3 并按 Sequence 截 24f 与动作严格等长（S4）；点击钉 click-camera（全片最响 vol 0.6，S2 响度分层）；网格飞走钉 whoosh-fast。
+打字段钉 typewriter-digital.mp3 并按 Sequence 截 24f 与动作严格等长（S4）；点击钉 click-camera（全片最响 vol 0.6，S2 响度分层）；网格飞走钉 whoosh-fast。
 
 ## 已知坑
 - 初版打字+过滤"太快了"被返工（R3）——交互镜头的第一版几乎总是偏快，起稿就按 3f/字符

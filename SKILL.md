@@ -218,7 +218,7 @@ node workbench/scripts/open.mjs <成片工程目录>   # 链接工程 → 起 de
   `three` + `@react-three/fiber` + `@remotion/three` 依赖，其余仅需 remotion。
 - `assets/scripts/capture-template.mjs` 复制后改顶部 CONFIG（BASE/路由/选择器）。
 - `assets/audio/` 音效直接复制使用（免费商用授权，见 audio/ATTRIBUTION.md）：
-  `audio/bgm/` 是节奏感强的 BGM 备选；`audio/sfx/<类别>/` 149 个音效按场景分 16 类
+  `audio/bgm/` 是节奏感强的 BGM 备选；`audio/sfx/<类别>/` 146 个音效按场景分 16 类
   （transition impact riser camera ui text paper film light data scifi mech
   glass fluid crowd counter），找音先进类别目录，清单见 sound-design.md。
   词汇表 sparkle 的目录名是 `light/`（无 `sparkle/`）；S1 禁音色不禁动作——

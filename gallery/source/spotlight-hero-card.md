@@ -29,7 +29,7 @@ name: spotlight-hero-card
 | 双层影 | `0 8·lift px …, 0 46·lift px 90·lift px` 随高度生长 | 影子不随高度长，悬浮就不成立 |
 
 ## 声音
-弹起钉 whoosh-big（模板片钉在 f127），光束扫描钉 sparkle（f141），reseat 钉 transition-snap（f204）——弹起/光效/落定各有专属音（S2、S4）。
+弹起钉 whoosh-swirl（模板片钉在 f127），光束扫描钉 light-sweep-magic（f141），reseat 钉 transition-snap（f204）——弹起/光效/落定各有专属音（S2、S4）。
 
 ## 已知坑
 - 开场多卡群舞撑不起第一印象（Q5）——开场曾反复推倒多次才收敛到单卡；直接从单主角+完整动作弧起稿

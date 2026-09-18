@@ -66,16 +66,16 @@ CAPTIONS = [
 SFX = [
     (12, "transition-soft.mp3", 0.4),
     (78, "whoosh-fast.mp3", 0.45),
-    (127, "whoosh-big.mp3", 0.5),
-    (141, "sparkle.mp3", 0.35),
+    (127, "whoosh-swirl.mp3", 0.5),
+    (141, "light-sweep-magic.mp3", 0.35),
     (204, "transition-snap.mp3", 0.5),
     (220, "swoosh-quick.mp3", 0.4),
     (277, "transition-soft.mp3", 0.4),
-    (308, "whoosh-big.mp3", 0.5),
+    (308, "whoosh-swirl.mp3", 0.5),
     (340, "whoosh-fast.mp3", 0.4),
     (356, "whoosh-fast.mp3", 0.32),
-    (388, "whoosh-big.mp3", 0.5),
-    (401, "keyboard.mp3", 0.4),
+    (388, "whoosh-swirl.mp3", 0.5),
+    (401, "typewriter-digital.mp3", 0.4),
     (435, "whoosh-fast.mp3", 0.4),
     (451, "click-camera.mp3", 0.6),
     (455, "swoosh-quick.mp3", 0.35),
@@ -85,23 +85,23 @@ SFX = [
     (648, "click-camera.mp3", 0.45),
     (725, "swoosh-quick.mp3", 0.4),
     (779, "transition-soft.mp3", 0.4),
-    (781, "keyboard.mp3", 0.34),
-    (840, "pop.mp3", 0.4),
-    (845, "pop.mp3", 0.37),
-    (850, "pop.mp3", 0.34),
-    (855, "pop.mp3", 0.31),
-    (860, "pop.mp3", 0.28),
-    (865, "pop.mp3", 0.25),
+    (781, "typewriter-digital.mp3", 0.34),
+    (840, "ui-popup-dry.mp3", 0.4),
+    (845, "ui-popup-dry.mp3", 0.37),
+    (850, "ui-popup-dry.mp3", 0.34),
+    (855, "ui-popup-dry.mp3", 0.31),
+    (860, "ui-popup-dry.mp3", 0.28),
+    (865, "ui-popup-dry.mp3", 0.25),
     (885, "swoosh-quick.mp3", 0.4),
-    (945, "riser-cine.mp3", 0.5),
+    (945, "riser-trailer-cine.mp3", 0.5),
     (980, "impact-cine.mp3", 0.55),
-    (1005, "sparkle.mp3", 0.3),
+    (1005, "light-sweep-magic.mp3", 0.3),
 ]
 
 
 def sfx_cap_frames(from_f: int, src: str) -> int:
     # Main.tsx: keyboard 24f（搜索框打字）/ 44f（周报书写），其余 90f 内播完
-    if src == "keyboard.mp3":
+    if src == "typewriter-digital.mp3":
         return 44 if from_f > 700 else 24
     return 90
 

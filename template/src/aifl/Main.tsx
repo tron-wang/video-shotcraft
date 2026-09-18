@@ -47,10 +47,10 @@ export const parseWords = (text: string): { text: string; accent?: boolean }[] =
 // warm flash cuts straddle these hard cuts (from = cut − 5, 10f long)
 export const FLASH_CUTS = [AIFL_SHOTS.table.from, AIFL_SHOTS.macro.from, AIFL_SHOTS.chart.from, AIFL_SHOTS.wbr.from];
 
-// keyboard: 24f for the short search-box typing, 44f under the wbr writing
+// typing (typewriter-digital): 24f for the short search-box typing, 44f under the wbr writing
 // reveals; everything else plays out (≤3s assets)
 export const sfxDuration = (s: { from: number; src: string }) =>
-  s.src === 'keyboard.mp3' ? (s.from > 700 ? 44 : 24) : 90;
+  s.src === 'typewriter-digital.mp3' ? (s.from > 700 ? 44 : 24) : 90;
 
 // bottom-strip narration over the live shots (absolute frames; outro stays clean)
 export const CAPTIONS = [
@@ -71,8 +71,8 @@ export const SFX: { from: number; src: string; volume: number }[] = [
   { from: 12, src: 'transition-soft.mp3', volume: 0.4 },
   { from: 78, src: 'whoosh-fast.mp3', volume: 0.45 }, // brand → dashboard
   // hero card: whoosh up on the pop, sparkle on the beam scan, impact reseat
-  { from: 127, src: 'whoosh-big.mp3', volume: 0.5 },
-  { from: 141, src: 'sparkle.mp3', volume: 0.35 },
+  { from: 127, src: 'whoosh-swirl.mp3', volume: 0.5 },
+  { from: 141, src: 'light-sweep-magic.mp3', volume: 0.35 },
   { from: 204, src: 'transition-snap.mp3', volume: 0.5 },
   // title cards ride a quick swoosh
   { from: 220, src: 'swoosh-quick.mp3', volume: 0.4 },
@@ -80,12 +80,12 @@ export const SFX: { from: number; src: string; volume: number }[] = [
   // pulls back and dealing starts, fast whooshes as the deal accelerates,
   // then the scroll rest → big whoosh back up to the search bar
   { from: 277, src: 'transition-soft.mp3', volume: 0.4 }, // pile close-up
-  { from: 308, src: 'whoosh-big.mp3', volume: 0.5 }, // pull-back + first deals
+  { from: 308, src: 'whoosh-swirl.mp3', volume: 0.5 }, // pull-back + first deals
   { from: 340, src: 'whoosh-fast.mp3', volume: 0.4 }, // dealing accelerates
   { from: 356, src: 'whoosh-fast.mp3', volume: 0.32 }, // full flurry
-  { from: 388, src: 'whoosh-big.mp3', volume: 0.5 }, // swoosh back to header
+  { from: 388, src: 'whoosh-swirl.mp3', volume: 0.5 }, // swoosh back to header
   // typing (slower now, 3f/char) + a breath + filter + click
-  { from: 401, src: 'keyboard.mp3', volume: 0.4 }, // trimmed by sequence length
+  { from: 401, src: 'typewriter-digital.mp3', volume: 0.4 }, // trimmed by sequence length
   { from: 435, src: 'whoosh-fast.mp3', volume: 0.4 }, // grid filters away
   { from: 451, src: 'click-camera.mp3', volume: 0.6 }, // click on the result card
   { from: 455, src: 'swoosh-quick.mp3', volume: 0.35 }, // push-in
@@ -99,18 +99,18 @@ export const SFX: { from: number; src: string; volume: number }[] = [
   // wbr: the page "writes itself" over live keyboard typing, then past weeks
   // pop into the left rail one by one (a pop per landing)
   { from: 779, src: 'transition-soft.mp3', volume: 0.4 },
-  { from: 781, src: 'keyboard.mp3', volume: 0.34 }, // trimmed to the writing reveals
-  { from: 840, src: 'pop.mp3', volume: 0.4 },
-  { from: 845, src: 'pop.mp3', volume: 0.37 },
-  { from: 850, src: 'pop.mp3', volume: 0.34 },
-  { from: 855, src: 'pop.mp3', volume: 0.31 },
-  { from: 860, src: 'pop.mp3', volume: 0.28 },
-  { from: 865, src: 'pop.mp3', volume: 0.25 },
+  { from: 781, src: 'typewriter-digital.mp3', volume: 0.34 }, // trimmed to the writing reveals
+  { from: 840, src: 'ui-popup-dry.mp3', volume: 0.4 },
+  { from: 845, src: 'ui-popup-dry.mp3', volume: 0.37 },
+  { from: 850, src: 'ui-popup-dry.mp3', volume: 0.34 },
+  { from: 855, src: 'ui-popup-dry.mp3', volume: 0.31 },
+  { from: 860, src: 'ui-popup-dry.mp3', volume: 0.28 },
+  { from: 865, src: 'ui-popup-dry.mp3', volume: 0.25 },
   { from: 885, src: 'swoosh-quick.mp3', volume: 0.4 }, // title card 3
   // outro: riser under the assembly, big impact when the wordmark stamps
-  { from: 945, src: 'riser-cine.mp3', volume: 0.5 },
+  { from: 945, src: 'riser-trailer-cine.mp3', volume: 0.5 },
   { from: 980, src: 'impact-cine.mp3', volume: 0.55 },
-  { from: 1005, src: 'sparkle.mp3', volume: 0.3 }, // rule + tagline glint
+  { from: 1005, src: 'light-sweep-magic.mp3', volume: 0.3 }, // rule + tagline glint
 ];
 
 export const AiflMain: React.FC = () => {
