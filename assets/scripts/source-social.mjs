@@ -9,8 +9,9 @@
 //        Playwright 以手机版面打开公开贴文：贴文截图（证据镜用）、帐号 / 内文 / 时间、贴文主影片（mp4）
 //        → assets/social/<platform>-<id>/{post.png, video.mp4, post.json}、public/media/、assets/manifest.json
 //
-// 支援度：Threads 公开贴文（实测）。其他平台走通用路径（og 标签 + 页面第一个 <video>）：
-//   Facebook / TikTok 公开贴文多半拍得到画面、影片不一定；X / Instagram 需登入 → 明确报「需要登入，未采集」；
+// 支援度：Threads 公开贴文（实测，走页面）；X 公开贴文（实测，走 X 的公开嵌入端点，影片可到 1080p）。
+//   其他平台走通用路径（og 标签 + 页面第一个 <video>）：Facebook / TikTok 公开贴文多半拍得到画面、影片不一定；
+//   Instagram 需登入 → 明确报「需要登入，未采集」；
 //   YouTube 只拍画面不下载影片（平台条款）。需要登入的内容一律不绕过。
 //
 // 权利（lib/media-rules.mjs socialPostRights）：贴文著作权属上传者。使用者决定可用，但 manifest 一律
@@ -96,6 +97,8 @@ const runCapture = async (target) => {
   const id = `${info.platform}-${info.postId}`.replace(/[^a-zA-Z0-9_-]/g, '');
   const dir = P('assets', 'social', id);
   fs.mkdirSync(dir, { recursive: true });
+
+  if (info.platform === 'x') return captureX({ url, info, id, dir, segment, shotId });
 
   const { chromium } = await loadPlaywright();
   const browser = await chromium.launch();
@@ -186,6 +189,62 @@ const runCapture = async (target) => {
   console.log(`   内文：${(data.description || '').replace(/\n/g, ' ／ ').slice(0, 60)}`);
   if (rights.risk === 'high') console.log(`   ⚠ risk: high —— ${rights.note}\n   画面内来源条：「${rights.source_strip}」；已记入 manifest，会进 out/CREDITS.md`);
   if (main && Math.min(main.w, main.h) < 1080) console.log(`   解析度 ${main.w}×${main.h} 低于 1080p：放进画框里用（clip-frame-reveal），不要全幅放大`);
+};
+
+// X（Twitter）：贴文页要登入、影片是分段串流，所以不走页面。改走 X 自己给网站嵌入贴文用的公开端点
+// （cdn.syndication.twimg.com/tweet-result，免登入）：内文、作者、时间、影片各码率的 mp4 都在里面。
+// 贴文画面拍官方嵌入页 platform.twitter.com/embed。受保护帐号、已删除或限制嵌入的贴文拿不到 → 报未采集。
+const captureX = async ({ url, info, id, dir, segment, shotId }) => {
+  const token = ((Number(info.postId) / 1e15) * Math.PI).toString(36).replace(/(0+|\.)/g, '');
+  const res = await fetch(`https://cdn.syndication.twimg.com/tweet-result?id=${info.postId}&token=${token}&lang=zh-tw`, { headers: { 'User-Agent': 'Mozilla/5.0' } });
+  const d = res.ok ? await res.json().catch(() => null) : null;
+  if (!d || !d.user) throw new Error(`X 这则贴文拿不到公开嵌入资料（HTTP ${res.status}）：可能是受保护帐号、已删除或限制嵌入——未采集`);
+  const handle = `@${d.user.screen_name}`.toLowerCase();
+  const media = (d.mediaDetails || []).find((m) => m.type === 'video' || m.type === 'animated_gif');
+  const variants = (media?.video_info?.variants || []).filter((v) => v.content_type === 'video/mp4')
+    .map((v) => { const m = v.url.match(/\/(\d+)x(\d+)\//); return { ...v, w: m ? +m[1] : 0, h: m ? +m[2] : 0 }; })
+    .sort((x, y) => Math.min(x.w, x.h) - Math.min(y.w, y.h));
+  // 同 source-media：取短边刚好 ≥1080 的最小档，没有就取最大
+  const pick = variants.find((v) => Math.min(v.w, v.h) >= 1080) || variants[variants.length - 1] || null;
+
+  const { chromium } = await loadPlaywright();
+  const browser = await chromium.launch();
+  const page = await (await browser.newContext({ viewport: { width: 430, height: 932 }, deviceScaleFactor: 3, locale: 'zh-TW' })).newPage();
+  await page.goto(`https://platform.twitter.com/embed/Tweet.html?id=${info.postId}&lang=zh-tw&dnt=true&hideThread=true`, { waitUntil: 'networkidle', timeout: 60000 }).catch(() => {});
+  await page.waitForTimeout(2500);
+  const art = page.locator('article').first();
+  if (await art.count()) await art.screenshot({ path: path.join(dir, 'post.png') });
+  else await page.screenshot({ path: path.join(dir, 'post.png') });
+  await browser.close();
+
+  let videoRel = null;
+  if (pick) {
+    const v = await fetch(pick.url, { headers: { 'User-Agent': 'Mozilla/5.0' } });
+    if (v.ok) {
+      fs.writeFileSync(path.join(dir, 'video.mp4'), Buffer.from(await v.arrayBuffer()));
+      videoRel = `public/media/${id}.mp4`;
+      fs.mkdirSync(P('public', 'media'), { recursive: true });
+      fs.copyFileSync(path.join(dir, 'video.mp4'), P(videoRel));
+    } else console.warn(`  影片下载失败（HTTP ${v.status}）：只保留贴文画面`);
+  }
+  const full = { ...info, handle };
+  const rights = socialPostRights(full, config.trusted_social || []);
+  const duration = media?.video_info?.duration_millis ? +(media.video_info.duration_millis / 1000).toFixed(2) : null;
+  writeJson(path.join(dir, 'post.json'), { url, ...full, author_name: d.user.name, text: d.text, published: d.created_at, captured_at: new Date().toISOString(),
+    video: pick ? { width: pick.w, height: pick.h, duration, bitrate: pick.bitrate } : null });
+  const base = {
+    source: 'social', platform: 'x', source_url: url, author: handle, author_url: `https://x.com/${d.user.screen_name}`,
+    license: rights.rights === 'trusted-social' ? '使用者自己的帐号（narration.config.json trusted_social）' : '著作权属上传者；使用者决定引用，须标来源',
+    ...rights, caption: d.text, downloaded_at: new Date().toISOString(), used_in: shotId ? [shotId] : [], ...(segment ? { segment } : {}),
+  };
+  const entries = [{ id: `${id}-post`, file: `assets/social/${id}/post.png`, kind: 'screenshot', file_url: url, ...base }];
+  if (videoRel) entries.push({ id: `${id}-video`, file: videoRel, kind: 'video', file_url: pick.url.split('?')[0], width: pick.w, height: pick.h, duration, ...base });
+  upsertManifest(P('assets', 'manifest.json'), entries);
+  console.log(`→ assets/social/${id}/post.png  贴文画面（X ${handle}）`);
+  if (videoRel) console.log(`→ ${videoRel}  ${pick.w}×${pick.h}${duration ? ` ${duration}s` : ''}`);
+  else if (!media) console.log('   这则贴文没有影片：只有贴文画面');
+  console.log(`   内文：${(d.text || '').replace(/\n/g, ' ／ ').slice(0, 60)}`);
+  if (rights.risk === 'high') console.log(`   ⚠ risk: high —— ${rights.note}\n   画面内来源条：「${rights.source_strip}」；已记入 manifest，会进 out/CREDITS.md`);
 };
 
 try {

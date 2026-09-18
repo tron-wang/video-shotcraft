@@ -207,7 +207,8 @@ node <skill>/assets/scripts/source-social.mjs --capture <编号或贴文网址> 
   （免登入免金钥；被挡会明说）。平台站内搜寻都要登入，不走。
 - **采**：Playwright 以手机版面打开**公开**贴文 → `assets/social/<platform>-<id>/post.png`（贴文画面：帐号、内文、影片、互动数，
   已去掉「开启 App」弹窗与下方留言串）+ 贴文主影片 → `public/media/<platform>-<id>.mp4` + manifest。
-  Threads 实测可用；X / Instagram 需登入 → 报「未采集」，**不绕过登入**；YouTube 只拍画面不下载。
+  Threads 实测可用（走页面，影片多为 720p）；**X 实测可用**（走 X 给网站嵌入贴文用的公开端点，免登入，影片可到 1080p；
+  受保护帐号 / 已删除 / 限制嵌入的拿不到）；Instagram 需登入 → 报「未采集」，**不绕过登入**；YouTube 只拍画面不下载。
 - **权利**：贴文著作权属上传者。使用者决定可用（同文章图片的决定），但 manifest 一律 `risk: high`、`attribution_required`，
   **画面内必须有来源条「影片來源 <平台> @帐号」**，进 `out/CREDITS.md`，交付时逐则提醒并建议先留言 / 私讯取得同意。
   使用者自己的帐号写进 `narration.config.json` 的 `trusted_social`（如 `"threads:@blocktempo"`）→ 不警示、不标注。
@@ -331,7 +332,7 @@ node <skill>/assets/scripts/source-media.mjs --credits     # → out/CREDITS.md
 |---|---|---|
 | 主内容安全区 | x 60–1020、y 150–1420 | x 120–1800、y 80–880 |
 | 字幕（`Subtitles.tsx` 内建） | y 1480、52px、每条 ≤ 16 字 | y 930、46px、每条 ≤ 26 字 |
-| 来源条 | 左下，y 1620–1700，避开右缘 | 左下，y 1000–1050 |
+| 来源条 | 画面左下角，距底 70（y≈1790–1850），避开右缘；在平台底部说明区内，要避开传 `bottom={230}` | 左下角，距底 34 |
 | 章节 / 角标等常驻件 | 左上或左下；**右缘 x > 900、y 900–1700 留给平台按钮** | 四角皆可 |
 | 平台 UI 遮挡区 | 顶 0–150（帐号列）、底 1720–1920（说明文字） | — |
 

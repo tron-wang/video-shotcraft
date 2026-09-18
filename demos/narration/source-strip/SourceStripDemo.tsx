@@ -1,6 +1,6 @@
 // source-strip —— 来源条：用到文章图片或网页截图的证据镜，画面左下角一条小字标出处，陪完整个镜头。
 // 它是引用标注，不是装饰：只淡入淡出（各 8 帧），不做位移；不靠右（平台按钮区）；
-// 待在字幕（y≈1480–1560）下方的 y≈1630。
+// 贴画面左下角（直式距底 70px，y≈1790–1850），在字幕（y≈1480–1560）之下。
 // 成片用的是 assets/lib/SourceStrip.tsx（scaffold-narration.mjs 会拷进 src/lib/）。demo 不能 import
 // assets/lib，所以这里按同样的 props / 几何 / 时序重做一份 `SourceStripShot`——两边改动必须同步。
 // 本档多出来的只有两项：`maxWidth`（长媒体名截断）与 `layout`（设计舞台内强制直式几何）。
@@ -53,7 +53,7 @@ export const SourceStripShot: React.FC<SourceStripDemoProps> = ({
       style={{
         position: 'absolute',
         left: portrait ? 60 : 120,
-        top: portrait ? 1630 : 1000,
+        bottom: portrait ? 70 : 34,
         maxWidth: maxWidth ?? (portrait ? 820 : 900),
         boxSizing: 'border-box',
         display: 'flex',

@@ -1,5 +1,7 @@
 // 来源条：用到文章图片或网页截图的证据镜，画面内必须标出处（narration-mode.md ⓪④）。
-// 靠左下——直式片右缘是社群平台按钮区。淡入淡出各 8 帧，不做位移动画。
+// 贴画面左下角（使用者 2026-09-18 指定）——直式片右缘是社群平台按钮区，所以永远靠左。
+// 注意：Reels / Shorts / TikTok 会在底部约 200px 叠上帐号与说明文字，来源条在 App 里可能被盖到；
+// 要完全避开就传 bottom={230}（回到字幕正下方）。淡入淡出各 8 帧，不做位移动画。
 import React from 'react';
 import { interpolate, useCurrentFrame, useVideoConfig } from 'remotion';
 
@@ -16,6 +18,8 @@ export const SourceStrip: React.FC<{
   fontFamily?: string;
   /** 整条最大宽度（px）。直式预设 820：右缘停在 x=880，不进平台按钮区。超出只截 label，结尾省略号。 */
   maxWidth?: number;
+  /** 距画面底边的距离（px）。预设贴左下角：直式 70、横式 34。 */
+  bottom?: number;
 }> = ({
   label,
   prefix = '來源',
@@ -25,6 +29,7 @@ export const SourceStrip: React.FC<{
   accent = '#e0b04b',
   fontFamily = '"PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif',
   maxWidth,
+  bottom,
 }) => {
   const frame = useCurrentFrame();
   const { width, height } = useVideoConfig();
@@ -39,7 +44,7 @@ export const SourceStrip: React.FC<{
       style={{
         position: 'absolute',
         left: portrait ? 60 : 120,
-        top: portrait ? 1630 : 1000,
+        bottom: bottom ?? (portrait ? 70 : 34),
         display: 'flex',
         maxWidth: maxWidth ?? (portrait ? 820 : 900),
         boxSizing: 'border-box',
