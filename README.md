@@ -11,7 +11,7 @@
 [![GitHub stars](https://img.shields.io/github/stars/tron-wang/video-shotcraft)](https://github.com/tron-wang/video-shotcraft/stargazers)
 [![Gallery](https://img.shields.io/badge/Gallery-live%20previews-d3923c)](https://shotcraft-gallery.nionionote.com/)
 
-**An agent skill for crafting cinematic product videos: 167 shot recipe cards · 224 styles · 219 motion previews · a production-ready template**
+**An agent skill for crafting cinematic product videos: 167 shot recipe cards · 224 styles · 224 motion previews · a production-ready template**
 
 [English](README.md) | [中文](README_CN.md) | [日本語](README_JA.md)
 
