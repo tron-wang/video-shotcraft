@@ -4,6 +4,8 @@ name: chip-lift-to-user-pill
 适用: "从一堆候选里选中并展开这一个"的交互链路；协作/通讯录/收件人类产品的功能演示；选中→详情的转场
 时长: 约5.0s（150f@30fps）
 能量: 中（选中那一下是硬爆点，之后全是从容的生长与打字）
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

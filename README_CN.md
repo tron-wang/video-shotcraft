@@ -12,7 +12,7 @@
 [![GitHub forks](https://img.shields.io/github/forks/tron-wang/video-shotcraft)](https://github.com/tron-wang/video-shotcraft/network/members)
 [![Gallery](https://img.shields.io/badge/Gallery-在线样片-d3923c)](https://shotcraft-gallery.nionionote.com/)
 
-**让 agent 帮你制作电影感产品视频的 skill：162 张镜头配方卡 · 219 个样式 · 219 条动态样片 · 已验收成片模板**
+**让 agent 帮你制作电影感产品视频的 skill：174 张镜头配方卡 · 231 个样式 · 231 条动态样片 · 已验收成片模板**
 
 [English](README.md) | [中文](README_CN.md) | [日本語](README_JA.md)
 
@@ -23,7 +23,7 @@
 和声音设计，产出一支电影感的宣传片 / 营销视频 / 发布视频 / 功能演示——
 真实页面截图、2.5D 运镜、节奏卡点和电影级 SFX 全部包含。
 
-🖼️ [**在线 Gallery：浏览全部 219 条动态样片 »**](https://shotcraft-gallery.nionionote.com/)
+🖼️ [**在线 Gallery：浏览全部 231 条动态样片 »**](https://shotcraft-gallery.nionionote.com/)
 
 ## ✨ 最近更新
 
@@ -96,6 +96,14 @@ ln -s "$(pwd)" ~/.codex/skills/video-shotcraft    # Codex
 如果没有指定镜头卡，skill 会先介绍现成成片模板并询问是否采用；
 也可以先在 [Gallery](https://shotcraft-gallery.nionionote.com/) 里挑好镜头再开始。
 
+## 🎙 口播模式：新闻 / 文章 → 配音短片
+
+给一个新闻或文章网址（或直接给口播稿），skill 会自动改写口播稿、逐句合成配音、
+产出逐字时间戳、**上网采集可商用素材**（Pexels / Pixabay / Unsplash / Openverse CC0 +
+来源网页截图）、按语意分镜并为每一镜挑卡，做成带烧录字幕的直式短片。
+每个素材的来源与授权记在 `assets/manifest.json`，需标注的自动产出 `out/CREDITS.md`。
+流程见 [`references/narration-mode.md`](references/narration-mode.md)。
+
 ## 📼 成片模板：Ink Press（墨压）
 
 skill 内置 **Ink Press（墨压）** 模板——一支已验收的完整宣传片：
@@ -137,8 +145,8 @@ agent 会替换成目标产品的截图、文案和品牌信息，复现同等�
 
 | 内容 | 说明 |
 | --- | --- |
-| 162 张镜头配方卡 | 记录用途、能量、建议时长、参数、实现要点与已知坑 |
-| 219 条动态样片 | 覆盖 219 个样式，可在在线 Gallery 中直接预览、搜索和筛选 |
+| 174 张镜头配方卡 | 记录用途、能量、建议时长、参数、实现要点与已知坑 |
+| 231 条动态样片 | 覆盖 231 个样式，可在在线 Gallery 中直接预览、搜索和筛选 |
 | Remotion 参考实现 | 每张卡对应经过调校的 TSX demo，包含实际缓动和时序参数 |
 | 完整成片模板 | 36.2 秒、1920×1080、30fps、10 镜头的纸墨琥珀风产品宣传片 |
 | 组件与素材 | 2.5D 页面相机、字幕、闪切、数字滚动、音效和素材采集脚本 |
@@ -156,7 +164,7 @@ video-shotcraft/
 ├── SKILL.md                 # Agent 使用入口与核心制作规则
 ├── references/
 │   ├── pipeline.md          # 完整制作流水线
-│   ├── shots/               # 162 张镜头配方卡
+│   ├── shots/               # 174 张镜头配方卡
 │   ├── sequences/           # 可复用的全片结构与桥段模板
 │   ├── aesthetic-rules.md   # 视觉验收准则
 │   ├── music-beat-sync.md   # BGM 节奏分析与卡点方法
@@ -172,8 +180,8 @@ video-shotcraft/
     ├── lib/                 # 可复制使用的 Remotion 组件
     ├── scripts/             # 页面素材采集脚本
     └── audio/               # 音频资产
-        ├── bgm/             # 5 首 BGM 备选
-        └── sfx/<类别>/      # 149 个音效，按场景分 16 类
+        ├── bgm/             # 4 首 BGM 备选
+        └── sfx/<类别>/      # 146 个音效，按场景分 16 类
 ```
 
 完整工作流和实现要求见 [SKILL.md](SKILL.md)、

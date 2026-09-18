@@ -4,6 +4,8 @@ name: marker-underline-title
 适用: 标题里强调单个关键词（new/free/AI…）；手写感/人味的品牌调性；正文标注式强调
 时长: 标题落定 +4~8f 后起笔，划线 8–12f，总 1–1.5s
 能量: 低（一笔点睛，不抢标题的戏）
+input: [text]
+narration: quote
 ---
 
 ## 意图

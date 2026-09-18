@@ -5,6 +5,8 @@ name: sakuga-timing-shift
 时长: ~5s
 能量: 中高
 标签: ui-entrance
+input: [screenshot, video]
+narration: none
 ---
 
 ## 意图

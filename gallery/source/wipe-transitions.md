@@ -4,6 +4,8 @@ name: wipe-transitions
 适用: 新旧页都不动、一条几何边界扫过完成交接的通用转场；不依赖构图里有合适元素，哪儿都能用
 时长: 单式 前态 ≥20f + 擦除 32–60f + 收尾 ≥40f，约 5s（150f）
 能量: 中
+input: [video, photo, screenshot, text]
+narration: transition
 ---
 
 ## 意图

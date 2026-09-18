@@ -4,6 +4,8 @@ name: element-body-moves
 适用: 给"位置在变"之外补"身体在变"：高速飞入给速度肉身（A）、卡片点名给悬浮证据（B）；A 配横冲入场，B 配 2.5D 运镜与逐张点名
 时长: A ~4.7s / B ~5.3s
 能量: A 中高 / B 低中
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

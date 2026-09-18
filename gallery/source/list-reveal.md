@@ -4,6 +4,8 @@ name: list-reveal
 适用: 导航/侧边栏/设置面板的入场；任何"界面自己长出来"的 UI 段落，也适合做旁白铺垫时的低能量底
 时长: 约 3.6s（108f@30fps）
 能量: 低（稳定节拍，无峰值；靠漂移维持画面不死）
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

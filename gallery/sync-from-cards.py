@@ -46,7 +46,12 @@ CATEGORIES = {
     'rhythm': {'zh': '节奏与蒙太奇', 'en': 'Rhythm & Montage'},
     'effects': {'zh': '光效与强调', 'en': 'Light & Emphasis'},
     'outro': {'zh': '收尾', 'en': 'Outro'},
+    # 口播模式的资讯型卡（目录）；同时也是筛选标签：任何 narration != none 的卡都会被打上
+    'narration': {'zh': '口播与资讯', 'en': 'Narration & Info'},
 }
+
+NARRATION_ROLES = {'evidence', 'data', 'quote', 'chapter', 'transition', 'broll', 'none'}
+INPUT_MODES = {'video', 'photo', 'screenshot', 'chart', 'text'}
 
 
 def main():
@@ -98,6 +103,15 @@ def main():
         if bad:
             raise SystemExit(f"{card['name']}: unknown 标签 {bad} (must be CATEGORIES keys)")
         card['tags'] = [card['category']] + [t for t in extra if t != card['category']]
+        # 口播模式选卡用：input = 这张卡吃什么素材；narration = 在口播片里担任的段落角色
+        role = fm.get('narration', 'none')
+        modes = [t.strip() for t in fm.get('input', '').strip('[]').split(',') if t.strip()]
+        if role not in NARRATION_ROLES or not modes or set(modes) - INPUT_MODES:
+            raise SystemExit(f"{card['name']}: bad input/narration frontmatter ({modes!r}, {role!r})")
+        card['input'] = modes
+        card['narration'] = role
+        if role != 'none' and 'narration' not in card['tags']:
+            card['tags'].append('narration')
         card['source'] = f"references/shots/{card['category']}/{card['name']}.md"
         if card['name'] in touched:
             card['updatedAt'] = now

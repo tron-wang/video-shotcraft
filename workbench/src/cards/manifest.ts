@@ -33,7 +33,7 @@ export type ManifestAudio = {
   from: number;
   /** 帧数；缺省 90（与 Main.tsx 里 SFX Sequence 默认长度对齐） */
   duration?: number;
-  /** public/ 下的路径，如 "audio/whoosh-big.mp3" */
+  /** public/ 下的路径，如 "audio/whoosh-swirl.mp3" */
   src: string;
   volume: number;
   label?: string;

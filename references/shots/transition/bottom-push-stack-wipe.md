@@ -4,6 +4,8 @@ name: bottom-push-stack-wipe
 适用: 多章节产品片的换章骨架（每章一个卖点一种底色）；需要"翻页节奏感"贯穿全片的段落切换
 时长: 单次推入 30f + 章内 hold ~1s；demo 三连推 140f（~4.7s）
 能量: 中
+input: [text]
+narration: chapter
 ---
 
 ## 意图

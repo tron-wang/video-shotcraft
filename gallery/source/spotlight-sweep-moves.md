@@ -5,6 +5,8 @@ name: spotlight-sweep-moves
 时长: 单式 3.5–4.5s；A/B 可串联成巡礼段
 能量: 中低（克制、神秘感，爆点在"亮起"瞬间）
 标签: ui-entrance、transition
+input: [screenshot]
+narration: evidence
 ---
 
 ## 意图

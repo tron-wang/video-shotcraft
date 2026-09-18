@@ -5,6 +5,8 @@ name: paper-title-card
 时长: 1.7–1.8s（50–55f）
 能量: 低（呼吸位，隔开两段高能镜头）
 标签: transition、rhythm
+input: [text]
+narration: quote
 ---
 
 ## 意图

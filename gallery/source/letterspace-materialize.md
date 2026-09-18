@@ -5,6 +5,8 @@ name: letterspace-materialize
 时长: 静置 ~15f + 描画 ~50f + 终态静置 ≥30f；全段 3–4s
 能量: 低（静谧仪式感，一次呼吸完成）
 标签: typography、outro
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

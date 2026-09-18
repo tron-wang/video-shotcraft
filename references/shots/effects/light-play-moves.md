@@ -5,6 +5,8 @@ name: light-play-moves
 时长: A ~5.3s / B ~4.7s / D ~4.8s
 能量: A 中 / B 低 / D 高
 标签: typography
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

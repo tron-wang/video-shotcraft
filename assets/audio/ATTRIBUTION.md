@@ -2,7 +2,7 @@
 
 规矩：**下载音频素材时当场记录曲名/URL**，事后无法反查。
 
-目录结构：`bgm/` 5 首 BGM 备选；`sfx/<类别>/` 149 个音效分 16 类（transition impact riser camera ui text paper film light data scifi mech glass fluid crowd counter）。类别含义与找音路径见 `references/sound-design.md` 3.0。
+目录结构：`bgm/` 4 首 BGM 备选；`sfx/<类别>/` 146 个音效分 16 类（transition impact riser camera ui text paper film light data scifi mech glass fluid crowd counter）。类别含义与找音路径见 `references/sound-design.md` 3.0。
 
 下表「路径」列为 `assets/audio/` 下的相对路径。
 
@@ -10,22 +10,20 @@
 
 批量下载时 metadata 被抹掉，原本无逐文件 URL。**2026-07-27 用 md5 比对补回了 7 个**——
 这批文件与已登记 URL 的扩充批次字节完全相同（同一个 Mixkit 素材下了两次、存成两个名字），
-据此反查出原始条目，下表「原名 / URL」列即比对结果。剩余 6 个仍无法反查，商用前须逐个确认。
+据此反查出原始条目，下表「原名 / URL」列即比对结果。
 
-（原 13 个，2026-07-27 筛选删掉 `impact-cine.mp3`、`typewriter.mp3` 两个，现存 11 个；`impact-cine` 的等价文件是字节相同的 `sfx/impact/impact-deep-whoosh.mp3`，详见 sound-design 3.1。）
+**2026-09-18 清理**：剩余无法反查的 5 个 SFX（`keyboard` `pop` `riser-cine` `sparkle` `whoosh-big`）与 1 首 BGM（`bgm-tech-house`）已从库与 `template/public/audio/` 删除，
+模板片改用库内有 URL 的 Mixkit 素材（对照表见 `references/sound-design.md` 3.1）。**现在库内每个文件都有可查 URL。**
+
+（原 13 个，2026-07-27 筛选删掉 `impact-cine.mp3`、`typewriter.mp3` 两个，2026-09-18 再删 5 个无法反查的，现存 6 个；`impact-cine` 的等价文件是字节相同的 `sfx/impact/impact-deep-whoosh.mp3`，详见 sound-design 3.1。）
 
 | 文件 | 路径 | 来源 | 原名 / URL |
 |---|---|---|---|
 | `click-camera.mp3` | `sfx/camera/` | Mixkit SFX Free License | Camera shutter click · https://assets.mixkit.co/active_storage/sfx/1133/1133-preview.mp3 |
 | `impact-transition.mp3` | `sfx/impact/` | Mixkit SFX Free License | Movie trailer epic impact · https://assets.mixkit.co/active_storage/sfx/2908/2908-preview.mp3 |
-| `keyboard.mp3` | `sfx/text/` | Mixkit License | **无法反查**，商用前须确认 |
-| `pop.mp3` | `sfx/ui/` | 来源待考，商用前须确认 | 无法反查 |
-| `riser-cine.mp3` | `sfx/riser/` | Mixkit License | **无法反查**，商用前须确认 |
-| `sparkle.mp3` | `sfx/light/` | Mixkit License | **无法反查**，商用前须确认 |
 | `swoosh-quick.mp3` | `sfx/transition/` | Mixkit SFX Free License | Fast small sweep transition · https://assets.mixkit.co/active_storage/sfx/166/166-preview.mp3 |
 | `transition-snap.mp3` | `sfx/transition/` | Mixkit SFX Free License | Fast transitions swoosh · https://assets.mixkit.co/active_storage/sfx/3115/3115-preview.mp3 |
 | `transition-soft.mp3` | `sfx/transition/` | Mixkit SFX Free License | Air zoom vacuum · https://assets.mixkit.co/active_storage/sfx/2608/2608-preview.mp3 |
-| `whoosh-big.mp3` | `sfx/transition/` | Mixkit License | **无法反查**，商用前须确认 |
 | `whoosh-fast.mp3` | `sfx/transition/` | Mixkit SFX Free License | Fast whoosh transition · https://assets.mixkit.co/active_storage/sfx/1490/1490-preview.mp3 |
 
 ## 扩充 SFX 第一批（2026-07-19 下载，当场记录 URL）
@@ -180,11 +178,19 @@
 | `ui-success-soft.mp3` | `sfx/ui/` | Success software tone | https://assets.mixkit.co/active_storage/sfx/2865/2865-preview.mp3 |
 | `ui-tone-quick.mp3` | `sfx/ui/` | Digital quick tone | https://assets.mixkit.co/active_storage/sfx/2866/2866-preview.mp3 |
 
+## 补充 riser（2026-09-18 下载，当场记录 URL）
+
+替换已删的 `riser-cine.mp3`。Mixkit Sound Effects Free License（免署名可商用）。
+
+| 文件 | 路径 | 原名 | URL |
+|---|---|---|---|
+| `riser-trailer-cine.mp3` | `sfx/riser/` | Cinematic trailer riser | https://assets.mixkit.co/active_storage/sfx/790/790-preview.mp3 |
+| `riser-synth-cine.mp3` | `sfx/riser/` | Cinematic synth riser | https://assets.mixkit.co/active_storage/sfx/645/645-preview.mp3 |
+
 ## bgm/（BGM 备选，Mixkit Stock Music Free License 免署名可商用）
 
 | 文件名 | 原曲名 | 艺术家 | 风格 | BPM | URL |
 |---|---|---|---|---|---|
-| `bgm-tech-house.mp3` | （首批沿用，无法逐曲反查） | — | Tech House | ~124 | Mixkit，商用前复核 |
 | `cat-walk.mp3` | Cat Walk | Arulo | House | ~129 | https://assets.mixkit.co/music/371/371.mp3 |
 | `g-eazy-nba-type.mp3` | G Eazy NBA type | Arulo | Hip Hop | ~86 | https://assets.mixkit.co/music/403/403.mp3 |
 | `house-vibez.mp3` | House Vibez | Lily J | House | ~123 | https://assets.mixkit.co/music/745/745.mp3 |

@@ -4,6 +4,8 @@ name: color-block-step-wipe
 适用: 品牌色转场/章节交接；"硬朗无缓动"的像素游戏手感段落；接管后的纯色场当下一段的舞台
 时长: A ~2.5s（生长 44f + 徽章 + hold）/ B ~1.5–2s（3 跳 30f + hold）；demo 合计 150f
 能量: 中高（能量来自"跳变"的顿挫而非速度）
+input: [video, photo, screenshot, text]
+narration: transition
 ---
 
 ## 意图

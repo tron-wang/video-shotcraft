@@ -4,6 +4,8 @@ name: mosaic-reframe
 适用: "同一批内容多种看法"的陈列转场：作品集/模板库/相册产品的布局能力展示
 时长: 约 6.0s（180f@30fps；浮现 0–0.6s · A→B 1.6–2.5s · hold · B→C 3.7–4.8s）
 能量: 中（连续流动的重排，无爆点，气质从容）
+input: [photo]
+narration: broll
 ---
 
 ## 意图

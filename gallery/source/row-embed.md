@@ -4,6 +4,8 @@ name: row-embed
 适用: "结构化数据长进页面"的详情页/列表镜头；行级内容的批量入场
 时长: 约 2s（12–68f）
 能量: 中
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

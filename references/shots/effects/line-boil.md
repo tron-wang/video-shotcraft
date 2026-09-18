@@ -5,6 +5,8 @@ name: line-boil
 时长: 寄生型——沸腾段随宿主 hold 长度，无自身时长
 能量: 低（底噪级）
 标签: typography
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

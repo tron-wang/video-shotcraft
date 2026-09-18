@@ -5,6 +5,8 @@ name: stroke-segment-build
 时长: 4–5s
 能量: 低起中收（悬念型，落位帧是能量点）
 标签: typography
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

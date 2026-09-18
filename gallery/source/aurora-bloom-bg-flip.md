@@ -4,6 +4,8 @@ name: aurora-bloom-bg-flip
 适用: 叙事转折点（"多年以来…→一切都变了"）；品牌片从铺垫拉到重音的那一拍；深浅色系之间的段落切换
 时长: 约5.2s（156f@30fps）
 能量: 由低到高（前 2/3 是酝酿，压暗那一瞬是全片重音）
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

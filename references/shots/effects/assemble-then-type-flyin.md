@@ -4,6 +4,8 @@ name: assemble-then-type-flyin
 适用: 页面/海报"自己长出来"的开场；排版类产品的能力展示；从骨架到成稿的两段式叙事
 时长: 约5.2s（156f@30fps）
 能量: 中高（骨架段稀疏、文字段密集，能量单调上升到收尾）
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

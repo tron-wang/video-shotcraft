@@ -5,6 +5,8 @@ name: type-rhythm-sync
 时长: 单式 4–5s；A 每拍占 10f 衰减窗、B 每词按语速 15–35f
 能量: A 高（蹦迪感）/ B 中（跟读引导）
 标签: rhythm
+input: [text]
+narration: quote
 ---
 
 ## 意图

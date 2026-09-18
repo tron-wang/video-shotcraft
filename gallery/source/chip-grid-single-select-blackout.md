@@ -4,6 +4,8 @@ name: chip-grid-single-select-blackout
 适用: 单选/套餐/档位选择的交互演示；"选了它之后会怎样"的因果镜头；价格/参数结算类链路
 时长: 约5.0s（150f@30fps）
 能量: 中低（唯一的爆点是那一帧灰闪，其余都在收）
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

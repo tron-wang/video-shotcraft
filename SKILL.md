@@ -1,18 +1,24 @@
 ---
 name: video-shotcraft
-description: Create cinematic product videos from shot recipe cards, a validated template, and code/audio assets (Remotion + real page screenshots + 2.5D camera moves + beat-synced cuts + sound design). Use when the user asks to turn a frontend project or webpage into a product video, says "use video-shotcraft to make a video/promo", names the Ink Press template or asks to reproduce its effect, or wants a single shot card's motion. 用镜头配方卡 + 已验收模板 + 代码/音频资产制作电影感产品视频（Remotion + 真实页面截图 + 2.5D 运镜 + 节奏卡点 + 声音设计）。当用户要求"用 video-shotcraft 做视频/宣传片"、把前端项目/网页做成产品视频、点名 Ink Press 模板或要求复刻模板片效果，或要用镜头卡做单个动效镜头时使用。
+description: Create cinematic product videos from shot recipe cards, a validated template, and code/audio assets (Remotion + real page screenshots + 2.5D camera moves + beat-synced cuts + sound design). Use when the user asks to turn a frontend project or webpage into a product video, says "use video-shotcraft to make a video/promo", names the Ink Press template or asks to reproduce its effect, or wants a single shot card's motion. 用镜头配方卡 + 已验收模板 + 代码/音频资产制作电影感产品视频（Remotion + 真实页面截图 + 2.5D 运镜 + 节奏卡点 + 声音设计）。当用户要求"用 video-shotcraft 做视频/宣传片"、把前端项目/网页做成产品视频、点名 Ink Press 模板或要求复刻模板片效果，或要用镜头卡做单个动效镜头时使用。 Also use for narration mode: when the user gives a news/article/blog URL, article text, a voiceover script or a voice file and wants it made into a narrated short video (script → TTS → per-character subtitles → auto-sourced licensed stock media → shot cards). 口播模式：用户给新闻/文章/部落格网址、整篇文字、口播稿或配音档，要求"做成影片/配音短片/解说视频"时也使用（口播稿 → 配音 → 逐字卡点字幕 → 自动上网采集可商用素材 → 选卡成片）。
 ---
 
 # video-shotcraft：电影感产品视频制作
 
-一个自包含的制作能力库：162 张镜头配方卡（附 demo 实现源码与动态样片
+一个自包含的制作能力库：174 张镜头配方卡（附 demo 实现源码与动态样片
 画廊）、一支已验收的完整宣传片模板、可复用组件与音频资产、六阶段工作流。
 当前 focus 是 web/桌面产品宣传片，但镜头卡本身是通用动效词汇——
 也可以单独抽卡做任意视频里的单个镜头。
 
 ## 调用时先判断模式
 
-完整宣传片有三种互不合并的模式。在开始素材采集、分镜或实现前，先判断用户
+**先看是不是口播模式**：使用者给的是新闻 / 文章 / 部落格网址或整篇文字，并要求「做成影片」
+「配音短片」「解说」；或给了口播稿 / 配音档；或点名「口播模式」——任一成立即视为已选定
+**口播模式**，不再询问模式，也不做下面的产品检查。完整阅读 `references/narration-mode.md`，
+只问一次三件事（画幅，预设 9:16 直式；语言，预设繁体中文；目标长度，预设 40–60s），
+没说就用预设。口播稿产出后给使用者过目一次，这是唯一的确认点；同样遵守「不自动渲染」。
+
+其余情况是产品宣传片。完整宣传片有三种互不合并的模式。在开始素材采集、分镜或实现前，先判断用户
 是否已经明确选择；已经选择时直接执行，不重复询问，也不要改成另一种模式。
 
 1. **直接使用模板**：保持 Ink Press 原有替换流程。读 `template/TEMPLATE.md`，
@@ -56,7 +62,7 @@ description: Create cinematic product videos from shot recipe cards, a validated
 自主自由创作还是共同创作，只询问这两种模式，指定镜头作为后续制作约束，不自动
 等同于共同创作。
 
-## 四种用法
+## 五种用法
 
 1. **完整宣传片（模板路线）**：想要和模板片高度相似的效果 →
    读 `template/TEMPLATE.md`，按“换产品复现指南”替换素材逐镜头适配。
@@ -65,7 +71,11 @@ description: Create cinematic product videos from shot recipe cards, a validated
 3. **完整宣传片（共同创作）**：要参与关键决策 → 读
    `references/guided-free-creation.md`，确认产品简报、需求决策、视觉方向、
    镜头映射和最终分镜；放行后从流水线的最终素材采集继续。
-4. **单镜头/单动效**：从 `references/shots/` 选卡（或让用户在
+4. **口播模式（新闻 / 文章 → 配音短片）**：给网址、文字或口播稿 → 读
+   `references/narration-mode.md`：取材与事实 → 口播稿 → 配音 → 逐字时间戳 →
+   自动上网采集素材 → 语意分镜与选卡 → 成片（烧录字幕）。素材授权全程记在
+   `assets/manifest.json`，需标注的自动产出 `out/CREDITS.md`。
+5. **单镜头/单动效**：从 `references/shots/` 选卡（或让用户在
    `gallery/` 画廊里挑），读卡全文并按“参考实现”定位准确 demo 源码，
    适配到目标素材。
 
@@ -197,6 +207,7 @@ node workbench/scripts/open.mjs <成片工程目录>   # 链接工程 → 起 de
 | 项目启动且模式未定 | 最小只读检查，然后提供三种完整宣传片模式并推荐 |
 | 自主自由创作 | pipeline.md（Agent 自主完成阶段 0–7，不逐阶段等待确认） |
 | 共同创作 | guided-free-creation.md（确认阶段 0–3），再从 pipeline.md 阶段 4 继续 |
+| 口播模式（新闻 / 文章 / 口播稿 → 配音短片） | narration-mode.md 全文；分镜骨架 sequences/narration-news-arc.md |
 | 用户已选 BGM | music-beat-sync.md（先分析再分镜） |
 | 走模板路线 | template/TEMPLATE.md 全文 |
 | 分镜设计 | sequences/ 桥段模板（全片骨架先填空）；shots/ 全部 frontmatter；选中的卡读全文 |
@@ -217,8 +228,13 @@ node workbench/scripts/open.mjs <成片工程目录>   # 链接工程 → 起 de
   helpers(rand/shake/camera/motion)。FlatPanel 与 helpers/camera 需要
   `three` + `@react-three/fiber` + `@remotion/three` 依赖，其余仅需 remotion。
 - `assets/scripts/capture-template.mjs` 复制后改顶部 CONFIG（BASE/路由/选择器）。
+- 口播模式的脚本**不复制、直接从 skill 目录执行**并用 `--out <project>` 指向影片专案：
+  `fetch-article.mjs`（取材）、`tts-minimax.py`（逐句配音）、`align.py`（逐字时间戳）、
+  `source-media.mjs`（多源素材采集 / 配额检查 / 标注清单）、`source-social.mjs`（找出并采集新闻引用的社群贴文影片）、`capture-page.mjs`（网页长图 + DOM 坐标）。
+  `scaffold-narration.mjs`（专案骨架 + 生成 timeline.ts）、`anchor-lint.py`（词锚与素材机器检查）。
+  `assets/lib/` 的 timing.ts / Subtitles / SlowPush / SourceStrip 由骨架脚本 copy 进专案。用法见 narration-mode.md。
 - `assets/audio/` 音效直接复制使用（免费商用授权，见 audio/ATTRIBUTION.md）：
-  `audio/bgm/` 是节奏感强的 BGM 备选；`audio/sfx/<类别>/` 149 个音效按场景分 16 类
+  `audio/bgm/` 是节奏感强的 BGM 备选；`audio/sfx/<类别>/` 146 个音效按场景分 16 类
   （transition impact riser camera ui text paper film light data scifi mech
   glass fluid crowd counter），找音先进类别目录，清单见 sound-design.md。
   词汇表 sparkle 的目录名是 `light/`（无 `sparkle/`）；S1 禁音色不禁动作——
@@ -247,5 +263,5 @@ node workbench/scripts/open.mjs <成片工程目录>   # 链接工程 → 起 de
 - `gallery/` 静态画廊：优先直接给用户在线版
   https://shotcraft-gallery.nionionote.com/library.html ；
   本地跑则先 `gallery/fetch-media.sh` 拉样片（mp4 不在 git 里），再
-  `cd gallery && python3 -m http.server 4178`。162 卡 219 条动态样片
+  `cd gallery && python3 -m http.server 4178`。174 卡 231 条动态样片
   可浏览/搜索/多选复制卡名——适合让用户看着样片挑镜头。

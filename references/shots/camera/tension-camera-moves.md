@@ -4,6 +4,8 @@ name: tension-camera-moves
 适用: 情绪节点（震撼/纠偏/积压/收束）的运镜语言；与 space-camera-moves 的"炫技大动作"互补——这四式动作小、情绪重
 时长: 单式 4–5s；全片合计 ≤2 式（各 ≤1 次）
 能量: A 高 / B 中 / C 低压升 / D 低收
+input: [photo, video]
+narration: broll
 ---
 
 ## 意图

@@ -4,6 +4,8 @@ name: theme-switch-moves
 适用: 深色模式/主题功能的叙事段落；同一 UI "在你眼前变色"而非切到新场景
 时长: A 3–4s / B 5–6s
 能量: A 中 / B 中高（组合款有完整因果链）
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

@@ -4,6 +4,8 @@ name: ai-stream-response
 适用: AI 助手/agent/search/copilot 的结果生成镜头；强调“结论先到、证据随后、任务完成”
 时长: 约 4–5s（120–150f，含 ≥15f 完成态静止）
 能量: 中高（信息持续增加，但阅读优先于速度炫技）
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

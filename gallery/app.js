@@ -78,6 +78,16 @@ const text = (key) => translations.ui[state.language][key] || key;
 const NEW_WINDOW_MS = 14 * 24 * 60 * 60 * 1000;
 const isNewCard = (card) =>
   Boolean(card.addedAt) && Date.now() - Date.parse(card.addedAt) < NEW_WINDOW_MS;
+// 口播模式标记：narration 目录下的是「口播专用」卡（醒目角标 + 卡顶色条）；
+// 其他类别里 narration != none 的是「口播可用」卡（标题旁小胶囊，附它在口播片里的段落角色）
+const isNarrationCard = (card) => card.category === 'narration';
+const narrationRole = (card) => (card.narration && card.narration !== 'none' ? card.narration : '');
+const narrationRibbon = (card) => (isNarrationCard(card)
+  ? `<p class="narration-ribbon" title="${escapeHtml(text('narrOnlyHint'))}"><span aria-hidden="true">🎙</span>${escapeHtml(text('narrOnly'))} · ${escapeHtml(text('narrRole_' + card.narration))}</p>`
+  : '');
+const narrationChip = (card) => (!isNarrationCard(card) && narrationRole(card)
+  ? ` <span class="narration-chip" title="${escapeHtml(text('narrUsableHint'))}">${escapeHtml(text('narrUsable'))} · ${escapeHtml(text('narrRole_' + card.narration))}</span>`
+  : '');
 const cardName = (card) => state.language === 'zh'
   ? translations.cardsZh[card.name] || card.name
   : card.name;
@@ -196,16 +206,17 @@ function cardMarkup(card, cardIndex) {
   const multiStyle = card.styles.length > 1;
 
   return `
-    <article class="shot-card${isSelected ? ' is-selected' : ''}" id="${escapeHtml(card.name)}">
+    <article class="shot-card${isSelected ? ' is-selected' : ''}${isNarrationCard(card) ? ' is-narration' : ''}" id="${escapeHtml(card.name)}">
       <div class="card-media">
         ${mediaMarkup(style, cardIndex)}
+        ${narrationRibbon(card)}
         ${status && style.media ? `<p class="implementation-status implementation-status--${escapeHtml(style.implementationStatus)}">${escapeHtml(status)}</p>` : ''}
         ${multiStyle ? styleSelectorMarkup(card, selectedIndex) : ''}
       </div>
       <div class="card-body">
         <div class="card-title-row">
           <div class="card-title">
-            <h3>${escapeHtml(title)}${isNewCard(card) ? ' <span class="new-badge">NEW</span>' : ''}</h3>
+            <h3>${escapeHtml(title)}${isNewCard(card) ? ' <span class="new-badge">NEW</span>' : ''}${narrationChip(card)}</h3>
             ${subtitle ? `<p>${escapeHtml(subtitle)}</p>` : ''}
           </div>
         </div>
@@ -339,6 +350,8 @@ function render() {
   if (!state.library) return;
   const focusMark = captureFocus();
   const cards = state.library.cards.filter(cardMatches);
+  // 口播筛选下，专用卡排最前（其余维持原顺序；sort 是稳定排序）
+  if (state.filter === 'narration') cards.sort((x, y) => Number(isNarrationCard(y)) - Number(isNarrationCard(x)));
   // 跨类标签之后按主类别分组名不副实：All 视图就是一整片按字母序的平铺
   elements.library.innerHTML = cards.map((card, index) => cardMarkup(card, index)).join('');
   elements.library.setAttribute('aria-busy', 'false');

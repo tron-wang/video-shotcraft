@@ -5,6 +5,8 @@ name: particle-sand-fill
 时长: 4–5s
 能量: 中高（构筑感入场）
 标签: effects
+input: [chart]
+narration: data
 ---
 
 ## 意图

@@ -5,6 +5,8 @@ name: lead-word-zoom-assemble
 时长: 约 2.8s（84f@30fps；组句 f32 完成、上移与副行 f34–50、静止 22f、末 12f crash）
 能量: 中高（起手就是满画面的大字，但全程只有一次运动，没有二次冲击）
 标签: opening
+input: [text]
+narration: quote
 ---
 
 ## 意图

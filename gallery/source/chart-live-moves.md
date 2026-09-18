@@ -4,6 +4,8 @@ name: chart-live-moves
 适用: 数据叙事段落；分别讲"实时性"、"每个数字是一个人"、"增长装不下"
 时长: 各 4–6s
 能量: 中高（数据即剧情）
+input: [chart]
+narration: data
 ---
 
 ## 意图

@@ -28,3 +28,6 @@ gallery/.deploy.env
 
 # 模板區的成片範例（影片、封面、templates.json）是使用者自己的作品，只隨自架部署上傳，不進公開 repo
 gallery/templates/
+
+# 口播模式的 API 金钥（MiniMax / Pexels / Pixabay / Unsplash），绝不进库
+.env

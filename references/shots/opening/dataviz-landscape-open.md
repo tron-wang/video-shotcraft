@@ -5,6 +5,8 @@ name: dataviz-landscape-open
 时长: 5–8s（开场氛围段，一支片 ≤1 次）
 能量: 低开缓升（起步位，为后续爬升留空间）
 标签: data、camera
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

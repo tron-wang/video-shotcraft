@@ -5,6 +5,8 @@ name: document-typewriter-reveal
 时长: 约 3.7s（110f，含 history-list-stack 尾段）
 能量: 低中（信息密度最高，节奏放稳让观众读字）
 标签: ui-entrance
+input: [screenshot]
+narration: evidence
 ---
 
 ## 意图
@@ -29,7 +31,7 @@ name: document-typewriter-reveal
 | 相机 | 标题特写 zoom 1.25 → 64f 全页 zoom 0.997，78/102f 1.003/0.995 微呼吸 | 全页时双栏必须都入画——文档镜头砍掉侧栏等于砍掉"完整产品"的说服力（Q10） |
 
 ## 声音
-写入段钉 keyboard.mp3 修剪到 44f 盖住书写段（拟音与动作严格等长，S4）；历史条目 6 连 pop 每 5f 一发、音量 0.40→0.25 阶梯递减做距离衰减（S2）。
+写入段钉 typewriter-digital.mp3 修剪到 44f 盖住书写段（拟音与动作严格等长，S4）；历史条目 6 连 ui-popup-dry 每 5f 一发、音量 0.40→0.25 阶梯递减做距离衰减（S2）。
 
 ## 已知坑
 - mock 内容必须出版级：产品原生排版、文字铺满、侧栏完整入镜（Q10）——"贴图+标语"级的敷衍文档会导致整镜头重做

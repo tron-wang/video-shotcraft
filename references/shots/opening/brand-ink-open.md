@@ -5,6 +5,8 @@ name: brand-ink-open
 时长: 约 2.8s（83f）
 能量: 低（起步位，为后续镜头留爬升空间）
 标签: typography
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

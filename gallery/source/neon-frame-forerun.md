@@ -5,6 +5,8 @@ name: neon-frame-forerun
 时长: 框奔画 ~0.6s + 点亮&贴落 ~2s + 背景熄灭收束 ~0.8s；全段 4–4.5s
 能量: 中高（三层动作叠进，但都服务同一次登场）
 标签: effects
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

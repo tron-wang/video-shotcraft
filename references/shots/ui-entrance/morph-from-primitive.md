@@ -5,6 +5,8 @@ name: morph-from-primitive
 时长: ~4.7s（呼吸 20f + 变形 24f + 内容淡入 12f）
 能量: 中低
 标签: opening
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

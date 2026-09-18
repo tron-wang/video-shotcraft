@@ -5,6 +5,8 @@ name: command-palette-summon
 时长: 4–5s
 能量: 中（仪式感型，弹落帧与收窄是两个小打击点）
 标签: ui-entrance
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

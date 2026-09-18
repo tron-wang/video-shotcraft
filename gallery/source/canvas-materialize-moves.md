@@ -5,6 +5,8 @@ name: canvas-materialize-moves
 时长: A ~4.3s（130f）/ B ~5.3s（160f）
 能量: 中
 标签: ui-entrance
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

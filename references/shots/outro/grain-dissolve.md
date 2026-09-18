@@ -4,6 +4,8 @@ name: grain-dissolve
 适用: 收尾"XX. Now Live"式上线宣告；长句信息压缩成品牌短标的能量聚合拍
 时长: 约 2.0s（60f@30fps；砂化 0.26–0.56s · 凝聚 1.2–1.42s · 凝固回落收尾）
 能量: 中高（短促、一次性的能量脉冲，天然的 outro 卡点）
+input: [text]
+narration: none
 ---
 
 ## 意图

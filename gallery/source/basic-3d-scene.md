@@ -4,6 +4,8 @@ name: basic-3d-scene
 适用: 概念/路线图/三步法的空间化讲述；替代平面 slides 的"每一步都换个空间视角"
 时长: 约 6.0s（180f@30fps；四站，三段飞行各 0.96s）
 能量: 中（每次转场有空间惊喜，停留段安静读卡）
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

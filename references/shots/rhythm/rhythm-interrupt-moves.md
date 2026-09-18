@@ -4,6 +4,8 @@ name: rhythm-interrupt-moves
 适用: 用"打断连续性"本身当节奏器：顿挫推近（B）、窒息逼近（C）；与 beat-cut-moves（切点排布）、montage-rhythm（段落呼吸）互补
 时长: B ~4.5s / C ~4.5s
 能量: B 中 / C 高
+input: [screenshot, video]
+narration: none
 ---
 
 ## 意图

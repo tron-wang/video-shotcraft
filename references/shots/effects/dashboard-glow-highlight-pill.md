@@ -4,6 +4,8 @@ name: dashboard-glow-highlight-pill
 适用: 金融/数据类产品的重功能揭示；"注意这里"的高级指引；黑金调品牌片的核心一拍
 时长: 约2.0s（60f@30fps）
 能量: 高（2s 里塞了升入 + 巡游 + 描边 + 弹窗四段，交棒必须密不透风）
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

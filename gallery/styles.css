@@ -282,6 +282,44 @@ main {
   flex: none;
 }
 .category-link .new-badge { margin-left: auto; }
+
+/* 口播模式标记。专用卡：媒体区左上角标 + 卡顶色条（用 inset box-shadow，避开 .shot-card 的边框覆盖）；
+   可用卡：标题旁描边小胶囊 */
+.shot-card.is-narration { box-shadow: inset 0 3px 0 #d9822b, var(--shadow); border-color: color-mix(in srgb, #d9822b 45%, var(--line)); }
+.narration-ribbon {
+  position: absolute;
+  top: 0.55rem;
+  left: 0.55rem;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  margin: 0;
+  padding: 0.28em 0.7em 0.28em 0.55em;
+  border-radius: 999px;
+  background: #d9822b;
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28);
+  pointer-events: none;
+}
+.narration-chip {
+  display: inline-block;
+  padding: 0.06em 0.5em;
+  border: 1px solid #d9822b;
+  border-radius: 999px;
+  color: #b3641a;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  line-height: 1.5;
+  vertical-align: 0.2em;
+  white-space: nowrap;
+}
+.category-link[data-filter="narration"] > span:first-child::before { content: '🎙 '; }
 .category-link .count { flex: none; }
 .category-link.is-active .new-badge { background: #e5484d; color: #fff; }
 
@@ -1037,3 +1075,4 @@ a.author-chip:hover { color: var(--accent-text); border-color: var(--accent); }
   .showcase-grid { grid-template-columns: 1fr; }
   .topbar-link { padding: 0 0.6rem; font-size: 0.68rem; }
 }
+:root[data-theme="dark"] .narration-chip { color: #f0a860; border-color: #c97a2e; }

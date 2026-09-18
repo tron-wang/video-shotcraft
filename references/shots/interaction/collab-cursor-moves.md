@@ -4,6 +4,8 @@ name: collab-cursor-moves
 适用: 协作/多人/交接主题的叙事段；A 撑起无 UI 的纯叙事拍，B 给画布场景铺"团队在场"体温
 时长: A ~4.7s（140f）/ B ~4.7s（140f）
 能量: A 中（叙事密度高）/ B 低中（氛围层，可垫任何时长）
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

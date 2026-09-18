@@ -5,6 +5,8 @@ name: input-trigger-moves
 时长: A ~5s / C ~5s
 能量: A 中 / C 高
 标签: opening
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

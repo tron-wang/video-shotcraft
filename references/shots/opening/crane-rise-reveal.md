@@ -5,6 +5,8 @@ name: crane-rise-reveal
 时长: 5s（特写 hold 20f + 拉升 100f + 满幅静止 30f）
 能量: 中高（持续单向运动，无冲击拍）
 标签: camera、data
+input: [screenshot]
+narration: evidence
 ---
 
 ## 意图

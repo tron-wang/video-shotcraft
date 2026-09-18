@@ -5,6 +5,8 @@ name: glow-flyline-moves
 时长: A ~5s / B ~4.7s / C ~5.2s
 能量: A 低（底噪级）/ B 中 / C 中高
 标签: data
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

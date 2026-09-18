@@ -5,6 +5,8 @@ name: cycle-glass-node-morph
 时长: 约 8.6s（257f@30fps；最终状态保留 34f）
 能量: 中高（前段场景转换，中段循环建立，后段推近与三节点连续顶起）
 标签: interaction、camera
+input: [chart, text]
+narration: none
 ---
 
 ## 意图

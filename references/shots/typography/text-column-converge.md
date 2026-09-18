@@ -5,6 +5,8 @@ name: text-column-converge
 时长: 轮换 7–16f/词 × 8–9 词 + 合拢 ~36f + 小字后静置；全段约 5–6s
 能量: 中低（机器节奏、小字规格清单气质，不是砸字）
 标签: outro
+input: [text]
+narration: none
 ---
 
 ## 意图

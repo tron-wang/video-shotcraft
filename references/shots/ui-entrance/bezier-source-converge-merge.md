@@ -4,6 +4,8 @@ name: bezier-source-converge-merge
 适用: "多源整合/统一接入/数据汇聚"的核心机制镜头；集成、聚合、单一入口类产品的说明段落
 时长: 约 5.6s（168f@30fps）
 能量: 中（长镜慢速推进，靠数据包滑行维持活性；吞并瞬间是唯一小高点）
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

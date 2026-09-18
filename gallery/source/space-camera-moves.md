@@ -4,6 +4,8 @@ name: space-camera-moves
 适用: 把平面页面当 3D 实体拍的高光段落；两式都是"大动作"，一支片合计 ≤2 次
 时长: A 5s（炸开-悬停-合体全程）；C 3–5s 单向俯冲
 能量: 高
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

@@ -5,6 +5,8 @@ name: slam-entrance-moves
 能量: 高
 时长: 单式动作段 6–22f + 冲击余波 ~16f + hold ≥45f
 标签: ui-entrance
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

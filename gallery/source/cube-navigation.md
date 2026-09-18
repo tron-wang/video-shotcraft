@@ -4,6 +4,8 @@ name: cube-navigation
 适用: 多模块产品的"逐面导航"陈列：Overview/Metrics/Timeline 等 3–6 个板块的空间化串讲
 时长: 约 6.0s（180f@30fps；五段相机步进，每段约 0.7s + hold）
 能量: 中（稳定的空间巡航，靠转面瞬间的透视变化给节拍）
+input: [video, photo, screenshot, text]
+narration: transition
 ---
 
 ## 意图

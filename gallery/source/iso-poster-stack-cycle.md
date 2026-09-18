@@ -5,6 +5,8 @@ name: iso-poster-stack-cycle
 时长: 约 9.6s（288f@30fps；6 拍 × 48f，每拍 20f 静置 + 18f 前移，淡出 26f 跨过前移）
 能量: 中低（节拍稳定、单次动作小，靠整摞持续递进撑住注意力）
 标签: transition
+input: [photo]
+narration: broll
 ---
 
 ## 意图

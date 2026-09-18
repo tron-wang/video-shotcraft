@@ -4,6 +4,8 @@ name: cloner-depth-echo
 适用: "多副本/多租户/规模感/批量处理"卖点；一镜讲完"一个=很多"
 时长: 4–5s
 能量: 中（陈列-收束型）
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

@@ -4,6 +4,8 @@ name: skeleton-reveal
 适用: 产品 UI 的"从无到有"登场叙事；开场后第一次亮产品界面的段落
 时长: ~5.7s（172f：涂鸦 1s + 换真 0.3s + 骨架滚入 1.2s + 推近显影 3s）
 能量: 中（叙事型登场，重点是"变成真的"那两次跃迁）
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

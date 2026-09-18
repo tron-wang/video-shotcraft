@@ -5,6 +5,8 @@ name: orbit-ring-title-open
 时长: 约 4.3s（130f@30fps；标题落定 f50 到退场 f108 之间是 1.9s 稳态巡回）
 能量: 中（唯一的持续运动是匀速公转，全片只有马克块横扫一次冲击）
 标签: ui-entrance
+input: [photo]
+narration: broll
 ---
 
 ## 意图

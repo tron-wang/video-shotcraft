@@ -5,6 +5,8 @@ name: steep-tilt-glide
 时长: 4s（120f）单镜；页面越宽越可拉长
 能量: 中高（透视炫技+持续运动，但节奏是匀的）
 标签: ui-entrance
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

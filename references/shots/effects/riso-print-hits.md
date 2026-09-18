@@ -5,6 +5,8 @@ name: riso-print-hits
 时长: A 4s（单发）；B 4.7s（四拍）
 能量: 高
 标签: typography、rhythm
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

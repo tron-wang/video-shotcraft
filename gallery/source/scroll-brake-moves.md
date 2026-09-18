@@ -5,6 +5,8 @@ name: scroll-brake-moves
 时长: A 4–5s / B 5s
 能量: 高开中收（速度对比型）
 标签: rhythm
+input: [screenshot]
+narration: evidence
 ---
 
 ## 意图

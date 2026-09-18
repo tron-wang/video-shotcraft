@@ -5,6 +5,8 @@ name: smear-multiples
 时长: 元素级技法（移动 12f + 合拢回弹 8f，寄生在位移动作上）
 能量: 中高
 标签: effects
+input: [screenshot, video]
+narration: none
 ---
 
 ## 意图

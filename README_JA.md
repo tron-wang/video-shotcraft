@@ -11,7 +11,7 @@
 [![GitHub stars](https://img.shields.io/github/stars/tron-wang/video-shotcraft)](https://github.com/tron-wang/video-shotcraft/stargazers)
 [![Gallery](https://img.shields.io/badge/Gallery-live%20previews-d3923c)](https://shotcraft-gallery.nionionote.com/)
 
-**映画のような製品動画を制作するためのエージェントスキル：162 種類のショットレシピカード · 219 種類のスタイル · 219 本のモーションプレビュー · 実制作に対応したテンプレート**
+**映画のような製品動画を制作するためのエージェントスキル：174 種類のショットレシピカード · 231 種類のスタイル · 231 本のモーションプレビュー · 実制作に対応したテンプレート**
 
 [English](README.md) | [中文](README_CN.md) | [日本語](README_JA.md)
 
@@ -23,7 +23,7 @@
 マーケティング、ローンチ、デモ動画を制作します。実際のページキャプチャ、2.5D カメラワーク、
 ビートに同期したカット、映画品質の SFX も含まれます。
 
-🖼️ [**ライブ Gallery で 219 本のモーションプレビューをすべて見る »**](https://shotcraft-gallery.nionionote.com/)
+🖼️ [**ライブ Gallery で 231 本のモーションプレビューをすべて見る »**](https://shotcraft-gallery.nionionote.com/)
 
 ## ✨ 最新情報
 
@@ -104,6 +104,15 @@ Design a product close-up inspired by spotlight-hero-card.
 紹介し、それを使うか確認します。作業を始める前に
 [Gallery](https://shotcraft-gallery.nionionote.com/) でショットを選ぶこともできます。
 
+## 🎙 ナレーションモード：ニュース / 記事 → ナレーション付きショート動画
+
+ニュースや記事の URL（または原稿）を渡すと、ナレーション原稿の作成、1 文ずつの音声合成、
+文字単位のタイムスタンプ生成、**商用利用可能な素材の自動収集**（Pexels / Pixabay / Unsplash /
+Openverse CC0 + 出典ページのスクリーンショット）、意味単位の絵コンテとショットカード選定までを行い、
+字幕焼き込みの縦型ショート動画に仕上げます。素材の出典とライセンスは `assets/manifest.json` に記録され、
+クレジット表記が必要なものは `out/CREDITS.md` に自動出力されます。
+詳細は [`references/narration-mode.md`](references/narration-mode.md)。
+
 ## 📼 動画テンプレート：Ink Press
 
 スキルには、検証済みの完全なプロモーションテンプレート **Ink Press** が付属します。
@@ -147,8 +156,8 @@ Use video-shotcraft to make a promo for my product with the Ink Press template.
 
 | 内容 | 説明 |
 | --- | --- |
-| 162 種類のショットレシピカード | 目的、エネルギー、推奨時間、パラメータ、実装上の注意点、既知の落とし穴 |
-| 219 本のモーションプレビュー | 219 種類のスタイルを網羅し、オンライン Gallery で検索と絞り込みが可能 |
+| 174 種類のショットレシピカード | 目的、エネルギー、推奨時間、パラメータ、実装上の注意点、既知の落とし穴 |
+| 231 本のモーションプレビュー | 231 種類のスタイルを網羅し、オンライン Gallery で検索と絞り込みが可能 |
 | Remotion 実装 | 各カードの実際のイージングとタイミングパラメータを含む、調整済みの TSX デモ |
 | 完全な動画テンプレート | 検証済みの 36.2 秒、1920×1080、30fps、10 ショットの製品プロモーション |
 | コンポーネントとアセット | 2.5D ページカメラ、キャプション、フラッシュカット、数字ロール、SFX、キャプチャスクリプト |
@@ -167,7 +176,7 @@ video-shotcraft/
 ├── SKILL.md                 # Agent entry point and core production rules
 ├── references/
 │   ├── pipeline.md          # End-to-end production workflow
-│   ├── shots/               # 162 shot recipe cards
+│   ├── shots/               # 174 shot recipe cards
 │   ├── sequences/           # Reusable full-video structures and sequence patterns
 │   ├── aesthetic-rules.md   # Visual QA criteria
 │   ├── music-beat-sync.md   # BGM analysis and beat-sync methodology
@@ -183,8 +192,8 @@ video-shotcraft/
     ├── lib/                 # Reusable Remotion components
     ├── scripts/             # Page-asset capture scripts
     └── audio/               # 音声アセット
-        ├── bgm/             # BGM 候補 5 曲
-        └── sfx/<カテゴリ>/  # 効果音 149 個、シーン別 16 カテゴリ
+        ├── bgm/             # BGM 候補 4 曲
+        └── sfx/<カテゴリ>/  # 効果音 146 個、シーン別 16 カテゴリ
 ```
 
 完全なワークフローと実装要件については、[SKILL.md](SKILL.md)、

@@ -5,6 +5,8 @@ name: runway-ground-skim
 时长: 悬空展示 ~0.4s + 贴落 ~1.2s + 立起转正 ~1.8s；全段 4s
 能量: 高（掉落感是戏眼，立起转正是收束）
 标签: camera
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

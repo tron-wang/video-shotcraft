@@ -4,6 +4,8 @@ name: print-texture-transitions
 适用: 换景接缝的纸墨审美款；与交棒六式/穿越三式并列的第三族——"介质显影"型转场
 时长: 4–4.5s（洇开段 55–80f + 静止收尾 ≥30f）
 能量: 中（渐进显形，无冲击拍）
+input: [video, photo, screenshot, text]
+narration: transition
 ---
 
 ## 意图

@@ -5,6 +5,8 @@ name: cel-flash-stomp
 时长: 每词 ~30f × 词数 + 收尾 ≥45f；三词约 4.8s
 能量: 高
 标签: rhythm
+input: [text]
+narration: none
 ---
 
 ## 意图

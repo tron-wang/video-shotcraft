@@ -4,6 +4,8 @@ name: research-card-stack-scroll
 适用: "读了大量资料/处理了海量文档"的量级交代；研究类、检索类、批处理类产品的能力镜头
 时长: 约 4.8s（144f@30fps）
 能量: 中高（匀速高频，无爆发但持续压迫）
+input: [screenshot, text]
+narration: evidence
 ---
 
 ## 意图

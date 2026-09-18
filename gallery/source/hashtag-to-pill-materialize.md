@@ -5,6 +5,8 @@ name: hashtag-to-pill-materialize
 时长: 打字 ~40f + 硬切胶囊 hold ~18f + 缩移 ~14f + 硬切揭示后静置；全段约 3.5s（原片 18–21.5s）
 能量: 中（干脆利落，靠硬切给劲，不靠弹跳）
 标签: typography
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

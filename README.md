@@ -11,7 +11,7 @@
 [![GitHub stars](https://img.shields.io/github/stars/tron-wang/video-shotcraft)](https://github.com/tron-wang/video-shotcraft/stargazers)
 [![Gallery](https://img.shields.io/badge/Gallery-live%20previews-d3923c)](https://shotcraft-gallery.nionionote.com/)
 
-**An agent skill for crafting cinematic product videos: 162 shot recipe cards · 219 styles · 219 motion previews · a production-ready template**
+**An agent skill for crafting cinematic product videos: 174 shot recipe cards · 231 styles · 231 motion previews · a production-ready template**
 
 [English](README.md) | [中文](README_CN.md) | [日本語](README_JA.md)
 
@@ -23,7 +23,7 @@ sound-designs a cinematic promo, marketing, launch, or demo video with
 [Remotion](https://www.remotion.dev/) — real page captures, 2.5D camera moves,
 beat-synced cuts, and film-grade SFX included.
 
-🖼️ [**Browse all 219 motion previews in the live Gallery »**](https://shotcraft-gallery.nionionote.com/)
+🖼️ [**Browse all 231 motion previews in the live Gallery »**](https://shotcraft-gallery.nionionote.com/)
 
 ## ✨ What's new
 
@@ -106,6 +106,16 @@ If no shot card is specified, the skill introduces the built-in video template
 first and asks whether to use it; you can also pick shots in the
 [Gallery](https://shotcraft-gallery.nionionote.com/) before starting.
 
+## 🎙 Narration mode: news / article → voiced short
+
+Give it a news or article URL (or your own script) and the skill rewrites a voiceover script,
+synthesizes it line by line, produces per-character timestamps, **sources commercially usable
+media from the web** (Pexels / Pixabay / Unsplash / Openverse CC0 + screenshots of the source page),
+storyboards by meaning, picks a shot card for every shot, and builds a vertical short with burned-in
+subtitles. Every asset's origin and license is recorded in `assets/manifest.json`; anything that needs
+attribution lands in an auto-generated `out/CREDITS.md`.
+See [`references/narration-mode.md`](references/narration-mode.md).
+
 ## 📼 Video template: Ink Press
 
 The skill ships with **Ink Press** — a validated, complete promo template:
@@ -148,8 +158,8 @@ With these three flags, frame renders from the bundled template work.
 
 | Content | Description |
 | --- | --- |
-| 162 shot recipe cards | Purpose, energy, suggested duration, parameters, implementation notes, and known pitfalls |
-| 219 motion previews | Covering 219 styles; searchable and filterable in the online Gallery |
+| 174 shot recipe cards | Purpose, energy, suggested duration, parameters, implementation notes, and known pitfalls |
+| 231 motion previews | Covering 231 styles; searchable and filterable in the online Gallery |
 | Remotion implementations | Tuned TSX demos containing the actual easing and timing parameters for each card |
 | Complete video template | A validated 36.2-second, 1920×1080, 30fps product promo with 10 shots |
 | Components and assets | 2.5D page camera, captions, flash cuts, digit rolls, SFX, and capture scripts |
@@ -168,7 +178,7 @@ video-shotcraft/
 ├── SKILL.md                 # Agent entry point and core production rules
 ├── references/
 │   ├── pipeline.md          # End-to-end production workflow
-│   ├── shots/               # 162 shot recipe cards in 10 functional categories
+│   ├── shots/               # 174 shot recipe cards in 11 functional categories
 │   ├── sequences/           # Reusable full-video structures and sequence patterns
 │   ├── aesthetic-rules.md   # Visual QA criteria
 │   ├── music-beat-sync.md   # BGM analysis and beat-sync methodology
@@ -184,8 +194,8 @@ video-shotcraft/
     ├── lib/                 # Reusable Remotion components
     ├── scripts/             # Page-asset capture scripts
     └── audio/               # Audio assets
-        ├── bgm/             # 5 BGM options
-        └── sfx/<category>/  # 149 SFX across 16 scene categories
+        ├── bgm/             # 4 BGM options
+        └── sfx/<category>/  # 146 SFX across 16 scene categories
 ```
 
 For the complete workflow and implementation requirements, see [SKILL.md](SKILL.md),

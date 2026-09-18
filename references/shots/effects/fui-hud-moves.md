@@ -5,6 +5,8 @@ name: fui-hud-moves
 时长: A 3–4s（含退场）/ B 2–3s
 能量: A 中 / B 中高（咬合帧是打击点）
 标签: ui-entrance
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

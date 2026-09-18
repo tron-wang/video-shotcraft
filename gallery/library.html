@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark light">
   <meta name="google-site-verification" content="Qu8vMAC99goV9xnwf_0ZlGGimtmj24TWFNVUiTz2mhM">
-  <meta name="description" content="video-shotcraft is an AI agent skill for Claude Code &amp; Codex that makes cinematic product promo videos with Remotion. Browse 162 shot recipe cards and 219 motion previews.">
+  <meta name="description" content="video-shotcraft is an AI agent skill for Claude Code &amp; Codex that makes cinematic product promo videos with Remotion. Browse 174 shot recipe cards and 231 motion previews.">
   <link rel="canonical" href="https://shotcraft-gallery.nionionote.com/library.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="video-shotcraft">
   <meta property="og:title" content="video-shotcraft — AI Video Skill for Claude Code &amp; Codex">
-  <meta property="og:description" content="An agent skill for crafting cinematic product videos with Remotion: 162 shot recipe cards, 219 motion previews, and a production-ready promo template.">
+  <meta property="og:description" content="An agent skill for crafting cinematic product videos with Remotion: 174 shot recipe cards, 231 motion previews, and a production-ready promo template.">
   <meta property="og:url" content="https://shotcraft-gallery.nionionote.com/library.html">
   <meta property="og:image" content="https://shotcraft-gallery.nionionote.com/og-image.jpg?v=20260726b">
   <meta property="og:image:width" content="1280">
@@ -18,7 +18,7 @@
   <meta property="og:image:alt" content="video-shotcraft Gallery — shot recipes and motion samples">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="video-shotcraft — AI Video Skill for Claude Code &amp; Codex">
-  <meta name="twitter:description" content="An agent skill for crafting cinematic product videos with Remotion: 162 shot recipe cards, 219 motion previews, and a production-ready promo template.">
+  <meta name="twitter:description" content="An agent skill for crafting cinematic product videos with Remotion: 174 shot recipe cards, 231 motion previews, and a production-ready promo template.">
   <meta name="twitter:image" content="https://shotcraft-gallery.nionionote.com/og-image.jpg?v=20260726b">
   <link rel="icon" href="./logo-mark.svg" type="image/svg+xml">
   <title>video-shotcraft — AI Video Skill for Claude Code &amp; Codex | Remotion Shot Library</title>
@@ -27,7 +27,7 @@
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "video-shotcraft",
-    "description": "An AI agent skill for Claude Code and Codex that crafts cinematic product promo videos with Remotion: 162 shot recipe cards, 219 styles, 219 motion previews, and a production-ready 36.2-second video template.",
+    "description": "An AI agent skill for Claude Code and Codex that crafts cinematic product promo videos with Remotion: 174 shot recipe cards, 231 styles, 231 motion previews, and a production-ready 36.2-second video template.",
     "url": "https://shotcraft-gallery.nionionote.com/",
     "sameAs": ["https://github.com/tron-wang/video-shotcraft"],
     "applicationCategory": "MultimediaApplication",
@@ -95,6 +95,7 @@
         <button class="category-link" type="button" data-filter="rhythm"><span data-i18n="catRhythm">Rhythm</span></button>
         <button class="category-link" type="button" data-filter="effects"><span data-i18n="catEffects">Light &amp; Emphasis</span></button>
         <button class="category-link" type="button" data-filter="outro"><span data-i18n="catOutro">Outro</span></button>
+        <button class="category-link" type="button" data-filter="narration"><span data-i18n="catNarration">Narration</span></button>
         <!-- 模板区：成品视频范例（gallery/templates/templates.json，不进库；读不到时整段隐藏） -->
         <p class="sidebar-heading sidebar-heading--section" data-i18n="templatesHeading" data-template-nav hidden>Templates</p>
         <button class="category-link" type="button" data-filter="templates" data-template-nav hidden><span data-i18n="allTemplates">Finished videos</span></button>
@@ -109,9 +110,9 @@
         </div>
 
         <dl class="stats" aria-label="Shot library statistics" data-i18n-aria-label="statsLabel">
-          <div><dt data-i18n="cards">Cards</dt><dd id="cardCount">162</dd></div>
-          <div><dt data-i18n="styles">Styles</dt><dd id="styleCount">219</dd></div>
-          <div><dt data-i18n="samples">Samples</dt><dd id="previewCount">219</dd></div>
+          <div><dt data-i18n="cards">Cards</dt><dd id="cardCount">174</dd></div>
+          <div><dt data-i18n="styles">Styles</dt><dd id="styleCount">231</dd></div>
+          <div><dt data-i18n="samples">Samples</dt><dd id="previewCount">231</dd></div>
         </dl>
       </section>
 
@@ -155,6 +156,11 @@
         <h3>avatar-grid-radial-build-colorize</h3>
         <p>A card grid grows ring by ring from the center — tiles holding initials, icons, or image placeholders — then about fifteen percent of them flush red at random moments to surface anomalies.</p>
         <p>Styles: avatar-grid-radial-build-colorize</p>
+      </article>
+      <article class="shot-card" id="bar-grow-compare">
+        <h3>bar-grow-compare</h3>
+        <p>Two to four bars grow from a zero baseline in narration order, values rolling with the bar height; earlier bars step back and the key bar ends highlighted.</p>
+        <p>Styles: bar-grow-compare</p>
       </article>
       <article class="shot-card" id="basic-3d-scene">
         <h3>basic-3d-scene</h3>
@@ -246,6 +252,11 @@
         <p>Large words stamp into frame on the beat while flat background colors flash behind the locked typography.</p>
         <p>Styles: cel-flash-stomp</p>
       </article>
+      <article class="shot-card" id="chapter-slate">
+        <h3>chapter-slate</h3>
+        <p>A short chapter card between sentences: one colour and one self-drawing line-art motif per chapter, with a matching corner tag for the shots that follow.</p>
+        <p>Styles: chapter-slate</p>
+      </article>
       <article class="shot-card" id="chart-live-moves">
         <h3>chart-live-moves</h3>
         <p>Three data-driven motions: a live oscilloscope trace, dots regrouping into a figure, and an axis forced to rescale.</p>
@@ -270,6 +281,11 @@
         <h3>circle-match-iris</h3>
         <p>An iris expands from a circular UI element and lands on a matching circle in the next scene.</p>
         <p>Styles: circle-match-iris</p>
+      </article>
+      <article class="shot-card" id="clip-frame-reveal">
+        <h3>clip-frame-reveal</h3>
+        <p>Stock footage or a photo opens from a thin slit inside one themed frame (paper print, film strip or hairline) so mixed b-roll reads as one film.</p>
+        <p>Styles: clip-frame-reveal</p>
       </article>
       <article class="shot-card" id="cloner-depth-echo">
         <h3>cloner-depth-echo</h3>
@@ -461,20 +477,25 @@
         <p>Two impact layers: a combo counter with damage feedback, and a full anime-style impact frame.</p>
         <p>Styles: hit-counter, anime-impact</p>
       </article>
+      <article class="shot-card" id="ink-circle-note">
+        <h3>ink-circle-note</h3>
+        <p>A hand-drawn ink loop circles one thing on the source, a curved arrow leads to a short note, and the ink stays glued to the content as the page moves.</p>
+        <p>Styles: ink-circle-note</p>
+      </article>
       <article class="shot-card" id="input-trigger-moves">
         <h3>input-trigger-moves</h3>
         <p>Two input triggers: a performing cursor, and a key strike used as a hard-cut fuse.</p>
         <p>Styles: cursor-performance, keycap-smash-cut</p>
       </article>
-      <article class="shot-card" id="iso-poster-stack-cycle">
-        <h3>iso-poster-stack-cycle</h3>
-        <p>A stack of posters sits in an orthographic isometric view; on each beat the front poster dissolves in place while drifting toward the camera, the rest of the stack slides forward one slot with a one-frame cascade, and a new poster fades in at the back — six posters loop seamlessly.</p>
-        <p>Styles: iso-poster-stack-cycle</p>
-      </article>
       <article class="shot-card" id="integration-hub-map">
         <h3>integration-hub-map</h3>
         <p>A page flips 180 degrees into an integration hub where five app icons pop in together and rainbow light tubes connect with pulses flowing through them.</p>
         <p>Styles: integration-hub-map</p>
+      </article>
+      <article class="shot-card" id="iso-poster-stack-cycle">
+        <h3>iso-poster-stack-cycle</h3>
+        <p>A stack of posters sits in an orthographic isometric view; on each beat the front poster dissolves in place while drifting toward the camera, the rest of the stack slides forward one slot with a one-frame cascade, and a new poster fades in at the back — six posters loop seamlessly.</p>
+        <p>Styles: iso-poster-stack-cycle</p>
       </article>
       <article class="shot-card" id="lead-word-zoom-assemble">
         <h3>lead-word-zoom-assemble</h3>
@@ -516,10 +537,20 @@
         <p>A neon slit ring shrinks fast into a solid white O with an overshoot brake, slides left to make room, letters stagger in one by one, and an accent slogan fades in below.</p>
         <p>Styles: logo-shrink-wordmark-lockup</p>
       </article>
+      <article class="shot-card" id="loupe-peek">
+        <h3>loupe-peek</h3>
+        <p>A circular magnifier pops over one small detail of a parked page or photo for about a second, then withdraws: a glance, not a new scene.</p>
+        <p>Styles: loupe-peek</p>
+      </article>
       <article class="shot-card" id="magician-card-flourish">
         <h3>magician-card-flourish</h3>
         <p>A blue starburst flashes on black for a third of a second, then a card shoots out of the flash, spinning along an arc toward camera before freezing near full frame.</p>
         <p>Styles: magician-card-flourish</p>
+      </article>
+      <article class="shot-card" id="marker-sweep">
+        <h3>marker-sweep</h3>
+        <p>A highlighter stroke sweeps across a sentence of the source page, its leading edge advancing word by word with the narration.</p>
+        <p>Styles: marker-sweep</p>
       </article>
       <article class="shot-card" id="marker-underline-title">
         <h3>marker-underline-title</h3>
@@ -581,6 +612,16 @@
         <p>Two overhead reveals: a tilted scene leveling into view, and a tabletop layout dropping sharply into place.</p>
         <p>Styles: tilt-reveal, overhead-tabletop-drop</p>
       </article>
+      <article class="shot-card" id="page-anchor-tour">
+        <h3>page-anchor-tour</h3>
+        <p>A virtual camera visits points of interest on a long page screenshot in order, reframing and zooming for each box exactly when the narration mentions it.</p>
+        <p>Styles: page-anchor-tour</p>
+      </article>
+      <article class="shot-card" id="page-scroll-read">
+        <h3>page-scroll-read</h3>
+        <p>A long source-page screenshot scrolls up at reading pace, decelerating to park on each key passage exactly when the narration reaches it.</p>
+        <p>Styles: page-scroll-read</p>
+      </article>
       <article class="shot-card" id="page-turn-transitions">
         <h3>page-turn-transitions</h3>
         <p>Two full-page transitions: adjacent faces rotating like a cube, and an old page splitting open like double doors.</p>
@@ -621,6 +662,11 @@
         <p>Chart columns form from falling square particles, solidify when full, and finish with a value pop.</p>
         <p>Styles: particle-sand-fill</p>
       </article>
+      <article class="shot-card" id="photo-drift-stack">
+        <h3>photo-drift-stack</h3>
+        <p>Two or three photo prints land as a staggered stack on cue and drift very slowly with parallax; earlier prints dim and shrink but stay in place.</p>
+        <p>Styles: photo-drift-stack</p>
+      </article>
       <article class="shot-card" id="picker-carousel-feature-cycle">
         <h3>picker-carousel-feature-cycle</h3>
         <p>A vertical mobile-style picker holds its focus pill still while the list passes through it, each item decelerating hard into place and resting for several frames before the next.</p>
@@ -655,6 +701,11 @@
         <h3>quad-split-parallel-scenes</h3>
         <p>The frame hard-cuts into a 2×2 grid where four micro-scenes run in parallel — typing, a whip zoom, word pops, and a cursor interaction chain — with every beat offset by a few frames.</p>
         <p>Styles: quad-split-parallel-scenes</p>
+      </article>
+      <article class="shot-card" id="quote-plate">
+        <h3>quote-plate</h3>
+        <p>A quotation card where the sentence appears phrase by phrase in step with the narration, with one emphasised word and the attribution arriving last.</p>
+        <p>Styles: quote-plate</p>
       </article>
       <article class="shot-card" id="radial-ripple-phone-chips">
         <h3>radial-ripple-phone-chips</h3>
@@ -756,6 +807,11 @@
         <p>A fast-moving card leaves four countable translucent copies that collapse back into the original at the landing.</p>
         <p>Styles: smear-multiples</p>
       </article>
+      <article class="shot-card" id="source-strip">
+        <h3>source-strip</h3>
+        <p>A small bottom-left strip naming the outlet for every shot that uses an article image or page screenshot: a citation that clears subtitles and platform buttons.</p>
+        <p>Styles: source-strip</p>
+      </article>
       <article class="shot-card" id="space-camera-moves">
         <h3>space-camera-moves</h3>
         <p>Three spatial camera moves: exploded assembly, subject-locked rotation, and a drone-like dive to the landing point.</p>
@@ -785,6 +841,11 @@
         <h3>spotlight-sweep-moves</h3>
         <p>Three dark-scene spotlight moves: a wake-sleep sweep, an edge-glow pan with purple bleed, and a radial reveal expanding from a corner.</p>
         <p>Styles: glow-wake-sleep-panel, slide-spotlight-pan, corner-spotlight-reveal</p>
+      </article>
+      <article class="shot-card" id="stat-punch">
+        <h3>stat-punch</h3>
+        <p>The one number of the story slams in on the narrated word: digits roll to the final value, one damped overshoot, then the unit and label follow.</p>
+        <p>Styles: stat-punch</p>
       </article>
       <article class="shot-card" id="steep-tilt-glide">
         <h3>steep-tilt-glide</h3>

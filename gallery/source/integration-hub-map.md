@@ -5,6 +5,8 @@ name: integration-hub-map
 时长: 前摇 ~0.5s + 快翻 ~1.2s + 图标齐现 → 光管齐连两拍 ~0.7s + 输送呼吸 ≥1.5s；全段 4.5–5s
 能量: 中高（翻面是爆点，输送段是余韵）
 标签: effects
+input: [screenshot]
+narration: none
 ---
 
 ## 意图
