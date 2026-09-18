@@ -15,10 +15,10 @@
 - **不自动渲染**：制作期只出静帧；使用者说「汇出」才整片渲染。
 - **时间不手敲**：所有动效起点只能来自 `timing.ts` 的 `tLine / tChar / tWord`，禁止写死秒数或帧号。
 
-> **实作状态（2026-09-18）**：⓪–⑤ 的脚本与 `timing.ts` / `Subtitles.tsx` 已可用。
-> 尚未落地：12 张资讯型新卡与既有卡的 `input` / `narration` 标记（§⑥，届时 gallery 可筛）、
-> `scaffold-narration.mjs` / `SlowPush.tsx` / `SourceStrip.tsx` / `anchor-lint.py`（§⑦⑧）。
-> 这些落地前：选卡靠读 frontmatter 的「一句话 / 适用」人工判断，骨架参照 `template/` 手建。
+> **实作状态（2026-09-18）**：⓪–⑧ 的脚本与 `assets/lib/` 组件都已可用；既有 162 张卡已标 `input` / `narration`
+> （gallery 有「口播可用」筛选）。12 张资讯型新卡先落地 5 张（`page-scroll-read` `stat-punch` `marker-sweep`
+> `clip-frame-reveal` `chapter-slate`），其余 7 张未做——要用到时照 `docs/narration-card-brief.md` 补，
+> 或先从既有卡里挑同 `narration` 标记的替代。来源条已有组件 `assets/lib/SourceStrip.tsx`。
 
 ---
 
@@ -296,9 +296,18 @@ node <skill>/assets/scripts/source-media.mjs --credits     # → out/CREDITS.md
 
 ## ⑦ 实作
 
-- 专案骨架：`src/{Root,Main,timeline,theme,captions,audio,workbench}.ts(x)`、`src/scenes/`、`public/{vo,media,pages,sfx,bgm}`。
-- `src/timeline.ts` 是唯一时间事实源：由 `shotlist.json` + `timing.json` 生成每镜 `from / duration`，
-  镜长 = 段落末句 `end` − 首句 `start` + `hold`。不手写帧号。
+```bash
+node <skill>/assets/scripts/scaffold-narration.mjs --out <project> --style finance|tech|travel|life [--landscape]
+cd <project> && npm i
+```
+
+- 骨架产出 `src/{index,Root,Main,timeline,theme,audio}.ts(x)`、`src/scenes/Scene<Id>.tsx`（每镜一个占位场景，素材、
+  `SlowPush`、来源条已接好）、`src/lib/`（timing / Subtitles / SlowPush / SourceStrip 的拷贝）、`public/vo/vo.wav`。
+  已存在的档案不覆盖（`--force` 才覆盖）；**`timeline.ts` 与 `src/timing.json` 是生成物，每次重跑都重写**——
+  改稿重配后重跑一次骨架即可，场景档不会被动到。
+- `src/timeline.ts` 是唯一时间事实源：镜头边界落在句间气口中点，末镜 = 末句 `end` + `hold`。
+  场景里的时间点只准用 `atIn(shotId, line, '词')`（词锚 → 镜内相对帧）。不手写帧号。
+- 素材影片用 1080p 档（`source-media.mjs` 已自动挑短边刚好 ≥1080 的最小档）：4K 档会让 `OffthreadVideo` 抽帧逾时。
 - 字幕：`<Subtitles timing={data} highlights={[…]} />`——整句硬现、无动效、无标点；关键词高亮全片 ≤ 3 次（超过会抛错）。配色传 `color / accent / plate / fontFamily`。
 - 相机：每镜一条极缓缩放曲线；不摇晃、不旋转、不模糊。
 - 音效：沿用 `assets/audio/`，每个主要入场配一记，音量 ≤ 0.35（比人声低约 12dB）；转场音只放在句间气口。
@@ -308,7 +317,11 @@ node <skill>/assets/scripts/source-media.mjs --credits     # → out/CREDITS.md
 
 ## ⑧ 自检、汇出、终检、交付
 
-1. 机器检查：每个 anchor 落点误差 ≤ 0.1s、镜尾保护带 ≥ 0.5s、每镜素材档存在、manifest 授权栏非空；`source-media.mjs --check` PASS。
+1. 机器检查，两个都要 PASS：
+   ```bash
+   python3 <skill>/assets/scripts/anchor-lint.py --project <project>   # 词锚 / 镜尾保护带 / 素材与授权 / 选卡规则 / 转场
+   node <skill>/assets/scripts/source-media.mjs --out <project> --check
+   ```
 2. 静帧：每镜入 / 出 / 每个锚点各一张，拼成 overview 给使用者。
 3. 使用者说「汇出」→ 整片渲染两版（带 / 不带 BGM）→ 抽音轨实测字幕偏移 → 派**全新上下文 subagent** 依 `final-review.md` 终检，外加口播专属三项：字幕与人声同步、画面数字与 `facts.md` 一致、每镜素材来源在 manifest 内。
 4. 交付物：`out/final.mp4`、`out/final-nobgm.mp4`、`out/CREDITS.md`、`assets/manifest.json`、`sources/facts.md`。

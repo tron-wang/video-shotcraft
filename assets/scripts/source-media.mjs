@@ -112,8 +112,9 @@ const SOURCES = {
       }
       const d = await getJson(`https://api.pexels.com/videos/search?${qs}`, h);
       return d.videos.map((v, rank) => {
-        const best = v.video_files.filter((f) => f.width && f.height).sort((a, b) => Math.min(b.width, b.height) - Math.min(a.width, a.height))
-          .find((f) => Math.min(f.width, f.height) <= 2160) || v.video_files[0];
+        // 取「短边刚好 ≥1080 的最小档」：4K 档 OffthreadVideo 抽帧会逾时，成片也用不到那么多像素
+        const sized = v.video_files.filter((f) => f.width && f.height).sort((a, b) => Math.min(a.width, a.height) - Math.min(b.width, b.height));
+        const best = sized.find((f) => Math.min(f.width, f.height) >= 1080) || sized[sized.length - 1] || v.video_files[0];
         return {
           id: `pexels-v${v.id}`, source: 'pexels', kind, width: best.width, height: best.height, duration: v.duration, thumb: v.image, file_url: best.link,
           source_url: v.url, author: v.user?.name, author_url: v.user?.url, ...lic('pexels'), attribution_required: false, credit: null, rank,
@@ -141,7 +142,8 @@ const SOURCES = {
       }
       const d = await getJson(`https://pixabay.com/api/videos/?${base}`);
       return d.hits.map((v, rank) => {
-        const f = v.videos.large?.url ? v.videos.large : v.videos.medium;
+        // 同上：medium 已达 1080 就不拿 large
+        const f = Math.min(v.videos.medium?.width || 0, v.videos.medium?.height || 0) >= 1080 || !v.videos.large?.url ? v.videos.medium : v.videos.large;
         return {
           id: `pixabay-v${v.id}`, source: 'pixabay', kind, width: f.width, height: f.height, duration: v.duration, thumb: f.thumbnail || v.videos.tiny?.thumbnail, file_url: f.url,
           source_url: v.pageURL, author: v.user, author_url: `https://pixabay.com/users/${v.user}-${v.user_id}/`, ...lic('pixabay'), attribution_required: false, credit: null, rank,
