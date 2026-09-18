@@ -84,25 +84,41 @@ const splitPoints = (chars: TimingChar[], maxChars: number): number[] => {
 
 /** 字幕 cue：按标点切片语、去标点；相邻短片语在 maxChars 内合并，超长片语均分。
  * cue 显示到同句下一 cue 的起点（句内不闪），句末多留 tailHold 秒。 */
-export const buildCues = (data: Timing, maxChars: number, tailHold = 0.25): Cue[] => {
+export type CueBreak = { line: number; after: string };
+
+/** 超长片语在字界上均分可能切在词中间（「民主黨主｜席」）；`breaks` 指定「第 line 句在 after 之后必断」，
+ * 断开的两段各自再照 maxChars 合并 / 均分。after 不在句中直接抛错。 */
+export const buildCues = (data: Timing, maxChars: number, tailHold = 0.25, breaks: CueBreak[] = []): Cue[] => {
   const cues: Cue[] = [];
   for (const l of data.lines) {
-    // 1. 按标点切成片语（保留词间空格，如「在 Threads 上」）
+    const forced = new Set(
+      breaks.filter((b) => b.line === l.i).map((b) => {
+        const k = l.text.indexOf(b.after);
+        if (k < 0) throw new Error(`buildCues: 第 ${l.i} 句找不到断点「${b.after}」`);
+        return k + b.after.length;
+      }),
+    );
+    // 1. 按标点（与指定断点）切成片语（保留词间空格，如「在 Threads 上」）
     const phrases: TimingChar[][] = [];
     let cur: TimingChar[] = [];
-    for (const ch of l.chars) {
+    l.chars.forEach((ch, k) => {
+      if (forced.has(k) && cur.length) {
+        phrases.push(cur);
+        cur = [];
+      }
       if (isPunct(ch.c) && ch.c !== ' ') {
         if (cur.length) phrases.push(cur);
         cur = [];
       } else cur.push(ch);
-    }
+    });
     if (cur.length) phrases.push(cur);
 
     // 2. 合并与拆分
     const blocks: TimingChar[][] = [];
     for (const ph of phrases) {
       const last = blocks[blocks.length - 1];
-      if (last && last.length + ph.length <= maxChars) last.push(...ph);
+      const afterForced = forced.has(l.chars.indexOf(ph[0]));
+      if (last && !afterForced && last.length + ph.length <= maxChars) last.push(...ph);
       else if (ph.length <= maxChars) blocks.push([...ph]);
       else {
         const pts = splitPoints(ph, maxChars);

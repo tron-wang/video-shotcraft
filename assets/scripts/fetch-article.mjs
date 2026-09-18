@@ -83,9 +83,14 @@ const data = await page.evaluate((minW) => {
   }
   const ldAuthor = [ld.author].flat().filter(Boolean).map((a) => (typeof a === 'string' ? a : a.name)).filter(Boolean).join('、');
 
-  // 正文容器：直属 <p> 文字量最大的祖先
+  // 正文容器：直属 <p> 文字量最大的祖先。
+  // 无限卷动的站（动区）会在下方接上下一篇文章：只计第一个 h1 与下一个 h1 之间的段落。
+  const h1s = [...document.querySelectorAll('h1')];
+  const nextH1 = h1s[1];
+  const inMain = (p) => !nextH1 || !!(p.compareDocumentPosition(nextH1) & Node.DOCUMENT_POSITION_FOLLOWING);
   const score = new Map();
   for (const p of document.querySelectorAll('p')) {
+    if (!inMain(p)) continue;
     const len = p.innerText.trim().length;
     if (len < 20) continue;
     for (let el = p.parentElement, depth = 0; el && el !== document.body && depth < 3; el = el.parentElement, depth++) {

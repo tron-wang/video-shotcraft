@@ -2,7 +2,7 @@
 // 位置与字级按画幅表取值；关键词高亮全片 ≤ 3 次（超过直接抛错，逼你取舍）。
 import React, { useMemo } from 'react';
 import { AbsoluteFill, useCurrentFrame, useVideoConfig } from 'remotion';
-import { buildCues, type Timing } from './timing';
+import { buildCues, type CueBreak, type Timing } from './timing';
 
 /** 画幅表。直式右缘是社群平台按钮区，字幕块收窄并居中；y≈1480 在主内容（150–1420）之下。 */
 const LAYOUT = {
@@ -17,6 +17,8 @@ export const Subtitles: React.FC<{
   /** 配音在合成里的起始帧（vo 轨不从 0 帧开始时用）。 */
   offset?: number;
   highlights?: SubtitleHighlight[];
+  /** 超长片语的手动断点：第 line 句在 after 之后必断（自动均分切在词中间时用）。 */
+  breaks?: CueBreak[];
   color?: string;
   accent?: string;
   plate?: string;
@@ -27,6 +29,7 @@ export const Subtitles: React.FC<{
   timing,
   offset = 0,
   highlights = [],
+  breaks = [],
   color = '#ffffff',
   accent = '#ffd34d',
   plate = 'rgba(18,18,18,0.82)',
@@ -42,12 +45,12 @@ export const Subtitles: React.FC<{
 
   const cues = useMemo(
     () =>
-      buildCues(timing, L.maxChars).map((c) => ({
+      buildCues(timing, L.maxChars, 0.25, breaks).map((c) => ({
         ...c,
         from: offset + Math.round(c.start * fps),
         to: offset + Math.round(c.end * fps),
       })),
-    [timing, L.maxChars, offset, fps],
+    [timing, L.maxChars, offset, fps, breaks],
   );
 
   const cue = cues.find((c) => frame >= c.from && frame < c.to);
