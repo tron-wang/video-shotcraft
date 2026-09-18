@@ -80,6 +80,17 @@ npx remotion still src/_narr_<slug>.tsx D <scratch>/<slug>-<frame>.png --frame=<
 静帧输出放你的 scratch 目录：`/private/tmp/claude-501/-Users-joe-wang-Documents------video-shotcraft/6cdbdb7c-e9c7-4c7a-a7f0-25e5365dfa02/scratchpad/cards/<slug>/`。
 **结束前删掉 `template/src/_narr_<slug>.tsx` 与任何暂存 copy。**
 
+## 实务提醒（第一批 5 张卡的经验）
+
+- 同时有多个 agent 在渲染，单张静帧要 1–3 分钟，偶尔 Chrome 连线逾时：命令加 `--timeout=120000`，失败就重试，不算卡的问题。
+- 严格型别检查直接指到 `../demos/...` 会找不到 `react` / `remotion`——直接走退路：把组件连同 `_fixtures/Narration.tsx`、
+  `_fixtures/Motion.tsx` 按相同相对结构 copy 到 `template/src/_tmp_<slug>/` 检查，完了删掉。
+- fixture 另有 `FakePhoto`（占位照片，按 seed 变化）。**不要改 fixture**；缺什么在自己的组件里做。
+- 已落地可参考的同系卡：`demos/narration/` 下的 page-scroll-read / stat-punch / marker-sweep / clip-frame-reveal / chapter-slate，
+  卡片在 `references/shots/narration/`。和它们保持一致的面板圆角（28）、SAFE 用法、props 命名风格；不要重复它们已做的事。
+- `slowPush` 从 1.00 推到 1.04 会让贴满 SAFE 的面板溢出：贴满 SAFE 的容器请从 1/1.04 推到 1.00。
+- 页面层位移用 2D `translate`，不要 `translate3d`（小数缩放下会在面板边缘漏出 1px 亮线）。
+
 ## 回报
 
 最后一则讯息写：两个档案路径、DURATION、props 清单、你看过哪几帧与结论、严格型别检查结果、还没解决的问题（没有就说没有）。

@@ -145,6 +145,19 @@ export const FakeClip: React.FC<{ hue?: number; style?: React.CSSProperties }> =
   );
 };
 
+/** 没有图档时的占位「照片」：静态风景构图（天空渐层 + 山形 + 前景），按 seed 变化。进片时换成 <Img>。 */
+export const FakePhoto: React.FC<{ seed?: number; style?: React.CSSProperties }> = ({ seed = 0, style }) => {
+  const hue = (seed * 67 + 205) % 360;
+  const peak = 38 + ((seed * 29) % 24);
+  return (
+    <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', background: `linear-gradient(180deg, hsl(${hue} 45% 62%), hsl(${(hue + 40) % 360} 55% 82%) 58%, hsl(${(hue + 60) % 360} 35% 70%))`, ...style }}>
+      <div style={{ position: 'absolute', left: `${18 + ((seed * 13) % 50)}%`, top: '16%', width: '14%', aspectRatio: '1', borderRadius: '50%', background: 'hsl(45 95% 88% / .9)' }} />
+      <div style={{ position: 'absolute', inset: 0, background: `hsl(${(hue + 190) % 360} 22% 34%)`, clipPath: `polygon(0 72%, ${peak - 20}% 52%, ${peak}% 34%, ${peak + 16}% 50%, ${peak + 34}% 42%, 100% 60%, 100% 100%, 0 100%)` }} />
+      <div style={{ position: 'absolute', inset: 0, background: `hsl(${(hue + 170) % 360} 28% 20%)`, clipPath: `polygon(0 84%, 22% 76%, 46% 86%, 70% 74%, 100% 82%, 100% 100%, 0 100%)` }} />
+    </div>
+  );
+};
+
 /** 每镜一条极缓缩放：1.00 → 1.04（或反向）。口播片段内画面的「活」只来自这个。 */
 export const slowPush = (frame: number, duration: number, from = 1, to = 1.04) =>
   from + (to - from) * Math.min(1, Math.max(0, frame / Math.max(1, duration - 1)));
