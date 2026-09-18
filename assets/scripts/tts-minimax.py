@@ -70,6 +70,16 @@ def rms_db(pcm: bytes) -> float:
     return 10 * math.log10(sum(s * s for s in a) / len(a) / 32768 ** 2 + 1e-12)
 
 
+def fade_tail(pcm: bytes, seconds: float = 0.025) -> bytes:
+    """句尾线性淡出：尾音紧贴档尾时，直接接静音会有喀声。"""
+    import array
+    a = array.array('h', pcm)
+    n = min(len(a), int(seconds * OUT_SR))
+    for k in range(n):
+        a[len(a) - n + k] = int(a[len(a) - n + k] * (1 - (k + 1) / n))
+    return a.tobytes()
+
+
 def fingerprint(text: str, voice: str, model: str, speed: float) -> str:
     return hashlib.sha1(f'{model}|{voice}|{speed}|{text}'.encode('utf-8')).hexdigest()[:12]
 
@@ -119,10 +129,12 @@ def main() -> None:
         dur = len(pcm) / 2 / OUT_SR
         if dur <= 0:
             problems.append(f'L{i} 音档时长为 0')
-        # 截断检查：正常收尾的句子，尾端 0.2s 应已衰减
-        tail = rms_db(pcm[-int(0.2 * OUT_SR) * 2:])
+        # 截断检查：TTS 的音档尾端收得很紧（末字尾音常持续到档尾前 50ms），所以只看最后 50ms——
+        # 这里还响着才是真的被切在字中间
+        tail = rms_db(pcm[-int(0.05 * OUT_SR) * 2:])
         if tail > -30:
-            problems.append(f'L{i} 尾端 0.2s 仍有 {tail:.1f} dB，疑似截断')
+            problems.append(f'L{i} 档尾 50ms 仍有 {tail:.1f} dB，疑似截断')
+        pcm = fade_tail(pcm)
 
         start = len(pcm_all) / 2 / OUT_SR
         pcm_all += pcm

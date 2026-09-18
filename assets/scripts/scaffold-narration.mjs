@@ -122,6 +122,9 @@ export const at = (line: number, word: string, nth = 1) => VO_FROM + q.f(q.tWord
 /** 词锚 → 所属镜头内的相对帧（场景里用这个）。 */
 export const atIn = (shot: ShotId, line: number, word: string, nth = 1) => at(line, word, nth) - SHOTS[shot].from;
 export const lineIn = (shot: ShotId, line: number) => VO_FROM + q.f(q.tLine(line)) - SHOTS[shot].from;
+/** 词的最后一个字念完的那一帧（镜内相对帧）：荧光笔收笔、说明行跟进用。 */
+export const endIn = (shot: ShotId, line: number, word: string, nth = 1) => VO_FROM + q.f(q.tWordEnd(line, word, nth)) - SHOTS[shot].from;
+export const lineEndIn = (shot: ShotId, line: number) => VO_FROM + q.f(q.tLineEnd(line)) - SHOTS[shot].from;
 `, { generated: true });
 
 // ── theme ──
