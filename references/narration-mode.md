@@ -16,9 +16,8 @@
 - **时间不手敲**：所有动效起点只能来自 `timing.ts` 的 `tLine / tChar / tWord`，禁止写死秒数或帧号。
 
 > **实作状态（2026-09-18）**：⓪–⑧ 的脚本与 `assets/lib/` 组件都已可用；既有 162 张卡已标 `input` / `narration`
-> （gallery 有「口播可用」筛选）。12 张资讯型新卡先落地 5 张（`page-scroll-read` `stat-punch` `marker-sweep`
-> `clip-frame-reveal` `chapter-slate`），其余 7 张未做——要用到时照 `docs/narration-card-brief.md` 补，
-> 或先从既有卡里挑同 `narration` 标记的替代。来源条已有组件 `assets/lib/SourceStrip.tsx`。
+> （gallery 有「口播可用」筛选，口播专用卡带橘色角标）。12 张资讯型新卡全部落地，在 `references/shots/narration/`，
+> demo 在 `demos/narration/`。要再加新卡照 `docs/narration-card-brief.md`。
 
 ---
 
@@ -258,8 +257,24 @@ node <skill>/assets/scripts/source-media.mjs --credits     # → out/CREDITS.md
 4. 同一张卡全片最多当两次主角；连续两镜不用同一卡。
 5. 选定后**必读卡全文与 demo 原始码**，把「已知坑」逐条抄进该镜的 `checks`。
 
-**资讯型卡片**（`references/shots/narration/`）：`page-scroll-read`、`page-anchor-tour`、`loupe-peek`、`marker-sweep`、
-`ink-circle-note`、`stat-punch`、`bar-grow-compare`、`quote-plate`、`chapter-slate`、`photo-drift-stack`、`clip-frame-reveal`、`source-strip`。
+**资讯型卡片**（`references/shots/narration/`，12 张）：
+
+| 卡 | input | narration | 一句话 |
+|---|---|---|---|
+| `page-scroll-read` | screenshot | evidence | 长页匀速上滚，讲到关键段落减速停靠 |
+| `page-anchor-tour` | screenshot | evidence | 相机依序巡游兴趣点，位置与缩放都变；长距离跳转用它 |
+| `marker-sweep` | screenshot / text | evidence | 荧光笔按词锚逐词扫过一句 |
+| `ink-circle-note` | screenshot / photo | evidence | 手绘圈注 + 箭头 + 短注，钉在内容坐标系 |
+| `loupe-peek` | screenshot / photo | evidence | 圆形放大镜看一眼即撤 |
+| `source-strip` | text | evidence | 来源条（生产用 `assets/lib/SourceStrip.tsx`） |
+| `stat-punch` | text / video / photo | data | 词锚处大数字砸入 |
+| `bar-grow-compare` | chart | data | 2–4 根长条依词锚逐根生长，零基线 |
+| `quote-plate` | text / photo / video | quote | 引言逐片语浮现，署名最后到 |
+| `chapter-slate` | text | chapter | 一章一色一线稿 + 左下角标 |
+| `clip-frame-reveal` | video / photo | broll | 实拍素材主题边框（paper / film / hairline） |
+| `photo-drift-stack` | photo | broll | 2–3 张相纸错位堆叠、极缓漂移 |
+
+同一句话上不要叠两种强调（`marker-sweep` 与 `ink-circle-note` 二选一）；证据镜一律配 `source-strip`。
 
 **蒙皮契约**：卡是中性 UI，进片前依本片风格档改皮——颜色换 `theme.ts` token、字体、圆角、材质；
 **不改时序、缓动、几何比例、层级**。
