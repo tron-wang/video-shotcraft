@@ -230,7 +230,7 @@ node workbench/scripts/open.mjs <成片工程目录>   # 链接工程 → 起 de
 - `assets/scripts/capture-template.mjs` 复制后改顶部 CONFIG（BASE/路由/选择器）。
 - 口播模式的脚本**不复制、直接从 skill 目录执行**并用 `--out <project>` 指向影片专案：
   `fetch-article.mjs`（取材）、`tts-minimax.py`（逐句配音）、`align.py`（逐字时间戳）、
-  `source-media.mjs`（多源素材采集 / 配额检查 / 标注清单）、`capture-page.mjs`（网页长图 + DOM 坐标）。
+  `source-media.mjs`（多源素材采集 / 配额检查 / 标注清单）、`source-social.mjs`（找出并采集新闻引用的社群贴文影片）、`capture-page.mjs`（网页长图 + DOM 坐标）。
   `scaffold-narration.mjs`（专案骨架 + 生成 timeline.ts）、`anchor-lint.py`（词锚与素材机器检查）。
   `assets/lib/` 的 timing.ts / Subtitles / SlowPush / SourceStrip 由骨架脚本 copy 进专案。用法见 narration-mode.md。
 - `assets/audio/` 音效直接复制使用（免费商用授权，见 audio/ATTRIBUTION.md）：

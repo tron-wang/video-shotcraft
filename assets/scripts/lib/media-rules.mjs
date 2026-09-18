@@ -100,6 +100,7 @@ export const buildCredits = (entries, usedIds = null) => {
   const uns = used.filter((e) => e.source === 'unsplash');
   const art = used.filter((e) => e.source === 'article');
   const other = used.filter((e) => !['unsplash', 'article'].includes(e.source));
+  const social = used.filter((e) => e.source === 'social');
 
   const full = [
     ...uns.map((e) => `Photo by ${e.author} on Unsplash — ${e.source_url}`),
@@ -114,11 +115,11 @@ export const buildCredits = (entries, usedIds = null) => {
   const risky = used.filter((e) => e.risk === 'high');
   return [
     '# CREDITS', '',
-    `本片用了 ${uns.length} 張 Unsplash 照片、${art.length} 張文章圖片。發佈時請把下面其中一版貼到影片說明欄。`, '',
+    `本片用了 ${uns.length} 張 Unsplash 照片、${art.length} 張文章圖片、${social.length} 則社群貼文素材。發佈時請把下面其中一版貼到影片說明欄。`, '',
     '## 完整版（含連結）', '', ...full, '',
     '## 精簡版（字數受限的平台）', '', ...short, '',
     ...(risky.length
-      ? ['## 需要你判斷的高風險圖片', '', ...risky.map((e) => `- ${e.file}：${e.note}`), '']
+      ? ['## 需要你判斷的高風險素材', '', ...risky.map((e) => `- ${e.file}：${e.note}`), '']
       : []),
   ].join('\n');
 };
@@ -134,4 +135,43 @@ export const entryProblems = (e) => {
     if (e.source === 'unsplash' && !e.download_tracked) p.push('Unsplash 选用后未呼叫 download_location');
   }
   return p;
+};
+
+// ───────────────────────── 社群贴文 ─────────────────────────
+
+const PLATFORMS = [
+  ['threads', /(^|\.)threads\.(net|com)$/, 'Threads'],
+  ['x', /(^|\.)(x|twitter)\.com$/, 'X'],
+  ['instagram', /(^|\.)instagram\.com$/, 'Instagram'],
+  ['facebook', /(^|\.)facebook\.com$/, 'Facebook'],
+  ['youtube', /(^|\.)(youtube\.com|youtu\.be)$/, 'YouTube'],
+  ['tiktok', /(^|\.)tiktok\.com$/, 'TikTok'],
+];
+
+/** 网址 → { platform, label, handle, postId }；不是社群贴文返回 null。 */
+export const parseSocialUrl = (url) => {
+  let u;
+  try { u = new URL(url); } catch { return null; }
+  const hit = PLATFORMS.find(([, re]) => re.test(u.hostname.toLowerCase()));
+  if (!hit) return null;
+  const [platform, , label] = hit;
+  const seg = u.pathname.split('/').filter(Boolean);
+  const handle = (seg.find((s) => s.startsWith('@')) || (['x', 'facebook', 'instagram'].includes(platform) && seg[0] && !/^(p|reel|watch|share|sharer|intent|tr|hashtag|search)$/.test(seg[0]) ? `@${seg[0]}` : '')).toLowerCase();
+  const k = seg.findIndex((s) => /^(post|status|posts|p|reel|video|videos|shorts)$/.test(s));
+  const postId = k >= 0 ? seg[k + 1] || '' : platform === 'youtube' ? u.searchParams.get('v') || seg[seg.length - 1] || '' : '';
+  return { platform, label, handle, postId, isPost: !!postId };
+};
+
+/** 社群贴文的权利判定。贴文版权属上传者：使用者决定可用，但一律标 risk: high、画面内来源条、进 CREDITS、
+ * 交付时逐则提醒。narration.config.json 的 trusted_social（如 "threads:@blocktempo"）是使用者自己的帐号：不警示、不标注。 */
+export const socialPostRights = ({ platform, label, handle }, trustedSocial = []) => {
+  const key = `${platform}:${handle}`.toLowerCase();
+  if (trustedSocial.map((s) => s.toLowerCase()).includes(key)) {
+    return { rights: 'trusted-social', attribution_required: false, credit: null, risk: 'none', note: null, source_strip: `${label} ${handle}` };
+  }
+  return {
+    rights: 'social-post', attribution_required: true, credit: `影片來源：${label} ${handle}`.trim(), risk: 'high',
+    note: `${label} 贴文的著作权属上传者 ${handle}；未取得授权即使用属使用者自行判断的风险，建议先留言或私讯取得同意`,
+    source_strip: `${label} ${handle}`,
+  };
 };

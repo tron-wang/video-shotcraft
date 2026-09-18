@@ -164,6 +164,7 @@ node <skill>/assets/scripts/source-media.mjs --pick s1-hook 2 --shot S01   # 编
 | Unsplash | 照片（品质通常最好） | **是**——`--pick` 时自动先打 `download_location`；每小时 50 次上限，脚本有快取与落盘计数 |
 | Openverse | 照片，只取 CC0 / PDM | 否 |
 | 文章本身 | 头图、文内图（⓪ 已下载） | 是（已授权网域除外） |
+| 社群贴文（`source-social.mjs`） | 新闻引用的贴文影片与贴文画面 | **是**（risk: high；画面内来源条 + CREDITS；`trusted_social` 除外） |
 | Playwright 截图 | 证据镜 | 画面内来源条 |
 | 自产图表 | 从 `facts.md` 的数字画 | 否 |
 
@@ -192,6 +193,27 @@ node <skill>/assets/scripts/capture-page.mjs <url> --slug <name> --segment s3-ev
 
 产出 `assets/pages/<slug>/{page.png, boxes.json}`。`boxes.json` 坐标是整页 CSS px（× `scale` = `page.png` 像素），
 文字框用 Range 实测、逐行给 `rects`（跨连结节点也准）。成片里用相机在长图上滚动、停靠、放大、画线；**不做整张静态贴图，坐标不准目测**。找不到文字会 exit 2——照页面原文逐字重给。
+
+**4.3b 社群贴文（新闻引用的 Threads 影片等）**
+
+新闻讲到「某段影片在社群上疯传」时，那段影片本身就是最好的素材。⓪ 之后固定跑一次找：
+
+```bash
+node <skill>/assets/scripts/source-social.mjs --discover [--query "關鍵字"]   # → assets/social/candidates.json
+node <skill>/assets/scripts/source-social.mjs --capture <编号或贴文网址> --segment <id> --shot <id>
+```
+
+- **找**：① 文章正文里的社群贴文连结与嵌入（最准，新闻引用贴文几乎都附连结）；② `--query` 走搜寻引擎查 `site:threads.com`
+  （免登入免金钥；被挡会明说）。平台站内搜寻都要登入，不走。
+- **采**：Playwright 以手机版面打开**公开**贴文 → `assets/social/<platform>-<id>/post.png`（贴文画面：帐号、内文、影片、互动数，
+  已去掉「开启 App」弹窗与下方留言串）+ 贴文主影片 → `public/media/<platform>-<id>.mp4` + manifest。
+  Threads 实测可用；X / Instagram 需登入 → 报「未采集」，**不绕过登入**；YouTube 只拍画面不下载。
+- **权利**：贴文著作权属上传者。使用者决定可用（同文章图片的决定），但 manifest 一律 `risk: high`、`attribution_required`，
+  **画面内必须有来源条「影片來源 <平台> @帐号」**，进 `out/CREDITS.md`，交付时逐则提醒并建议先留言 / 私讯取得同意。
+  使用者自己的帐号写进 `narration.config.json` 的 `trusted_social`（如 `"threads:@blocktempo"`）→ 不警示、不标注。
+- **用法**：原片静音（人声是口播）、不去水印、不改内容；贴文影片多为 720p，全幅放大会略软——压暗叠数字可以，
+  要当主画面就放进画框（`clip-frame-reveal`）；贴文画面 `post.png` 可当证据镜的素材（`page-anchor-tour` / `loupe-peek`）。
+- 选片规则里的「无可辨识人脸特写」同样适用：路人入镜的贴文影片，挑远景段落、别定格在人脸上。
 
 **4.4 配额检查**（任一 FAIL 不进 ⑦）
 

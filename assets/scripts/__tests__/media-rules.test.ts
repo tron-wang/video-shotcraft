@@ -96,7 +96,7 @@ describe('buildCredits / entryProblems', () => {
   });
 
   it('高风险图片单独列出', () => {
-    expect(buildCredits([art], new Set(['a1']))).toContain('需要你判斷的高風險圖片');
+    expect(buildCredits([art], new Set(['a1']))).toContain('需要你判斷的高風險素材');
   });
 
   it('没有需标注素材时明说', () => {
@@ -108,5 +108,36 @@ describe('buildCredits / entryProblems', () => {
     expect(entryProblems(uns)).toEqual([]);
     expect(entryProblems({ attribution_required: false })).toHaveLength(2);
     expect(entryProblems({ ...uns, download_tracked: false })[0]).toMatch(/download_location/);
+  });
+});
+
+// @ts-expect-error — plain .mjs module without type declarations
+import { parseSocialUrl, socialPostRights } from '../lib/media-rules.mjs';
+
+describe('parseSocialUrl', () => {
+  it('认得 Threads / X / YouTube 贴文，抽出帐号与贴文 id', () => {
+    expect(parseSocialUrl('https://www.threads.com/@ntuacurry_0602/post/DdWsYRtD87b')).toMatchObject({ platform: 'threads', handle: '@ntuacurry_0602', postId: 'DdWsYRtD87b', isPost: true });
+    expect(parseSocialUrl('https://x.com/BlockTempo/status/123')).toMatchObject({ platform: 'x', handle: '@blocktempo', postId: '123' });
+    expect(parseSocialUrl('https://www.youtube.com/watch?v=abc123')).toMatchObject({ platform: 'youtube', postId: 'abc123' });
+  });
+
+  it('帐号首页、分享按钮、追踪像素不算贴文；非社群网址返回 null', () => {
+    expect(parseSocialUrl('https://twitter.com/BlockTempo')?.isPost).toBe(false);
+    expect(parseSocialUrl('https://www.facebook.com/tr?id=1&ev=PageView')?.isPost).toBe(false);
+    expect(parseSocialUrl('https://www.blocktempo.com/a')).toBeNull();
+    expect(parseSocialUrl('nope')).toBeNull();
+  });
+});
+
+describe('socialPostRights', () => {
+  const post = { platform: 'threads', label: 'Threads', handle: '@someone' };
+
+  it('别人的贴文：高风险、需标注、有来源条', () => {
+    const r = socialPostRights(post, []);
+    expect(r).toMatchObject({ rights: 'social-post', attribution_required: true, risk: 'high', credit: '影片來源：Threads @someone', source_strip: 'Threads @someone' });
+  });
+
+  it('白名单帐号（不分大小写）：不警示、不标注', () => {
+    expect(socialPostRights(post, ['Threads:@SomeOne'])).toMatchObject({ rights: 'trusted-social', attribution_required: false, risk: 'none' });
   });
 });
