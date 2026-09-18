@@ -186,6 +186,10 @@ node <skill>/assets/scripts/capture-page.mjs <url> --slug <name> --segment s3-ev
   --text "页面上的原文句子（逐字，含标点）" --auto
 ```
 
+**直式片一律加 `--width 430 --scale 3`（手机版面）**：文章栏占满画面，内文放进 1080 宽约 36px 可读；用预设的桌机版面（1280 宽）
+内文只剩约 19px，手机上读不到（台大新闻实跑踩过）。横式片用预设值。`--text` 命中的是页面里**第一次出现**的位置——
+摘要框常先出现同一句，要标内文就把句子给长一点。
+
 产出 `assets/pages/<slug>/{page.png, boxes.json}`。`boxes.json` 坐标是整页 CSS px（× `scale` = `page.png` 像素），
 文字框用 Range 实测、逐行给 `rects`（跨连结节点也准）。成片里用相机在长图上滚动、停靠、放大、画线；**不做整张静态贴图，坐标不准目测**。找不到文字会 exit 2——照页面原文逐字重给。
 

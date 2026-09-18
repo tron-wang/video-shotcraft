@@ -2,6 +2,7 @@
 // 口播模式 ④.3 网页「拍摄」：来源网页 → 全页 2× 长图 + 兴趣点 DOM 坐标
 //
 //   node capture-page.mjs <url> [--out <project>] [--slug name] [--width 1280] [--scale 2]
+//        直式片用 --width 430 --scale 3（手机版面，文章栏占满画面、内文可读）；横式片用预设。
 //        [--text "要标出的原文句子"]...   在页面里找这段文字，记下逐行矩形（供 marker-sweep / 圈注）
 //        [--select "css 选择器"]...        记下元素矩形（供 page-anchor-tour 停靠）
 //        [--auto]                          自动记下 h1–h3、正文图片、blockquote
