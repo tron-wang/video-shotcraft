@@ -11,7 +11,7 @@
 [![GitHub stars](https://img.shields.io/github/stars/tron-wang/video-shotcraft)](https://github.com/tron-wang/video-shotcraft/stargazers)
 [![Gallery](https://img.shields.io/badge/Gallery-live%20previews-d3923c)](https://shotcraft-gallery.nionionote.com/)
 
-**映画のような製品動画を制作するためのエージェントスキル：167 種類のショットレシピカード · 219 種類のスタイル · 219 本のモーションプレビュー · 実制作に対応したテンプレート**
+**映画のような製品動画を制作するためのエージェントスキル：167 種類のショットレシピカード · 224 種類のスタイル · 224 本のモーションプレビュー · 実制作に対応したテンプレート**
 
 [English](README.md) | [中文](README_CN.md) | [日本語](README_JA.md)
 
@@ -23,7 +23,7 @@
 マーケティング、ローンチ、デモ動画を制作します。実際のページキャプチャ、2.5D カメラワーク、
 ビートに同期したカット、映画品質の SFX も含まれます。
 
-🖼️ [**ライブ Gallery で 219 本のモーションプレビューをすべて見る »**](https://shotcraft-gallery.nionionote.com/)
+🖼️ [**ライブ Gallery で 224 本のモーションプレビューをすべて見る »**](https://shotcraft-gallery.nionionote.com/)
 
 ## ✨ 最新情報
 
@@ -157,7 +157,7 @@ Use video-shotcraft to make a promo for my product with the Ink Press template.
 | 内容 | 説明 |
 | --- | --- |
 | 167 種類のショットレシピカード | 目的、エネルギー、推奨時間、パラメータ、実装上の注意点、既知の落とし穴 |
-| 219 本のモーションプレビュー | 219 種類のスタイルを網羅し、オンライン Gallery で検索と絞り込みが可能 |
+| 224 本のモーションプレビュー | 224 種類のスタイルを網羅し、オンライン Gallery で検索と絞り込みが可能 |
 | Remotion 実装 | 各カードの実際のイージングとタイミングパラメータを含む、調整済みの TSX デモ |
 | 完全な動画テンプレート | 検証済みの 36.2 秒、1920×1080、30fps、10 ショットの製品プロモーション |
 | コンポーネントとアセット | 2.5D ページカメラ、キャプション、フラッシュカット、数字ロール、SFX、キャプチャスクリプト |

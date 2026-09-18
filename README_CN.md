@@ -12,7 +12,7 @@
 [![GitHub forks](https://img.shields.io/github/forks/tron-wang/video-shotcraft)](https://github.com/tron-wang/video-shotcraft/network/members)
 [![Gallery](https://img.shields.io/badge/Gallery-在线样片-d3923c)](https://shotcraft-gallery.nionionote.com/)
 
-**让 agent 帮你制作电影感产品视频的 skill：167 张镜头配方卡 · 224 个样式 · 219 条动态样片 · 已验收成片模板**
+**让 agent 帮你制作电影感产品视频的 skill：167 张镜头配方卡 · 224 个样式 · 224 条动态样片 · 已验收成片模板**
 
 [English](README.md) | [中文](README_CN.md) | [日本語](README_JA.md)
 
@@ -23,7 +23,7 @@
 和声音设计，产出一支电影感的宣传片 / 营销视频 / 发布视频 / 功能演示——
 真实页面截图、2.5D 运镜、节奏卡点和电影级 SFX 全部包含。
 
-🖼️ [**在线 Gallery：浏览全部 219 条动态样片 »**](https://shotcraft-gallery.nionionote.com/)
+🖼️ [**在线 Gallery：浏览全部 224 条动态样片 »**](https://shotcraft-gallery.nionionote.com/)
 
 ## ✨ 最近更新
 
@@ -146,7 +146,7 @@ agent 会替换成目标产品的截图、文案和品牌信息，复现同等�
 | 内容 | 说明 |
 | --- | --- |
 | 167 张镜头配方卡 | 记录用途、能量、建议时长、参数、实现要点与已知坑 |
-| 219 条动态样片 | 覆盖 224 个样式中的 219 个，可在在线 Gallery 中直接预览、搜索和筛选 |
+| 224 条动态样片 | 覆盖 224 个样式，可在在线 Gallery 中直接预览、搜索和筛选 |
 | Remotion 参考实现 | 每张卡对应经过调校的 TSX demo，包含实际缓动和时序参数 |
 | 完整成片模板 | 36.2 秒、1920×1080、30fps、10 镜头的纸墨琥珀风产品宣传片 |
 | 组件与素材 | 2.5D 页面相机、字幕、闪切、数字滚动、音效和素材采集脚本 |

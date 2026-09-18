@@ -23,7 +23,7 @@ sound-designs a cinematic promo, marketing, launch, or demo video with
 [Remotion](https://www.remotion.dev/) — real page captures, 2.5D camera moves,
 beat-synced cuts, and film-grade SFX included.
 
-🖼️ [**Browse all 219 motion previews in the live Gallery »**](https://shotcraft-gallery.nionionote.com/)
+🖼️ [**Browse all 224 motion previews in the live Gallery »**](https://shotcraft-gallery.nionionote.com/)
 
 ## ✨ What's new
 
@@ -159,7 +159,7 @@ With these three flags, frame renders from the bundled template work.
 | Content | Description |
 | --- | --- |
 | 167 shot recipe cards | Purpose, energy, suggested duration, parameters, implementation notes, and known pitfalls |
-| 219 motion previews | Covering 219 of 224 styles; searchable and filterable in the online Gallery |
+| 224 motion previews | Covering 224 styles; searchable and filterable in the online Gallery |
 | Remotion implementations | Tuned TSX demos containing the actual easing and timing parameters for each card |
 | Complete video template | A validated 36.2-second, 1920×1080, 30fps product promo with 10 shots |
 | Components and assets | 2.5D page camera, captions, flash cuts, digit rolls, SFX, and capture scripts |

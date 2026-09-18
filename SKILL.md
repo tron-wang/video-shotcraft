@@ -263,5 +263,5 @@ node workbench/scripts/open.mjs <成片工程目录>   # 链接工程 → 起 de
 - `gallery/` 静态画廊：优先直接给用户在线版
   https://shotcraft-gallery.nionionote.com/library.html ；
   本地跑则先 `gallery/fetch-media.sh` 拉样片（mp4 不在 git 里），再
-  `cd gallery && python3 -m http.server 4178`。167 卡 219 条动态样片（口播新卡 5 张的样片待渲染）
+  `cd gallery && python3 -m http.server 4178`。167 卡 224 条动态样片
   可浏览/搜索/多选复制卡名——适合让用户看着样片挑镜头。
