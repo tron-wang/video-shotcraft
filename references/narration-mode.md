@@ -345,7 +345,8 @@ cd <project> && npm i
 3. 使用者说「汇出」→ 整片渲染两版（带 / 不带 BGM）→ 抽音轨实测字幕偏移 → 派**全新上下文 subagent** 依 `final-review.md` 终检，外加口播专属三项：字幕与人声同步、画面数字与 `facts.md` 一致、每镜素材来源在 manifest 内。
 4. 交付物：`out/final.mp4`、`out/final-nobgm.mp4`、`out/CREDITS.md`、`assets/manifest.json`、`sources/facts.md`。
 5. 交付讯息必须写明：本片用了几张 Unsplash 照片 / 文章图片、发布时请贴上 `CREDITS.md`；有 `risk: high` 图片时逐张提醒并附替代候选；MiniMax 音档商用条款请自行确认。
-6. 然后开工作台；最后才提一次剪映汇出。
+6. 然后开工作台（骨架已生成 `src/workbench.ts`）：`node workbench/scripts/open.mjs <project>`，地址 http://localhost:5198/?import=project。
+   使用者问「去哪看预览」指的就是这个，不是 Remotion Studio；制作期想看可播放预览也开它。5198 被旧的 dev server 占住时先停掉旧的再开。最后才提一次剪映汇出。
 
 ---
 

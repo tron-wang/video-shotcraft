@@ -235,5 +235,38 @@ export const Root: React.FC = () => (
 write('src/index.ts', `import { registerRoot } from 'remotion';\nimport { Root } from './Root';\n\nregisterRoot(Root);\n`);
 write('props-nobgm.json', '{ "bgm": false }\n');
 
+// ── 动效工作台清单（references/workbench.md §2）：时间表与 Main 同源，每次重写 ──
+write('src/workbench.ts', `// 生成物：动效工作台清单。打开：在 skill 根目录 node workbench/scripts/open.mjs <本工程目录>
+import { createElement, type FC } from 'react';
+import { Main } from './Main';
+import { Subtitles } from './lib/Subtitles';
+import { BGM, SFX } from './audio';
+import { C, FONT, H, W } from './theme';
+import { FPS, SHOTS, TOTAL, VO_FROM, timing } from './timeline';
+${shots.map((s) => `import { ${pascal(s.id)} } from './scenes/${pascal(s.id)}';`).join('\n')}
+
+const SubtitleLayer: FC = () =>
+  createElement(Subtitles, { timing, offset: VO_FROM, accent: C.accent, plate: C.plate, fontFamily: FONT.body });
+const Original: FC = () => createElement(Main, { bgm: true });
+const shot = (id: keyof typeof SHOTS, label: string, component: FC) => ({ id, label, ...SHOTS[id], component });
+
+export const WORKBENCH = {
+  name: ${JSON.stringify(article.title || name)},
+  fps: FPS, width: W, height: H, total: TOTAL, background: C.bg,
+  shots: [
+${shots.map((s) => `    shot(${JSON.stringify(s.id)}, ${JSON.stringify(`${s.id} ${(s.intent || '').slice(0, 18)}`)}, ${pascal(s.id)}),`).join('\n')}
+  ],
+  transitions: [],
+  captions: [{ id: 'subtitles', label: '字幕（逐字时间戳）', from: 0, duration: TOTAL, component: SubtitleLayer }],
+  overlays: [],
+  sfx: [
+    { from: VO_FROM, duration: TOTAL - VO_FROM, src: 'vo/vo.wav', volume: 1 },
+    ...SFX.map((s) => ({ from: s.from, duration: 90, src: s.src, volume: s.volume })),
+  ],
+  bgm: BGM ? [{ from: 0, duration: TOTAL, src: BGM, volume: 0.15 }] : [],
+  original: Original,
+};
+`, { generated: true });
+
 console.log(`\n→ ${out}\n   ${shots.length} 镜，${cursor}f（${(cursor / fps).toFixed(1)}s），${W}×${H}，风格档 ${style}`);
 console.log('下一步：npm i → 先做第一个有素材与字幕的镜头 → npx remotion still src/index.ts ' + compId + ' out/qa/first.png --frame=<n> 给使用者看。不要整片渲染。');
