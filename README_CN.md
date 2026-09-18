@@ -96,6 +96,14 @@ ln -s "$(pwd)" ~/.codex/skills/video-shotcraft    # Codex
 如果没有指定镜头卡，skill 会先介绍现成成片模板并询问是否采用；
 也可以先在 [Gallery](https://shotcraft-gallery.nionionote.com/) 里挑好镜头再开始。
 
+## 🎙 口播模式：新闻 / 文章 → 配音短片
+
+给一个新闻或文章网址（或直接给口播稿），skill 会自动改写口播稿、逐句合成配音、
+产出逐字时间戳、**上网采集可商用素材**（Pexels / Pixabay / Unsplash / Openverse CC0 +
+来源网页截图）、按语意分镜并为每一镜挑卡，做成带烧录字幕的直式短片。
+每个素材的来源与授权记在 `assets/manifest.json`，需标注的自动产出 `out/CREDITS.md`。
+流程见 [`references/narration-mode.md`](references/narration-mode.md)。
+
 ## 📼 成片模板：Ink Press（墨压）
 
 skill 内置 **Ink Press（墨压）** 模板——一支已验收的完整宣传片：

@@ -104,6 +104,15 @@ Design a product close-up inspired by spotlight-hero-card.
 紹介し、それを使うか確認します。作業を始める前に
 [Gallery](https://shotcraft-gallery.nionionote.com/) でショットを選ぶこともできます。
 
+## 🎙 ナレーションモード：ニュース / 記事 → ナレーション付きショート動画
+
+ニュースや記事の URL（または原稿）を渡すと、ナレーション原稿の作成、1 文ずつの音声合成、
+文字単位のタイムスタンプ生成、**商用利用可能な素材の自動収集**（Pexels / Pixabay / Unsplash /
+Openverse CC0 + 出典ページのスクリーンショット）、意味単位の絵コンテとショットカード選定までを行い、
+字幕焼き込みの縦型ショート動画に仕上げます。素材の出典とライセンスは `assets/manifest.json` に記録され、
+クレジット表記が必要なものは `out/CREDITS.md` に自動出力されます。
+詳細は [`references/narration-mode.md`](references/narration-mode.md)。
+
 ## 📼 動画テンプレート：Ink Press
 
 スキルには、検証済みの完全なプロモーションテンプレート **Ink Press** が付属します。

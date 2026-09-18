@@ -106,6 +106,16 @@ If no shot card is specified, the skill introduces the built-in video template
 first and asks whether to use it; you can also pick shots in the
 [Gallery](https://shotcraft-gallery.nionionote.com/) before starting.
 
+## 🎙 Narration mode: news / article → voiced short
+
+Give it a news or article URL (or your own script) and the skill rewrites a voiceover script,
+synthesizes it line by line, produces per-character timestamps, **sources commercially usable
+media from the web** (Pexels / Pixabay / Unsplash / Openverse CC0 + screenshots of the source page),
+storyboards by meaning, picks a shot card for every shot, and builds a vertical short with burned-in
+subtitles. Every asset's origin and license is recorded in `assets/manifest.json`; anything that needs
+attribution lands in an auto-generated `out/CREDITS.md`.
+See [`references/narration-mode.md`](references/narration-mode.md).
+
 ## 📼 Video template: Ink Press
 
 The skill ships with **Ink Press** — a validated, complete promo template:
