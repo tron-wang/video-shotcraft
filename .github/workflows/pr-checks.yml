@@ -120,6 +120,8 @@ jobs:
           for f in assets/lib/ClipCard.tsx assets/lib/Caption.tsx \
                    assets/lib/DigitRoll.tsx assets/lib/FlashCut.tsx \
                    assets/lib/PageCam.tsx assets/lib/VerticalTicker.tsx \
+                   assets/lib/timing.ts assets/lib/Subtitles.tsx \
+                   assets/lib/SlowPush.tsx assets/lib/SourceStrip.tsx \
                    assets/lib/helpers/motion.ts assets/lib/helpers/rand.ts \
                    assets/lib/helpers/shake.ts; do
             echo "./$f" >> /tmp/demo-files.txt
