@@ -4,6 +4,8 @@ name: paper-craft-moves
 适用: 纸墨主视觉片的实体材料语言：单卡定妆入场用 A、整版 dashboard 开场建立用 B；与纸墨+强调色的主视觉（模板片为纸/墨/琥珀）天然同源
 时长: A 3–4s / B 4–5.5s
 能量: A 中（两拍打击）/ B 中高（立墙有纵深冲击）
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

@@ -5,6 +5,8 @@ name: panel-grid-moves
 时长: A ~4.7s / B ~4.8s / C ~5s
 能量: A 高 / B 中 / C 中高
 标签: ui-entrance
+input: [screenshot, video]
+narration: none
 ---
 
 ## 意图

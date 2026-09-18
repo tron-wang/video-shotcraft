@@ -5,6 +5,8 @@ name: ring-diagram-annotation-reveal
 时长: 约 6.3s（190f@30fps；最终构图保留 30f 可读时间）
 能量: 中高（前半段几何持续建立，后半段转为信息阅读）
 标签: camera、ui-entrance
+input: [chart, text]
+narration: none
 ---
 
 ## 意图

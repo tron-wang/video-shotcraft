@@ -4,6 +4,8 @@ name: radial-ripple-phone-chips
 适用: 移动端产品的"这就是它"定格镜头；功能点分列两侧的介绍段；片头/片尾的产品全景
 时长: 约5.6s（168f@30fps）
 能量: 低（安静、有呼吸感，靠同心圆的持续起伏撑住不冷场）
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

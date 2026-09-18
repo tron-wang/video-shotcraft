@@ -4,6 +4,8 @@ name: page-waterfall-wall
 适用: "多页面/多功能/多模板"体量感段落；montage 中段铺陈或 intro 后的产品广度镜头
 时长: 4–6s（无限循环体，时长由段落需要裁）
 能量: 中（流动陈列型）
+input: [screenshot, photo]
+narration: broll
 ---
 
 ## 意图

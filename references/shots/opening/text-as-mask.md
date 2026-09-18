@@ -5,6 +5,8 @@ name: text-as-mask
 时长: 5s（hold 20f + 字内漂移 80f + 放大接管 30f + 静止 20f）
 能量: 中高（漂移段沉稳，接管段一次爆发）
 标签: typography
+input: [video, photo]
+narration: broll
 ---
 
 ## 意图

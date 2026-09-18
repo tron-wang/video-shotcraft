@@ -4,6 +4,8 @@ name: segmented-thumb-hero
 适用: "模式切换/二选一"功能的宣告镜头（Ask→Computer、Chat→Agent 式）；一个 UI 微交互撑一整镜的特写拍法
 时长: ~3.5s（demo 110f：浮入 18f + 光标 24f + 点击 + 滑动 8f + 图标弹出 + hold）
 能量: 中（微交互特写，精致不轰）
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

@@ -5,6 +5,8 @@ name: overhead-camera-moves
 时长: A ~4.8s / B ~4.7s
 能量: A 中 / B 中高
 标签: opening、transition
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

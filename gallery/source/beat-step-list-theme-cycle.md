@@ -5,6 +5,8 @@ name: beat-step-list-theme-cycle
 时长: 铺垫 30f + 每拍 18f × 拍数 + 收尾 hold；3 拍约 3.5s（demo 110f）
 能量: 高（0.6s 一拍三通道齐跳，密度型高能）
 标签: typography
+input: [screenshot, video]
+narration: none
 ---
 
 ## 意图

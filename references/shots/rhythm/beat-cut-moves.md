@@ -5,6 +5,8 @@ name: beat-cut-moves
 时长: A 全程 ~4.3s（建立 49f + 五连切 + 定格 hold 35f）；B 全程 ~4.3s（活素材 30f + 三闪 + hold 60f）
 能量: 高
 标签: transition
+input: [screenshot, video]
+narration: none
 ---
 
 ## 意图

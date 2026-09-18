@@ -4,6 +4,8 @@ name: floating-glossy-label-pills
 适用: 多功能横向枚举（Feature A–D 各一屏）；产品概览、功能巡览类段落，也可作落地页 hero 的循环底
 时长: 约 4.0s（120f@30fps）
 能量: 中（三拍换位构成节拍，无爆点；光标是收尾的注意力交接）
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

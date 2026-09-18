@@ -5,6 +5,8 @@ name: particle-celebrate-hits
 时长: A 3–4s / B 4–5s
 能量: 高潮点缀型（爆发后必须落回纯净静止）
 标签: effects
+input: [chart, text]
+narration: none
 ---
 
 ## 意图

@@ -4,6 +4,8 @@ name: scanline-annotate-focus
 适用: "AI 正在读你的页面/品牌"的分析镜头；设计系统/品牌规范的拆解介绍；产品能力的自我说明段
 时长: 约4.6s（138f@30fps）
 能量: 中（机械冷静，节奏由扫描线匀速推动，标注是节拍点）
+input: [screenshot]
+narration: evidence
 ---
 
 ## 意图

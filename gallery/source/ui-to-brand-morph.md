@@ -4,6 +4,8 @@ name: ui-to-brand-morph
 适用: 品牌收尾/outro 前最后一拍；"你每天用的那个 UI 就是这个品牌"的视觉论证
 时长: A ~4.3s（130f）/ B ~4.7s（140f）
 能量: 中高（收尾点睛，一次完整变形讲完）
+input: [text]
+narration: none
 ---
 
 ## 意图

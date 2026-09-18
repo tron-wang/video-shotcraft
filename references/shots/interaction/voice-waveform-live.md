@@ -4,6 +4,8 @@ name: voice-waveform-live
 适用: 语音输入/AI 助手"正在听你说"的功能镜头；无 UI 内容可展示但需要持续活性撑画面的段落
 时长: ~5s（150f：入场 12f + 说 1.4s + 停 0.8s + 说 1.4s + 提交塌缩 0.8s）
 能量: 中（功能性活性，不是炫技）
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

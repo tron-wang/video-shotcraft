@@ -4,6 +4,8 @@ name: value-stagger-gradient
 适用: 技法演示与参数化能力的展示镜头；也可直接当数据/频谱/均衡器类界面的入场
 时长: 约 5.0s（150f@30fps）
 能量: 中高（第一拍是连续铺开，第二拍中心脉冲是明确的一次峰值）
+input: [chart]
+narration: data
 ---
 
 ## 意图

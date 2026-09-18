@@ -5,6 +5,8 @@ name: typewriter-moves
 时长: A ~5s / B ~5.5s
 能量: A 中高 / B 中低
 标签: opening
+input: [text]
+narration: none
 ---
 
 ## 意图

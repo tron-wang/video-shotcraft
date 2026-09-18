@@ -4,6 +4,8 @@ name: shot-transitions
 适用: 任何两镜衔接处（技法卡，分镜阶段排完镜头后逐个接缝选一式）
 时长: n/a（技法卡；各式占用帧数见参数表，从相邻镜头预算里划）
 能量: n/a（技法卡，不占能量位）
+input: [video, photo, screenshot, text]
+narration: transition
 ---
 
 ## 意图

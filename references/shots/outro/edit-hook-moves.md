@@ -4,6 +4,8 @@ name: edit-hook-moves
 适用: 片尾收束（全片 ≤1 次）
 时长: ~5s
 能量: 低→瞬时中→低
+input: [text]
+narration: none
 ---
 
 ## 意图

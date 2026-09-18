@@ -5,6 +5,8 @@ name: graze-face-tour
 时长: 单段 4–5s；可多段接力延长
 能量: 中高（运镜持续推进+元素连续落位，信息密度高）
 标签: ui-entrance
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

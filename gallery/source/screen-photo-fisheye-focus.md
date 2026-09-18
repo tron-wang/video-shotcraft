@@ -5,6 +5,8 @@ name: screen-photo-fisheye-focus
 时长: 约 5s（150f@30fps；推近 f12–66、荧光笔 f70–88、落定后 62f hold）
 能量: 中低（全程只有一次推近和一次涂抹，质感本身就是信息）
 标签: camera
+input: [screenshot]
+narration: evidence
 ---
 
 ## 意图

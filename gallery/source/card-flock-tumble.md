@@ -4,6 +4,8 @@ name: card-flock-tumble
 适用: 能量高潮段（功能页群→品牌口号的爆点转场）；霓虹暗场调性；"多页面能力"收束成一句话的段落
 时长: 翻飞 ~1.5s + 慢转展示 ~0.3s + 收束 0.3s + 烟环+巨字 ~2s；全段 4.5s
 能量: 极高（全片能量顶点用）
+input: [video, photo, screenshot, text]
+narration: transition
 ---
 
 ## 意图

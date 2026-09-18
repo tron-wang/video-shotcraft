@@ -5,6 +5,8 @@ name: magician-card-flourish
 时长: 闪光 0.3s + 飞行 ~1.7s + 定格展示+扫光 ~2s；全段 4.2s
 能量: 高（一次性爆点，定格后即静）
 标签: ui-entrance、effects
+input: [video, photo]
+narration: broll
 ---
 
 ## 意图

@@ -4,6 +4,8 @@ name: countdown-arc-scatter
 适用: 倒计时/时长承诺类文案（"5 min to install"）；数据揭晓的一拍；需要"仪表盘"语汇的浅底短镜
 时长: 约 1.1s（33f@30fps，极短单拍）
 能量: 高（96° 大幅扫动压进 17 帧，纯冲击）
+input: [text]
+narration: none
 ---
 
 ## 意图

@@ -5,6 +5,8 @@ name: icon-field-colorize
 时长: 浮现 ~45f 错峰 + 静置 ~10f + 翻色 12–45f + 终态静置；全段 3–4s
 能量: 中（浮现是铺垫，翻色瞬间是唯一爆点）
 标签: ui-entrance、outro
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

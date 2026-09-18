@@ -5,6 +5,8 @@ name: neon-frame-orbit-drop
 时长: 描框 ~0.5s + 旋转&同时贴落 ~2.5s + 落定 ~1s；全段 4–4.5s
 能量: 中高（一次性的大动作，落定即静）
 标签: effects、camera
+input: [video, screenshot]
+narration: broll
 ---
 
 ## 意图

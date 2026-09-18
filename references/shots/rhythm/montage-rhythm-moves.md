@@ -4,6 +4,8 @@ name: montage-rhythm-moves
 适用: 段落级节奏设计：蓄力爆发（A）、流程速写（B）、开场连锁（C）；与 beat-cut-moves（切点排布）互补——这三式管"段落的呼吸形状"
 时长: A 4.3s / B 4.3s / C 5s
 能量: 高
+input: [screenshot, video]
+narration: none
 ---
 
 ## 意图

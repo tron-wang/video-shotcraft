@@ -4,6 +4,8 @@ name: circle-match-iris
 适用: 前景有圆形元素（头像/图标/圆钮）、后景有圆形主体（donut 图/圆环进度）的接缝；转场技法卡
 时长: 4.7s（锚点脉冲 30f + 光圈扩张 45f + 图表生长 55f + 静止 40f）
 能量: 中高
+input: [video, photo, screenshot, text]
+narration: transition
 ---
 
 ## 意图

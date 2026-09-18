@@ -5,6 +5,8 @@ name: spotlight-hero-card
 时长: 约 4.6s（82–220f）
 能量: 中（质感最高的一镜，节奏慢而稳）
 标签: effects、camera
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

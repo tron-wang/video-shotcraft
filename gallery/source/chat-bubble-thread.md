@@ -5,6 +5,8 @@ name: chat-bubble-thread
 时长: 约 8.3s（250f@30fps；四条新消息 f36/116/156/204，末条后 46f hold）
 能量: 中低（节奏跟随真实对话，单个动作都很小，靠持续的"有人在回复"撑住注意力）
 标签: ui-entrance
+input: [text]
+narration: quote
 ---
 
 ## 意图

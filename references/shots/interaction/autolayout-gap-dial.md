@@ -4,6 +4,8 @@ name: autolayout-gap-dial
 适用: 设计工具/低代码产品的"改一个数、界面跟着动"卖点镜头；"用设计工具语义做包装"的品类语言
 时长: ~4s（120f：框选入场 + 拉松 38f + hold + 弹簧回弹）
 能量: 中（工具理性型，爽点在数字与位移的锁定同步）
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

@@ -4,6 +4,8 @@ name: quad-split-parallel-scenes
 适用: 节奏段"功能很多、同时发生"的蒙太奇拍；预告片中段的密度峰值
 时长: 约 2.1s（63f@30fps，全程无转场）
 能量: 高（四线并行 + 错拍冲击，标准的 BGM 副歌位）
+input: [video, photo]
+narration: broll
 ---
 
 ## 意图

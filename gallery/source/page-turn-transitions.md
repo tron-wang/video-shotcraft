@@ -4,6 +4,8 @@ name: page-turn-transitions
 适用: 章节级换页：两个并列大段落之间的"翻篇"仪式；与 shot-transitions 系（镜头交棒）分工——那是"航拍机移过去"，这是"页面自己是实体"
 时长: 单式 前态建立 30f + 转场 20–38f + 收尾 ≥40f，约 4.4–4.7s
 能量: 中高
+input: [video, photo, screenshot, text]
+narration: transition
 ---
 
 ## 意图

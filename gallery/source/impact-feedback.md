@@ -4,6 +4,8 @@ name: impact-feedback
 适用: 元素落位/撞击的"命中一瞬"——给砸入、撞停加游戏级手感；按强度阶梯选式
 时长: n/a（元素级技法，寄生在落位动作上；各式占用帧数见参数表）
 能量: 高（瞬时冲击）
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

@@ -5,6 +5,8 @@ name: title-demote-to-label
 时长: A ~3s（92f）/ B ~3.5s（104f）；demo 两式串播 196f
 能量: 低中（版式变换型，氛围镜头）
 标签: transition
+input: [text]
+narration: chapter
 ---
 
 ## 意图

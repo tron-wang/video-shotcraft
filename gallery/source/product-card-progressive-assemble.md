@@ -4,6 +4,8 @@ name: product-card-progressive-assemble
 适用: 商品/条目详情页的能力展示；"结构化抽取""自动填充""数据自己长出来"类叙事的主镜头
 时长: 约 5.0s（150f@30fps）
 能量: 中（连续小事件密集排布，无单点爆发；靠前推保持推进感）
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

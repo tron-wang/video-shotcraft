@@ -5,6 +5,8 @@ name: icon-performance-moves
 时长: A 3–4s / B 4–5s
 能量: A 高潮点缀 / B 蓄势引入
 标签: interaction
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

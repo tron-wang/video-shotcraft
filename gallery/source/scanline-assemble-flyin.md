@@ -4,6 +4,8 @@ name: scanline-assemble-flyin
 适用: "页面自己生成"的开场；AI 建站/自动排版类产品的核心演示；从空白到成品的能力叙事
 时长: 约4.6s（138f@30fps）
 能量: 中高（扫描线是稳的，但每次组件飞入都是一个爆点，密度递进）
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

@@ -4,6 +4,8 @@ name: doc-park-left-pill-deal
 适用: 旁白驱动的"分析结论逐条给出"段落；文档理解、推荐理由、审阅意见类产品的核心说明镜头
 时长: 约 5.8s（174f@30fps）
 能量: 低（慢发牌节奏，全片无峰值；靠自动滚动维持活性）
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

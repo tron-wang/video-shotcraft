@@ -5,6 +5,8 @@ name: timeline-travel
 时长: 4–5s
 能量: 中高（加速→急刹的节奏型镜头）
 标签: camera
+input: [text]
+narration: data
 ---
 
 ## 意图

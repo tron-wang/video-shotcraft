@@ -5,6 +5,8 @@ name: document-typewriter-reveal
 时长: 约 3.7s（110f，含 history-list-stack 尾段）
 能量: 低中（信息密度最高，节奏放稳让观众读字）
 标签: ui-entrance
+input: [screenshot]
+narration: evidence
 ---
 
 ## 意图

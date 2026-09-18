@@ -4,6 +4,8 @@ name: gradient-transition
 适用: 氛围底/章节底色的连续变奏；给静态排版段落提供"活着"的背景层
 时长: 约 6.0s（180f@30fps；linear 0–2.4s · radial 2–4.2s · conic 4–6s）
 能量: 低（纯背景运动，为前景内容让路）
+input: [video, photo, screenshot, text]
+narration: transition
 ---
 
 ## 意图

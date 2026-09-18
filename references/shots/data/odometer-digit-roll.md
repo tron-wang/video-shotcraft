@@ -5,6 +5,8 @@ name: odometer-digit-roll
 时长: 滚动+逐位锁定 ~63f + 脉冲 8f + hold ≥45f，约 5s
 能量: 中高
 标签: typography
+input: [text]
+narration: data
 ---
 
 ## 意图

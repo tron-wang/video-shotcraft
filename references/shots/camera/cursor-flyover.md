@@ -4,6 +4,8 @@ name: cursor-flyover
 适用: 单页产品的功能巡览：一镜带观众看完四个功能区，光标当"导游手指"
 时长: 约 6.0s（180f@30fps；俯瞰 0–1.2s · 四步各 0.7s 过渡 + 0.5s 停留）
 能量: 中（匀速巡航，节奏靠点击涟漪打点）
+input: [screenshot]
+narration: evidence
 ---
 
 ## 意图

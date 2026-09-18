@@ -5,6 +5,8 @@ name: word-relay-filmstrip
 时长: 每词期 ~1.5–2s × 3–4 词；全段 5–7s
 能量: 中低（编辑部气质，节奏靠切词的"咔哒"感）
 标签: ui-entrance
+input: [text]
+narration: none
 ---
 
 ## 意图

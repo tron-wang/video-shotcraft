@@ -5,6 +5,8 @@ name: transition-travel
 时长: n/a（技法卡；各式动作段 25–60f，前后 hold 另计，帧数从相邻镜头预算里划）
 能量: n/a（技法卡，不占能量位）
 标签: camera
+input: [video, photo, screenshot, text]
+narration: transition
 ---
 
 ## 意图

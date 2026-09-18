@@ -4,6 +4,8 @@ name: list-stack-press
 适用: feed/雷达/收件箱类"每天有新东西"的镜头；强调持续积累的资产列表
 时长: 约 3s（18–88f）
 能量: 中
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

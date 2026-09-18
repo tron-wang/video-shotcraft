@@ -5,6 +5,8 @@ name: spectrum-morph-ui
 时长: ~4.7s（裂开 8f + 跳动 64f + 收拢 12f + 静止 39f）
 能量: 中
 标签: typography
+input: [screenshot, video]
+narration: none
 ---
 
 ## 意图

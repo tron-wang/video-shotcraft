@@ -5,6 +5,8 @@ name: card-flip-reveal
 时长: 单卡翻转 26f，三卡错峰 10f，全程 ~4.9s（含 hold）
 能量: 中高
 标签: data
+input: [text]
+narration: data
 ---
 
 ## 意图

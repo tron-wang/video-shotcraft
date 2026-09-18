@@ -5,6 +5,8 @@ name: platform-hinge-rise
 时长: 约 3.5s（104f@30fps；结论落定后保留 30f 静止）
 能量: 中（中段双主体同时翻起是唯一主动作，结尾只做稳重升台）
 标签: opening
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

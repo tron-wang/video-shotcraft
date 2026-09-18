@@ -5,6 +5,8 @@ name: before-after-slider-scrub
 时长: 4–5s
 能量: 中（快甩是打击点，慢扫是阅读期）
 标签: interaction
+input: [photo, screenshot]
+narration: evidence
 ---
 
 ## 意图

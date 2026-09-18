@@ -4,6 +4,8 @@ name: outro-group-photo-launch
 适用: outro/品牌收尾；多功能产品的"全家福"式终镜
 时长: 约 4.8s（145f）
 能量: 峰值（全片最高点）
+input: [text]
+narration: none
 ---
 
 ## 意图

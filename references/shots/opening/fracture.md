@@ -4,6 +4,8 @@ name: fracture
 适用: 开场第一镜"从混沌到成形"的品牌/海报揭示；倒放或只取后半可作硬转场
 时长: 约 5.2s（156f@30fps；聚合 0–2.6s · hold 1s · 飞散 1.5s）
 能量: 高（两头高能、中段静止，适合压 BGM 重音起收）
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

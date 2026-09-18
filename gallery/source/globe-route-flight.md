@@ -5,6 +5,8 @@ name: globe-route-flight
 时长: 约 6s（180f@30fps；航线 f18–118、镜头 f24–128、到站后 52f hold）
 能量: 中（一条完整的长距离运动弧，中段拉远是唯一的视野峰值）
 标签: camera
+input: [chart]
+narration: data
 ---
 
 ## 意图

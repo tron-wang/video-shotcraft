@@ -4,6 +4,8 @@ name: carousel-3d
 适用: 作品集/模板库/集成清单的循环展示；需要无缝 loop 的背景拍或落地页 hero
 时长: 约 5.6s（168f@30fps）
 能量: 中（匀速无变化，是可无限循环的稳态运动）
+input: [photo]
+narration: broll
 ---
 
 ## 意图

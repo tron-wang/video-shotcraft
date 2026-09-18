@@ -4,6 +4,8 @@ name: bubble-swarm-takeover
 适用: 章节级换景且品牌世界里有"实体装饰物"可当幕布（气泡/花瓣/图标皆可换皮）；转场即品牌露出的段落
 时长: ~4.3s（130f：飘入 ~67f + 峰值藏切 + 散开 ~43f）
 能量: 中高（持续群体涌动，无瞬时冲击）
+input: [video, photo, screenshot, text]
+narration: transition
 ---
 
 ## 意图

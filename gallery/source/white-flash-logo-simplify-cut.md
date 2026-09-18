@@ -4,6 +4,8 @@ name: white-flash-logo-simplify-cut
 适用: 品牌段落收束（华丽演绎→干净定妆）；情绪从炫技切换到正式宣告的转场拍
 时长: 约 3.6s（108f@30fps；静置流光 0–1.2s · 冲白 1.2–1.5s · 扁平定格 1.7–2.7s）
 能量: 中高（一次脉冲式重音，前后都是静场）
+input: [video, photo, screenshot, text]
+narration: transition
 ---
 
 ## 意图

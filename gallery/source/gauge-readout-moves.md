@@ -4,6 +4,8 @@ name: gauge-readout-moves
 适用: dashboard 开场仪式/性能指标揭晓；A 多表盘开机感，B 单指标大跳变
 时长: A 4–5s / B 4–5s
 能量: 中高（机械仪式型）
+input: [chart]
+narration: data
 ---
 
 ## 意图

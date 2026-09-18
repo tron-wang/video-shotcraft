@@ -4,6 +4,8 @@ name: transition-hidden-cut
 适用: 两镜衔接处需要"无痕换景"或"仪式感开屏"时（技法卡，与 shot-transitions 六式同层选型）
 时长: n/a（技法卡；各式占用帧数见参数表，从相邻镜头预算里划）
 能量: n/a（技法卡，不占能量位）
+input: [video, photo, screenshot, text]
+narration: transition
 ---
 
 ## 意图

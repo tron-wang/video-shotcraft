@@ -5,6 +5,8 @@ name: draw-svg-trace
 时长: 描边 40f + 闪黑交棒 16f + hold ≥35f，约 3–4s
 能量: 中
 标签: typography
+input: [screenshot, photo]
+narration: evidence
 ---
 
 ## 意图

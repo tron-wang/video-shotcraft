@@ -4,6 +4,8 @@ name: speed-ramp-freeze
 适用: 卡片流/长横移中把一个重点"放慢/停下给人看"；教学解说语境用定格标注
 时长: 变速全程 4–5s（慢速窗 ≥40f）；定格标注全程 4–5s（定格段 ≥45f）
 能量: 中高（速度反差本身即energy beat）
+input: [screenshot, video]
+narration: evidence
 ---
 
 ## 意图

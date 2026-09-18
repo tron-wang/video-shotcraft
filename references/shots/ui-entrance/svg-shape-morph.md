@@ -4,6 +4,8 @@ name: svg-shape-morph
 适用: 抽象概念的"形态转换/自适应/有机生长"表达；开场 logo 前的氛围一拍，或章节之间的过渡形
 时长: 约 5.2s（156f@30fps）
 能量: 低（无爆点的连续流动，适合当旁白底或呼吸拍）
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

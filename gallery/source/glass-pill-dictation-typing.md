@@ -4,6 +4,8 @@ name: glass-pill-dictation-typing
 适用: 语音/AI 输入框的登场；"跟它说话"的交互提示镜头；高能段之间的一个安静过渡拍
 时长: 约1.7s（50f@30fps）
 能量: 低（全片最安静的一拍，只有光在退）
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

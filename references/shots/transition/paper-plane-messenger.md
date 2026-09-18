@@ -5,6 +5,8 @@ name: paper-plane-messenger
 时长: ~5s（150f：点击 12f → 拉远 16–42f → 飞行 34–104f → B 接管 112–146f）
 能量: 中
 标签: camera
+input: [video, photo, screenshot, text]
+narration: transition
 ---
 
 ## 意图

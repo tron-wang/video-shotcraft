@@ -4,6 +4,8 @@ name: depth-layer-moves
 适用: 平面截图要"有厚度"的段落；戏剧性蓄力时刻用 dolly-zoom（一支片 ≤1 次）
 时长: 视差滑轨 4–5s 持续；dolly-zoom 3–4s 单向行程
 能量: 视差=中（质感型）；dolly-zoom=中高（压迫感渐强）
+input: [photo]
+narration: broll
 ---
 
 ## 意图

@@ -4,6 +4,8 @@ name: logo-shrink-wordmark-lockup
 适用: 片尾品牌定妆：从满屏图形能量收束到"图标+字标+标语"的标准 lockup
 时长: 约 4.4s（132f@30fps；收束 0.1–1.2s · 让位 1.5–2.1s · 字母 2–2.7s · 标语 3.2–3.7s）
 能量: 中（收束段有冲击力，整体是沉稳的落定节奏）
+input: [text]
+narration: none
 ---
 
 ## 意图

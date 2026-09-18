@@ -5,6 +5,8 @@ name: brand-frame-snap
 时长: 单次翻色 ~4.3s（130f）；画框本身可全片驻场
 能量: 中（翻色瞬间高，其余时间是安静的包装层）
 标签: transition
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

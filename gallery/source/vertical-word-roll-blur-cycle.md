@@ -4,6 +4,8 @@ name: vertical-word-roll-blur-cycle
 适用: "Built for ___" 这类句干 + 受众/对象列举的一句话卖点；浅底品牌片的干净一拍
 时长: 约 5.0s（150f@30fps：静置 → 3 次换词 → 尾部整组淡出）
 能量: 中（稳定三拍，无峰值）
+input: [text]
+narration: none
 ---
 
 ## 意图

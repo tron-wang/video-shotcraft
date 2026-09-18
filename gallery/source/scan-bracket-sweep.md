@@ -4,6 +4,8 @@ name: scan-bracket-sweep
 适用: "正在解析/校验这份内容"的过程镜头；文档类产品的能力演示；上传→分析链路的中段
 时长: 约5.0s（150f@30fps）
 能量: 中低（机械、克制，节奏全在往复扫掠的呼吸上）
+input: [screenshot]
+narration: evidence
 ---
 
 ## 意图

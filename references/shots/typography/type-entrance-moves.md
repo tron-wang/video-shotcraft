@@ -4,6 +4,8 @@ name: type-entrance-moves
 适用: 大标题/章节字卡的入场；与 split-flap-title（机械翻牌）、document-typewriter-reveal（打字机）同品类互斥选用
 时长: 单式 4–5s（含 hold 与静止收尾；动作段 A ~66f / B ~106f）
 能量: 中高（A 偏理性推进，B 偏物理趣味）
+input: [text]
+narration: none
 ---
 
 ## 意图

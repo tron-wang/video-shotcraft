@@ -4,6 +4,8 @@ name: type-assembly-moves
 适用: 大标题/标语的入场；与 type-entrance-moves 两式、split-flap-title、document-typewriter-reveal 同属标题入场大品类，全片 ≤2 种
 时长: 单式 4–5s（动作段 A ~56f / B ~104f / C ~58f / D ~99f，均含 hold）
 能量: A 中 / B 中高 / C 低中 / D 中
+input: [text]
+narration: none
 ---
 
 ## 意图

@@ -5,6 +5,8 @@ name: gradient-word-sweep
 时长: 扫充 ~15–20f（要快）+ 稳态闪电呼吸 1–2s；全段 2.5–3.5s
 能量: 高（一词爆点，前后都该让位）
 标签: effects
+input: [text]
+narration: none
 ---
 
 ## 意图

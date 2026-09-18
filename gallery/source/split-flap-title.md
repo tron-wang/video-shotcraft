@@ -5,6 +5,8 @@ name: split-flap-title
 时长: 约 4.7s（140f：≥20f 乱码静止建立 + 级联翻牌 + ≥15f 停定静止）
 能量: 中（持续的机械动感，非瞬时冲击）
 标签: opening
+input: [text]
+narration: chapter
 ---
 
 ## 意图

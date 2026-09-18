@@ -4,6 +4,8 @@ name: type-and-filter
 适用: 功能演示的"操作叙事"段；搜索/筛选/进入详情的任何交互链路
 时长: 约 2.5s（118–190f）
 能量: 中（发牌高能段之后的从容一拍）
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

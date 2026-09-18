@@ -4,6 +4,8 @@ name: wall-reveal-moves
 适用: 功能墙/卡片墙/整页界面的整体亮相；内容已在原位、要"显形"而非"涌入"的段落
 时长: 单式约 4.3–5s（A 150f / B 130f / C 150f @30fps，含建立 hold 与静止收尾）
 能量: 中
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

@@ -4,6 +4,8 @@ name: avatar-bracket-carousel
 适用: "一个位置，多种角色"的能力枚举；团队/身份/预设/人格类产品的核心一句话镜头
 时长: 约 5.2s（156f@30fps）
 能量: 中（三次等距切换构成稳定节拍器，对焦框脉冲是唯一装饰性动作）
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

@@ -5,6 +5,8 @@ name: neon-triple-marquee
 时长: 4–5s（demo 150f：10f 淡入 + 循环体 + 20f 淡出）
 能量: 中高（持续流动 + 逐行脉冲，无瞬时冲击）
 标签: typography
+input: [text]
+narration: none
 ---
 
 ## 意图

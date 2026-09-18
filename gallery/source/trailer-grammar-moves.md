@@ -5,6 +5,8 @@ name: trailer-grammar-moves
 时长: A ~4.7s / B ~5s / C ~4.5s
 能量: A 高 / B 中 / C 高
 标签: opening、transition
+input: [video]
+narration: broll
 ---
 
 ## 意图

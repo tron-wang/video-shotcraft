@@ -4,6 +4,8 @@ name: picker-carousel-feature-cycle
 适用: 逐个念出功能名/场景名的列表镜头；"选一个"的交互演示；移动端产品的 picker 类控件展示
 时长: 约3.6s（108f@30fps）
 能量: 中（每一次吸附都是一个节拍点，5 拍匀速推进）
+input: [screenshot]
+narration: none
 ---
 
 ## 意图

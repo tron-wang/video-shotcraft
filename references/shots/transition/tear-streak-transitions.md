@@ -5,6 +5,8 @@ name: tear-streak-transitions
 时长: 前态 ≥40f + 撕裂 17–24f + 收尾 ≥40f，约 4.5s（135–140f）
 能量: 高
 标签: effects
+input: [video, photo, screenshot, text]
+narration: transition
 ---
 
 ## 意图

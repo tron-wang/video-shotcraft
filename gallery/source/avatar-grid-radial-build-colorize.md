@@ -4,6 +4,8 @@ name: avatar-grid-radial-build-colorize
 适用: "群体中浮现异常/重点"的数据叙事：用户群健康度、监控面板、批量状态总览
 时长: 约 5.6s（168f@30fps；铺满 0.5–1.7s · 染色 1.7–3.4s 陆续浮现）
 能量: 中（生长段有节奏感，染色段是安静的"发现"时刻）
+input: [chart, text]
+narration: none
 ---
 
 ## 意图

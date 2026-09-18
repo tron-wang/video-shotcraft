@@ -5,6 +5,8 @@ name: line-carry-transition
 时长: ~5.3s（进度条走满 + 横移 60f + 围框 + 内容淡入 + 静止 36f）
 能量: 中
 标签: camera
+input: [video, photo, screenshot, text]
+narration: transition
 ---
 
 ## 意图
