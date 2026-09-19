@@ -51,7 +51,7 @@
 | 来源 | 卡片 |
 |---|---|
 | remotion.dev Elements（map-flyover、audio/oscilloscope）、remotionui.com（map-flight）——仅参考动效，程式为本库自写 | `map-flyover`、`audio-oscilloscope` |
-| remocn（github.com/Remocn/remocn，MIT 授权）的 terminal-cursor-zoom、search-reveal、claude-chat / chat-gpt / claude-code、x-follow-card / x-followers-overview / github-stars——仅参考动效，程式为本库自写、不含官方 logo 图档 | `cursor-follow-typing`、`search-reveal`、`ai-prompt-composer`、`social-profile-moves` |
+| remocn（github.com/Remocn/remocn，MIT 授权）的 terminal-cursor-zoom、search-reveal、claude-chat / chat-gpt / claude-code、x-follow-card / x-followers-overview / github-stars——仅参考动效，程式为本库自写 | `cursor-follow-typing`、`search-reveal`、`ai-prompt-composer`、`social-profile-moves` |
 | anime.js 官网演示 | `radial-wave`、`scramble`、`svg-shape-morph`、`value-stagger-gradient` |
 | remotion-bits.dev | `basic-3d-scene`、`blur-slide`、`card-stack`、`carousel-3d`、`counter-confetti`、`cube-navigation`、`cursor-flyover`、`flying-words`、`fracture`、`glitch-cycle`、`gradient-transition`、`list-reveal`、`mosaic-reframe`、`terminal-3d`、`typing-code-block` |
 | x.com/1amanly | `avatar-bracket-carousel`、`countdown-arc-scatter`、`floating-glossy-label-pills`、`pill-chip-slot-cycle-handled`、`radial-ripple-phone-chips` |
@@ -105,3 +105,6 @@
 | 来源 | 卡片 | 与来源的差异 |
 |---|---|---|
 | Resn × Squarespace Foundations 海报陈列 | `iso-poster-stack-cycle` | 来源是网页里的交互陈列（真实活动海报）；本卡改为逐帧确定性的视频镜头：6 张中性占位海报、固定拍长无缝循环、槽位由帧直接推出，新增后排逐槽晚起步、淡出提前 3f 且与朝镜头滑移分用两条曲线、逐槽压暗的参数化 |
+
+## 官方标志（商标）
+`demos/_fixtures/BrandMarks.tsx` 里的 Claude、OpenAI、X、GitHub 标志路径取自 Wikimedia Commons 上的官方 SVG（Claude_AI_symbol.svg、OpenAI_logo_2025_(symbol).svg、X_logo_2023.svg、Octicons-mark-github.svg）。商标属于各公司，本库只在新闻 / 评论画面里用来指认产品。

@@ -1,9 +1,10 @@
 // social-profile-moves 的「X 追踪者总览」款（2026-09，参考 remocn「x-followers-overview」的动效，程式为本卡自写；remocn 为 MIT 授权）。
 // 上方一则「新追踪者」通知：头像一个个叠进来，名字像翻页牌一样 rotateX 往上翻换人；
 // 下方大数字「位追蹤者」以里程表滚到终值（与通知翻名同步加速），到站时一圈细金环 + 短金芒轻轻散开（不用彩带，保持新闻调性）。
-// 只重现 X 通知与数据的版型与配色，不放官方 logo 图档。**数字必须真实**（有出处的追踪者数）；demo 为虚构帐号与数字。
+// 通知卡右上角带 X 官方标志（`logo={false}` 可关）。**数字必须真实**（有出处的追踪者数）；demo 为虚构帐号与数字。
 import React from 'react';
 import { AbsoluteFill, useCurrentFrame, useVideoConfig } from 'remotion';
+import { XMark } from '../../_fixtures/BrandMarks';
 import { InitialAvatar, Odometer, SANS, blurRise, clamp01, easeInOutCubic, easeInOutSine, easeOutCubic, mix } from './SocialKit';
 
 export const X_FOLLOWERS_OVERVIEW_DURATION = 180; // 6s @30fps
@@ -17,6 +18,8 @@ export type XFollowersOverviewProps = {
   /** 大数字下方的说明（例：「本週新增」）；不给就用 +差值。 */
   caption?: string;
   label?: string;
+  /** 通知卡右上角显示 X 标志。 */
+  logo?: boolean;
   /** 开始计数 / 计数到站的帧。 */
   countFrom?: number;
   countTo?: number;
@@ -27,7 +30,7 @@ export type XFollowersOverviewProps = {
 const TXT = '#e7e9ea', DIM = '#71767b', LINE = '#2f3336';
 
 export const XFollowersOverviewShot: React.FC<XFollowersOverviewProps> = ({
-  names, from, to, caption, label = '位追蹤者', countFrom = 30, countTo = 132, accent = '#e0b04b', bg = '#0b0c0f',
+  names, from, to, caption, label = '位追蹤者', logo = true, countFrom = 30, countTo = 132, accent = '#e0b04b', bg = '#0b0c0f',
 }) => {
   const f = useCurrentFrame();
   const { width: W, height: H, durationInFrames: D } = useVideoConfig();
@@ -71,6 +74,7 @@ export const XFollowersOverviewShot: React.FC<XFollowersOverviewProps> = ({
             <circle cx="9" cy="7.5" r="4" fill={accent} /><path d="M1.5 21c0-4.4 3.4-7.5 7.5-7.5s7.5 3.1 7.5 7.5z" fill={accent} />
             <path d="M19 8v6M16 11h6" stroke={accent} strokeWidth="2.2" strokeLinecap="round" />
           </svg>
+          {logo ? <XMark size={34 * u} style={{ position: 'absolute', right: 30 * u, top: 30 * u }} /> : null}
           <div style={{ flex: 1 }}>
             {/* 头像叠进来：目前名字之前的都在，最多显示 6 个 */}
             <div style={{ display: 'flex', height: 72 * u }}>

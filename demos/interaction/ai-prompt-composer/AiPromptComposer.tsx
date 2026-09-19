@@ -1,12 +1,13 @@
 // ai-prompt-composer —— AI 对话框：提问打字 → 送出 → 回答串流（2026-09，参考 remocn「claude-chat」「chat-gpt」的动效，
 // 程式为本卡自写；remocn 为 MIT 授权）。
 // 三种介面（skin）：neutral（通用黑金，不指向任何产品）/ claude（Claude 网页对话介面的版型与配色）/ chatgpt（ChatGPT 的版型与配色）。
-// 产品介面只重现版型、配色与字体气质，**不放官方 logo 图档**，产品名以文字标签呈现（新闻评论式的合理使用）。
+// 产品介面款带该产品的官方标志（向量，见 _fixtures/BrandMarks；`logo={false}` 可关），通用款不带任何品牌。
 // 时序：问候语与输入框浮现 → 游标闪烁 → 提问逐字打入（一有字，麦克风钮就形变成送出钮）→ 按下送出
 // → 输入框的文字上移成使用者气泡 → 回答一行行串流（先骨架条闪、再逐字出字）。
 // 用途：AI 新闻里「有人问 AI…」「AI 这样回答」的那一镜。
 import React from 'react';
 import { AbsoluteFill, useCurrentFrame, useVideoConfig } from 'remotion';
+import { ClaudeMark, OpenAIMark } from '../../_fixtures/BrandMarks';
 
 export const AI_PROMPT_COMPOSER_DURATION = 240; // 8s @30fps
 
@@ -29,6 +30,8 @@ export type AiPromptComposerProps = {
   answerCharsPerFrame?: number;
   /** 助理名称标签；不给用该介面的预设（neutral =「AI 助理」）。 */
   assistantLabel?: string;
+  /** 产品介面款是否显示官方标志（预设显示；通用款永远不显示）。 */
+  logo?: boolean;
   /** chatgpt 款输入框下方的建议标签（打字时淡出）。 */
   chips?: string[];
   /** 覆盖该介面的强调色 / 底色。 */
@@ -69,7 +72,7 @@ const mix = (a: number, b: number, t: number) => a + (b - a) * t;
 
 export const AiPromptComposerShot: React.FC<AiPromptComposerProps> = ({
   skin = 'neutral', greeting, placeholder, prompt, answer = '', typeAt, framesPerChar = 2, answerCharsPerFrame = 1.2,
-  assistantLabel, chips = ['整理重點', '寫一段說明', '分析數據'], accent, bg,
+  assistantLabel, chips = ['整理重點', '寫一段說明', '分析數據'], logo = true, accent, bg,
 }) => {
   const f = useCurrentFrame();
   const { width: W, height: H } = useVideoConfig();
@@ -101,9 +104,19 @@ export const AiPromptComposerShot: React.FC<AiPromptComposerProps> = ({
   return (
     <AbsoluteFill style={{ background: T.bg, fontFamily: SANS, overflow: 'hidden' }}>
       {skin === 'neutral' ? <div style={{ position: 'absolute', left: W / 2, top: H * 0.45, width: 1400 * u, height: 900 * u, transform: 'translate(-50%,-50%)', background: `radial-gradient(closest-side, ${T.accent}18, transparent)` }} /> : null}
+      {skin === 'chatgpt' && logo ? (
+        <div style={{ position: 'absolute', left: 48 * u, top: 40 * u, display: 'flex', alignItems: 'center', gap: 14 * u, fontSize: 34 * u, fontWeight: 600, color: T.text, opacity: inT }}>
+          <OpenAIMark size={40 * u} color={T.text} />ChatGPT<span style={{ color: T.muted, fontSize: 26 * u }}>⌄</span>
+        </div>
+      ) : null}
+      {skin === 'claude' && logo ? (
+        <div style={{ position: 'absolute', left: 48 * u, top: 40 * u, display: 'flex', alignItems: 'center', gap: 14 * u, fontSize: 36 * u, fontFamily: T.greetingFont, color: T.text, opacity: inT }}>
+          <ClaudeMark size={40 * u} color={T.accent} />Claude
+        </div>
+      ) : null}
       {/* 问候语 */}
       <div style={{ position: 'absolute', left: 0, right: 0, top: H * 0.42, textAlign: 'center', fontFamily: T.greetingFont, fontSize: 72 * u, fontWeight: skin === 'claude' ? 500 : 800, color: T.text, opacity: inT * (1 - sent), transform: `translateY(${(1 - inT) * 16 * u}px)` }}>
-        {T.glyph ? <span style={{ color: T.accent, marginRight: 18 * u }}>{T.glyph}</span> : null}
+        {skin === 'claude' && logo ? <ClaudeMark size={64 * u} color={T.accent} style={{ marginRight: 20 * u, verticalAlign: '-0.08em' }} /> : T.glyph ? <span style={{ color: T.accent, marginRight: 18 * u }}>{T.glyph}</span> : null}
         {greeting ?? T.greeting}
       </div>
 
@@ -116,8 +129,12 @@ export const AiPromptComposerShot: React.FC<AiPromptComposerProps> = ({
       {f >= answerAt && answer ? (
         <div style={{ position: 'absolute', left: x0, top: H * 0.2 + 150 * u, width: CW, color: T.text, fontSize: 40 * u, lineHeight: 1.6, fontFamily: skin === 'claude' ? '"Songti TC","Noto Serif TC",Georgia,serif' : SANS }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 14 * u, marginBottom: 18 * u, color: skin === 'chatgpt' ? T.text : T.accent, fontSize: 30 * u, fontWeight: 800, fontFamily: SANS }}>
-            {skin === 'claude'
+            {skin === 'claude' && logo
+              ? <ClaudeMark size={40 * u} color={T.accent} style={{ transform: `rotate(${an < aChars.length ? f * 4 : 0}deg)` }} />
+              : skin === 'claude'
               ? <span style={{ fontSize: 40 * u, color: T.accent, display: 'inline-block', transform: `rotate(${f * 4}deg)` }}>✻</span>
+              : skin === 'chatgpt' && logo
+              ? <OpenAIMark size={36 * u} color={T.text} />
               : <span style={{ width: 30 * u, height: 30 * u, borderRadius: '50%', background: skin === 'chatgpt' ? `conic-gradient(from ${f * 8}deg, #ffffff, #ffffff33, #ffffff)` : `conic-gradient(from ${f * 8}deg, ${T.accent}, ${T.accent}33, ${T.accent})` }} />}
             {label}
           </div>

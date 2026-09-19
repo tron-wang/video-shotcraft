@@ -1,9 +1,10 @@
 // social-profile-moves 的「GitHub 星数」款（2026-09，参考 remocn「github-stars」的动效，程式为本卡自写；remocn 为 MIT 授权）。
 // GitHub 深色 repo 卡浮入 → 游标按下「Star」：星星填成金色、按钮变「Starred」→ 卡下方大数字以里程表从起点滚到终点，
 // 同一个进度画出一条金色星数成长曲线（面积渐层），曲线尾端的光点跟着数字走 → stargazers 头像一排由右滑入。
-// 只重现 GitHub repo 页的版型与配色，不放官方 logo 图档。**数字必须真实**（repo 页 / star-history 可查）；demo 为虚构 repo。
+// repo 卡上方带 GitHub 官方标志（`logo={false}` 可关）。**数字必须真实**（repo 页 / star-history 可查）；demo 为虚构 repo。
 import React from 'react';
 import { AbsoluteFill, useCurrentFrame, useVideoConfig } from 'remotion';
+import { GithubMark } from '../../_fixtures/BrandMarks';
 import { Cursor, InitialAvatar, Odometer, SANS, blurRise, clamp01, easeInOutCubic, easeInOutSine, easeOutCubic, mix } from './SocialKit';
 
 export const GITHUB_STARS_DURATION = 210; // 7s @30fps
@@ -27,6 +28,8 @@ export type GithubStarsProps = {
   clickAt?: number | null;
   countFrom?: number;
   countTo?: number;
+  /** repo 卡上方显示 GitHub 标志。 */
+  logo?: boolean;
   accent?: string;
   bg?: string;
 };
@@ -36,7 +39,7 @@ const STAR = 'M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9
 
 export const GithubStarsShot: React.FC<GithubStarsProps> = ({
   owner, repo, description, language = 'TypeScript', languageColor = '#3178c6', from, to, curve, curveLabels, stargazers = [],
-  clickAt = 40, countFrom = 60, countTo = 150, accent = '#e3b341', bg = '#0b0c0f',
+  clickAt = 40, countFrom = 60, countTo = 150, logo = true, accent = '#e3b341', bg = '#0b0c0f',
 }) => {
   const f = useCurrentFrame();
   const { width: W, height: H, durationInFrames: D } = useVideoConfig();
@@ -81,6 +84,11 @@ export const GithubStarsShot: React.FC<GithubStarsProps> = ({
   return (
     <AbsoluteFill style={{ background: bg, overflow: 'hidden', fontFamily: SANS }}>
       <div style={{ position: 'absolute', inset: 0, transform: `scale(${push})` }}>
+        {logo ? (
+          <div style={{ position: 'absolute', left: x0, top: cardY - 70 * u, display: 'flex', alignItems: 'center', gap: 14 * u, fontSize: 32 * u, fontWeight: 700, color: TXT, ...blurRise(f, 2, u) }}>
+            <GithubMark size={44 * u} color={TXT} />GitHub
+          </div>
+        ) : null}
         {/* repo 卡 */}
         <div style={{
           position: 'absolute', left: x0, top: cardY, width: CW, height: cardH, boxSizing: 'border-box', borderRadius: 16 * u, background: PANEL, border: `${1.5 * u}px solid ${LINE}`,

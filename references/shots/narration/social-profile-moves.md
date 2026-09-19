@@ -10,7 +10,7 @@ narration: evidence
 
 ## 意图
 讲到社群帐号或开源专案时，只贴一张截图太静、数字也不会动；这张卡把社群介面重建成可以动的版本：卡片弹入、游标按一下、数字像里程表滚到真实的终值。介面重现 X / GitHub 的版型与配色，观众一眼认得是哪个平台。
-（2026-09 收入：参考 remocn「x-follow-card」「x-followers-overview」「github-stars」的动效——remocn 为 MIT 授权；程式为本卡自写。使用者要求社群介面要留。**不放官方 logo 图档**。）
+（2026-09 收入：参考 remocn「x-follow-card」「x-followers-overview」「github-stars」的动效——remocn 为 MIT 授权；程式为本卡自写。使用者要求社群介面要留，并确认可以放官方标志：X 两款带 X 标志、GitHub 款带 GitHub 标志（向量，`demos/_fixtures/BrandMarks.tsx`，`logo={false}` 可关）。）
 
 ## 三种款式
 | 款 | 做法 | 用在哪 |
@@ -38,7 +38,7 @@ narration: evidence
 
 ## 已知坑
 - **资料必须真实**：帐号名称、简介、数字、曲线都要能查证；**不要为真人捏造个人页或数字**。demo 全是虚构帐号（「夜間課程研究室」「nightclass / schedule-kit」）
-- **不放官方 logo 图档**；X 蓝勾只在真实帐号有认证时才开 `verified`
+- 官方标志只用来指认平台：不改形、不变色（X / GitHub 用白色），不要让画面看起来像官方发布；X 蓝勾只在真实帐号有认证时才开 `verified`
 - 追踪者数要写完整数字（38,214），不要写成 38.2K——里程表 +1 才看得出来
 - 直式画幅：X 两款置中；GitHub 款曲线较高、stargazers 在曲线下方
 

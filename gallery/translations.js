@@ -801,8 +801,8 @@ window.GALLERY_I18N = {
     'iso-poster-stack-cycle': '等轴海报堆叠轮播',
   },
   stylesEn: {
-    'ai-chat-claude': 'Claude-style chat UI: warm dark grey, terracotta accent, serif greeting; the question types in and the answer streams (no official logo).',
-    'ai-chat-chatgpt': 'ChatGPT-style chat UI: pill composer, white round send button and suggestion chips that fade as the question types in (no official logo).',
+    'ai-chat-claude': 'Claude-style chat UI: warm dark grey, terracotta accent, serif greeting; the question types in and the answer streams, with the official Claude mark.',
+    'ai-chat-chatgpt': 'ChatGPT-style chat UI: pill composer, white round send button and suggestion chips that fade as the question types in, with the official OpenAI mark.',
     'ai-terminal-claude-code': 'Claude Code-style terminal: the welcome box draws in, a prompt types, a Thinking spinner turns, tool calls appear and the answer streams.',
     'x-follow-card': 'An X profile card springs in layer by layer; a cursor clicks Follow, a gold ring ripples and the follower count ticks up by one.',
     'x-followers-overview': 'New-follower notification with avatars stacking and names flipping; the follower count rolls like an odometer and lands with a thin gold ring.',

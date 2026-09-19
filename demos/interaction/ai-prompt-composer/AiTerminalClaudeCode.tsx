@@ -1,10 +1,11 @@
 // ai-prompt-composer 的「Claude Code 终端机」款（2026-09，参考 remocn「claude-code」的动效，程式为本卡自写；remocn 为 MIT 授权）。
 // 终端机视窗浮现 → 陶土橘外框的欢迎框画出 → 输入框里逐字打入提问 → Enter：提问进入对话纪录，
 // 「✻ Thinking…」星芒轮转 → 工具呼叫一条条出现（⏺ Read(…) / ⎿ 结果）→ 回答逐字串流。
-// 只重现 CLI 的版型、字符与配色，不放官方 logo 图档；产品名以文字呈现。整体极缓慢推近（1 → 1.04），不停在静帧。
+// 标题列带 Claude 官方标志（`logo={false}` 可关）；欢迎框里是 CLI 本来就用的 ✻ 字符。整体极缓慢推近（1 → 1.04），不停在静帧。
 import React from 'react';
 import { AbsoluteFill, useCurrentFrame, useVideoConfig } from 'remotion';
 import { DEMO_ANSWER, DEMO_PROMPT } from './AiPromptComposer';
+import { ClaudeMark } from '../../_fixtures/BrandMarks';
 
 export const AI_TERMINAL_CLAUDE_CODE_DURATION = 270; // 9s @30fps
 
@@ -20,6 +21,8 @@ export type AiTerminalClaudeCodeProps = {
   typeAt?: number;
   framesPerChar?: number;
   answerCharsPerFrame?: number;
+  /** 标题列显示 Claude 官方标志。 */
+  logo?: boolean;
   accent?: string;
   bg?: string;
 };
@@ -32,7 +35,7 @@ const clamp01 = (t: number) => Math.min(1, Math.max(0, t));
 
 export const AiTerminalClaudeCodeShot: React.FC<AiTerminalClaudeCodeProps> = ({
   prompt, answer = '', tools = [], cwd = '~/projects/demo', title = 'claude', typeAt = 40, framesPerChar = 2, answerCharsPerFrame = 1.2,
-  accent = '#d97757', bg = '#0b0c0f',
+  logo = true, accent = '#d97757', bg = '#0b0c0f',
 }) => {
   const f = useCurrentFrame();
   const { width: W, height: H, durationInFrames: D } = useVideoConfig();
@@ -74,7 +77,7 @@ export const AiTerminalClaudeCodeShot: React.FC<AiTerminalClaudeCodeProps> = ({
         {/* 标题列 */}
         <div style={{ height: 56 * u, borderBottom: `${1 * u}px solid ${LINE}`, display: 'flex', alignItems: 'center', padding: `0 ${22 * u}px`, gap: 12 * u, background: '#222' }}>
           {['#ff5f57', '#febc2e', '#28c840'].map((c) => <span key={c} style={{ width: 18 * u, height: 18 * u, borderRadius: '50%', background: c, opacity: 0.85 }} />)}
-          <span style={{ flex: 1, textAlign: 'center', fontSize: 22 * u, color: DIM, marginRight: 80 * u }}>{title} — {cwd}</span>
+          <span style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10 * u, fontSize: 22 * u, color: DIM, marginRight: 80 * u }}>{logo ? <ClaudeMark size={24 * u} color={accent} /> : null}{title} — {cwd}</span>
         </div>
 
         <div style={{ padding: `${22 * u}px ${36 * u}px` }}>

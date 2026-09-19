@@ -1,9 +1,10 @@
 // social-profile-moves 的「X 个人页追踪」款（2026-09，参考 remocn「x-follow-card」的动效，程式为本卡自写；remocn 为 MIT 授权）。
 // X 深色个人页卡片弹入（上浮 + 微放大 + 整卡由糊变清），各层（横幅 / 头像 / 名字 / 简介 / 数据）错开几帧依序清晰；
 // 游标滑进来按下「追蹤」→ 按钮翻成「正在追蹤」、按下处漾出一圈金环，追踪者数字像里程表 +1；之后极缓慢推近，不停在静帧。
-// 只重现 X 个人页的版型与配色，不放官方 logo 图档。**资料必须真实**（成片放真实帐号的真实名称、简介与数字）；demo 为虚构帐号。
+// 横幅右上角带 X 官方标志（`logo={false}` 可关）。**资料必须真实**（成片放真实帐号的真实名称、简介与数字）；demo 为虚构帐号。
 import React from 'react';
 import { AbsoluteFill, useCurrentFrame, useVideoConfig } from 'remotion';
+import { XMark } from '../../_fixtures/BrandMarks';
 import { Cursor, InitialAvatar, Odometer, SANS, blurRise, clamp01, easeInOutCubic, easeInOutSine, easeOutCubic, mix } from './SocialKit';
 
 export const X_FOLLOW_CARD_DURATION = 180; // 6s @30fps
@@ -23,6 +24,8 @@ export type XFollowCardProps = {
   banner?: React.ReactNode;
   /** 游标按下追踪的帧；null = 不演按追踪（只展示个人页）。 */
   clickAt?: number | null;
+  /** 横幅右上角显示 X 标志。 */
+  logo?: boolean;
   followLabel?: string;
   followingLabel?: string;
   accent?: string;
@@ -33,7 +36,7 @@ const TXT = '#e7e9ea', DIM = '#71767b', LINE = '#2f3336';
 
 export const XFollowCardShot: React.FC<XFollowCardProps> = ({
   name, handle, bio, meta, following, followers, verified, avatar, banner, clickAt = 72,
-  followLabel = '追蹤', followingLabel = '正在追蹤', accent = '#e0b04b', bg = '#0b0c0f',
+  logo = true, followLabel = '追蹤', followingLabel = '正在追蹤', accent = '#e0b04b', bg = '#0b0c0f',
 }) => {
   const f = useCurrentFrame();
   const { width: W, height: H, durationInFrames: D } = useVideoConfig();
@@ -73,6 +76,11 @@ export const XFollowCardShot: React.FC<XFollowCardProps> = ({
             <div style={{ position: 'absolute', inset: 0, background: `repeating-linear-gradient(115deg, transparent 0 ${38 * u}px, ${accent}14 ${38 * u}px ${40 * u}px)` }} />
           </div>}
         </div>
+        {logo ? (
+          <div style={{ position: 'absolute', right: 24 * u, top: 24 * u, width: 64 * u, height: 64 * u, borderRadius: '50%', background: 'rgba(0,0,0,0.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', ...blurRise(f, 8, u, 12, 0) }}>
+            <XMark size={32 * u} />
+          </div>
+        ) : null}
         {/* 头像 */}
         <div style={{ position: 'absolute', left: 32 * u, top: bannerH - av / 2, width: av, height: av, borderRadius: '50%', overflow: 'hidden', border: `${6 * u}px solid #000`, background: '#000', ...blurRise(f, 10, u, 12, 10) }}>
           {avatar ?? <InitialAvatar name={name} size={av - 12 * u} ring="transparent" />}
