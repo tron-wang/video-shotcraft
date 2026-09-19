@@ -1,16 +1,24 @@
 ---
 name: ai-prompt-composer
-一句话: 通用 AI 对话框——问候语与输入框浮现，提问逐字打入（一有字，麦克风钮就形变成金色送出钮），送出后提问飞上去变成使用者气泡，回答先闪骨架条、再逐字串流；不带任何 AI 产品的品牌
+一句话: AI 对话框问答——问候语与输入框浮现，提问逐字打入（一有字，麦克风钮就形变成送出钮），送出后提问飞上去变成使用者气泡，回答先闪骨架条、再逐字串流；通用黑金款之外有 Claude 对话、ChatGPT 对话、Claude Code 终端机三款介面
 适用: AI 新闻口播里「有人问 AI…」「AI 这样回答」「用 AI 整理重点」的那一镜；教学类「怎么问 AI」
-时长: 约 8s（demo 240f）；只做到送出为止约 3s
+时长: 约 8s（demo 240f；终端机款 270f）；只做到送出为止约 3s
 能量: 中（打字 → 送出 → 串流，一问一答的完整节拍）
 input: [text]
 narration: quote
 ---
 
 ## 意图
-AI 题材的影片常需要演出「问 AI 一个问题、它回答」。直接录真实产品的画面会带品牌、介面也会改版；这张卡是一个通用、黑金的 AI 对话介面：问候语、输入框、打字、送出钮形变、回答串流——观众一看就懂「这是在问 AI」，但不指向任何特定产品。
-（2026-09 收入：参考 remocn「claude-chat」「chat-gpt」的动效——remocn 为 MIT 授权；程式为本卡自写，**刻意不复制任何产品的品牌、标志、专属配色或字体**。remocn 的「claude-code」完整复制 Anthropic 介面与品牌，未收。）
+AI 题材的影片常需要演出「问 AI 一个问题、它回答」。通用款是黑金的 AI 对话介面，观众一看就懂「这是在问 AI」但不指向特定产品；新闻明确在讲某个产品时（「有人问 ChatGPT…」「Claude Code 自己跑了统计」），改用该产品的介面款，观众一眼认得是哪家。
+（2026-09 收入：参考 remocn「claude-chat」「chat-gpt」「claude-code」的动效——remocn 为 MIT 授权；程式为本卡自写。使用者要求 AI 公司的对话介面也要留，于是加了三个产品介面款：**只重现版型、配色与字体气质，不放任何官方 logo 图档，产品名以文字标示**。）
+
+## 四种款式
+| 款 | 做法 | 用在哪 |
+|---|---|---|
+| `ai-prompt-composer`（通用，预设） | 黑金：深底、金色描边药丸输入框、金色送出钮、「AI 助理」标签 | 没指名哪个产品、或多家 AI 一起讲 |
+| `ai-chat-claude` | `skin="claude"`：暖深灰底、陶土橘强调、衬线问候语与回答、方框输入 + 方形送出钮、✻ 标签 | 新闻明确讲 Claude 网页版 |
+| `ai-chat-chatgpt` | `skin="chatgpt"`：中性深灰底、药丸输入框、白色圆形送出钮、下方建议标签（打字时淡出；预设 `typeAt` 48） | 新闻明确讲 ChatGPT |
+| `ai-terminal-claude-code` | 另一个元件 `AiTerminalClaudeCodeShot`：终端机视窗、陶土橘欢迎框画出、输入框打字 → Enter → 「✻ Thinking…」星芒轮转 → 工具呼叫（⏺ Read(…) / ⎿ 结果）→ 回答串流 | 讲 AI 写程式 / AI 代理自己跑工具 |
 
 ## 动效核心
 - 0–16 帧：问候语与输入框浮现（`easeOutCubic`）；输入框前闪烁游标
@@ -24,13 +32,17 @@ AI 题材的影片常需要演出「问 AI 一个问题、它回答」。直接�
 | `prompt` | 一句问题（≤ 30 字） | 太长输入框会裁切 |
 | `answer` | 2–4 行（`\n` 分行）；空字串 = 只做到送出 | 回答内容必须真实（真的问过、或新闻引述的内容） |
 | `framesPerChar` / `answerCharsPerFrame` | 2 / 1.2 | 回答太快观众读不完 |
-| `assistantLabel` | 「AI 助理」 | 引用特定产品的回答时，写「某某 AI」文字即可，不要放 logo |
+| `skin` | neutral / claude / chatgpt | 见「四种款式」 |
+| `assistantLabel` | 各款预设（「AI 助理」/「Claude」/「ChatGPT」） | 文字标签，不要放 logo |
 | `greeting` / `placeholder` | 「今天想問什麼？」 | |
 
 ## 已知坑
-- **不要冒充特定产品**：不加 logo、不仿专属配色 / 字体；要表明是哪个 AI，用文字标签与来源条
+- **不放官方 logo 图档**：产品介面款只重现版型与配色，产品名用文字；通用款保持中性
+- **产品介面款只用在新闻真的在讲那个产品时**：没指名就用通用款，别让观众以为是某家的回答
 - **回答要真实**：新闻里引用的 AI 回答必须是真的；示意用途时在画面标「示意」
 - 横式画幅输入框位于画面 62% 高度，回答区从 20% 高度往下长；回答超过 4 行会压到输入框
 
 ## 参考实现
-demos/interaction/ai-prompt-composer/AiPromptComposer.tsx（导出 `AiPromptComposerShot` / `AiPromptComposerProps` / `AI_PROMPT_COMPOSER_DURATION`；demo = 「幫我整理今年夜間課程報名的三個重點」+ 三行回答）
+demos/interaction/ai-prompt-composer/AiPromptComposer.tsx（导出 `AiPromptComposerShot`（`skin`: neutral / claude / chatgpt）/ `AiPromptComposerProps` / `AI_PROMPT_COMPOSER_DURATION`；demo = 「幫我整理今年夜間課程報名的三個重點」+ 三行回答）
+demos/interaction/ai-prompt-composer/AiChatClaude.tsx、AiChatChatgpt.tsx（两个介面款的 demo）
+demos/interaction/ai-prompt-composer/AiTerminalClaudeCode.tsx（导出 `AiTerminalClaudeCodeShot`：`prompt` / `answer` / `tools`（`{name, arg, result}[]`，0–3 条）/ `cwd` / `title`；`AI_TERMINAL_CLAUDE_CODE_DURATION` = 270）

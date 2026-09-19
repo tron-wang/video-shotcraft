@@ -16,7 +16,7 @@
 - **时间不手敲**：所有动效起点只能来自 `timing.ts` 的 `tLine / tChar / tWord`，禁止写死秒数或帧号。
 
 > **实作状态（2026-09-18）**：⓪–⑧ 的脚本与 `assets/lib/` 组件都已可用；既有 162 张卡已标 `input` / `narration`
-> （gallery 有「口播可用」筛选，口播专用卡带橘色角标）。12 张资讯型新卡全部落地（后加 post-focus-card、timeline-odometer，现 14 张；另有 map-flyover、audio-oscilloscope 两张口播可用卡放在 data / interaction 目录），在 `references/shots/narration/`，
+> （gallery 有「口播可用」筛选，口播专用卡带橘色角标）。12 张资讯型新卡全部落地（后加 post-focus-card、timeline-odometer、social-profile-moves，现 15 张；另有 map-flyover、audio-oscilloscope 两张口播可用卡放在 data / interaction 目录），在 `references/shots/narration/`，
 > demo 在 `demos/narration/`。要再加新卡照 `docs/narration-card-brief.md`。
 
 ---
@@ -294,6 +294,7 @@ node <skill>/assets/scripts/source-media.mjs --credits     # → out/CREDITS.md
 | `ink-circle-note` | screenshot / photo | evidence | 手绘圈注 + 箭头 + 短注，钉在内容坐标系 |
 | `loupe-peek` | screenshot / photo | evidence | 原地浮起：页面压暗、细节从原位浮起放大读一眼，再落回 |
 | `post-focus-card` | screenshot | evidence | 社群贴文整则置中留白，立体浮入 + 随旁白轻推到重点画一笔；**X / Threads 贴文画面首选** |
+| `social-profile-moves` | text | evidence | 社群数据：X 个人页按追踪 / X 追踪者数滚动 / GitHub 星数与成长曲线（资料必须真实） |
 | `audio-oscilloscope` | text | evidence | 真实音档驱动的示波器：金色波形随原音起伏 + 余辉；引用录音 / 通话 / 原音时用 |
 | `search-reveal` | text | evidence | 搜寻框成形 → 打字 → 结果面板展开（通用介面）：「大家都在搜 XXX」 |
 | `source-strip` | text | evidence | 来源条（生产用 `assets/lib/SourceStrip.tsx`） |
@@ -303,7 +304,7 @@ node <skill>/assets/scripts/source-media.mjs --credits     # → out/CREDITS.md
 | `map-flyover` | text | data | 真实卫星地图 A→B 飞越（夜间城市灯光预设）：近景 → 拉远看整条大圆航线 → 推近落在终点；「从 A 地到 B 地」首选 |
 | `quote-plate` | text / photo / video | quote | 左缘直条 + 引言逐片语擦出，署名最后到；压实拍只拉局部暗幕 |
 | `cursor-follow-typing` | text | quote | 游标跟随打字：镜头锁在游标上逐字读，打完拉远看全句 |
-| `ai-prompt-composer` | text | quote | 通用 AI 对话框：提问打字 → 送出 → 回答串流（不带品牌） |
+| `ai-prompt-composer` | text | quote | AI 对话框：提问打字 → 送出 → 回答串流；通用黑金款，另有 Claude / ChatGPT / Claude Code 终端机介面款（新闻指名该产品时用） |
 | `chapter-slate` | text | chapter | 巨型编号 + 标题 + 章节进度条（预设）或文字遮罩穿越；下一镜左上挂章节胶囊角标 |
 | `clip-frame-reveal` | video / photo | broll | 实拍素材主题框：card 圆角浮卡（预设）/ hairline 细线框 / bleed 满版出血（首尾冲击镜） |
 | `photo-drift-stack` | photo | broll | 叠卡推入：2–3 张照片圆角大卡依词锚从下推上、前一张缩小后退，编号 + 大字说明 |
