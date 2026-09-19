@@ -1,134 +1,85 @@
-// carousel-3d — 3D Carousel 环形画廊（motion-lab 定稿转原生 Remotion）
-// 8 张卡片按 sin/cos 排成圆环并匀速整环自转，每卡只绕 Y 公转、自身 billboard
-// 朝外，正反两层同向贴图 + backface-visibility:hidden，任何时刻卡片都正立不倒置；
-// 相机全程固定（浅俯角近景），配方 angle=i*360/n+frame*speed。
-// 设计坐标 480×270（DesignStage 等比放大），参数表数值以此坐标系标定。
+// carousel-3d — 双向跑马灯（2026-09 改版；卡名沿用）
+// 一组照片 / 卡片排成三排，整体微倾 −8°，相邻两排反向匀速横移，左右两侧渐隐：
+// 一次看到最多的「一组东西」，适合当照片衬底、作品集、合作伙伴墙。
+// （旧版：8 张紫色渐层卡排成圆环自转；使用者从「金边环形 / 双向跑马灯 / 弧形画廊 / 斜向无限墙」里选了双向跑马灯。）
+// 横移速度预设 3px/帧（使用者看过的速度）；要无缝循环时给 loopFrames，速度自动取「loopFrames 帧刚好走完一轮」。
+// 以画幅比例排版，横式直式都能用。
 import React from 'react';
-import { DesignStage, useT } from '../../_fixtures/Motion';
+import { Img, staticFile, useCurrentFrame, useVideoConfig } from 'remotion';
+import { FakePhoto } from '../../_fixtures/Narration';
 
-export const CAROUSEL_3D_DURATION = 168; // 5600ms @30fps
+export const CAROUSEL_3D_DURATION = 168; // 5.6s @30fps
 
-const N = 8;
-const RADIUS = 190;
-const ICONS = ['◆', '●', '▲', '■', '✦', '◗', '⬢', '◉'];
+export type Carousel3DProps = {
+  /** 卡片内容：public/ 下的图片路径（字串）或任意 ReactNode；会依序重复铺满各排。 */
+  items: (string | React.ReactNode)[];
+  /** 排数，预设 3；直式画幅可给 5 铺满。 */
+  rows?: number;
+  /** 横移速度（px/帧，以短边 1080 为准）。 */
+  speed?: number;
+  /** 给了就改成无缝循环：speed 自动取「这么多帧走完一轮」。 */
+  loopFrames?: number;
+  /** 整体倾角（度）。 */
+  tilt?: number;
+  /** 卡的描边色（预设淡金）。 */
+  stroke?: string;
+  bg?: string;
+};
 
-export const Carousel3D: React.FC = () => {
-  const t = useT();
-  const spin = t * 360; // 整片正好公转 1 圈可循环
+// ───────── 几何（以短边 1080 设计，按短边等比）─────────
+const CARD_W = 360;
+const CARD_H = 280;
+const GAP = 28;
+const ROW_GAP = 28;
+const RADIUS = 18;
+
+export const Carousel3DShot: React.FC<Carousel3DProps> = ({
+  items, rows = 3, speed = 3, loopFrames, tilt = -8, stroke = 'rgba(224,176,75,0.45)', bg = '#0b0c0f',
+}) => {
+  const f = useCurrentFrame();
+  const { width, height } = useVideoConfig();
+  const u = Math.min(width, height) / 1080; // 按短边等比：直式画幅卡不会被放大
+  const w = CARD_W * u, h = CARD_H * u, g = GAP * u;
+  const span = items.length * (w + g); // 一轮的长度
+  const v = loopFrames ? span / loopFrames : speed * u;
+  // 需要铺满的卡数：画面宽 + 倾斜余量 + 一轮
+  const perRow = Math.ceil((width * 1.4 + span) / (w + g)) + 1;
+  const blockH = rows * h + (rows - 1) * ROW_GAP * u;
+  const fade = 'linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent)';
+  const card = (i: number) => {
+    const it = items[((i % items.length) + items.length) % items.length];
+    return typeof it === 'string'
+      ? <Img src={staticFile(it)} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+      : it;
+  };
   return (
-    <DesignStage bg="#0a0b10">
-      {/* 3D 场景：perspective 950px + 径向渐变夜幕 */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          overflow: 'hidden',
-          perspective: '950px',
-          background: 'radial-gradient(ellipse at 50% 55%,#131120 0%,#0a0b10 75%)',
-        }}
-      >
-        {/* 相机全程固定：浅俯角近景，不拉远不变角 */}
-        <div
-          style={{
-            position: 'absolute',
-            left: '50%',
-            top: '50%',
-            width: 0,
-            height: 0,
-            transformStyle: 'preserve-3d',
-            willChange: 'transform',
-            transform: 'translateZ(-90px) rotateX(-8deg) translateY(-10px)',
-          }}
-        >
-          {/* 圆环载体：唯一的逐帧变量，整环绕 Y 匀速自转 */}
-          <div
-            style={{
-              position: 'absolute',
-              transformStyle: 'preserve-3d',
-              willChange: 'transform',
-              transform: `rotateY(${spin}deg)`,
-            }}
-          >
-            {Array.from({ length: N }, (_, i) => {
-              const hue = 200 + i * 22;
-              // 正反两层同向贴图 + backface-visibility:hidden：
-              // 从环外/环内看都是正立不镜像的同一张卡
-              const faceStyle: React.CSSProperties = {
-                position: 'absolute',
-                inset: 0,
-                borderRadius: 9,
-                boxSizing: 'border-box',
-                padding: 10,
-                backfaceVisibility: 'hidden',
-                WebkitBackfaceVisibility: 'hidden',
-                background: `linear-gradient(160deg,hsl(${hue},60%,42%),hsl(${hue + 28},70%,20%))`,
-                border: `1px solid hsla(${hue},80%,75%,.5)`,
-                boxShadow: `0 12px 34px rgba(0,0,0,.5), inset 0 1px 0 hsla(${hue},80%,85%,.35)`,
-                fontFamily: '-apple-system,system-ui,sans-serif',
-                color: '#f2f5fb',
-              };
-              const face = (
-                <>
-                  <div style={{ fontSize: 24 }}>{ICONS[i]}</div>
-                  <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1, marginTop: 34 }}>
-                    CARD 0{i + 1}
-                  </div>
-                  <div
-                    style={{
-                      marginTop: 6,
-                      height: 4,
-                      width: '70%',
-                      borderRadius: 2,
-                      background: 'rgba(255,255,255,.4)',
-                    }}
-                  />
-                  <div
-                    style={{
-                      marginTop: 4,
-                      height: 4,
-                      width: '45%',
-                      borderRadius: 2,
-                      background: 'rgba(255,255,255,.22)',
-                    }}
-                  />
-                </>
-              );
-              return (
-                // 卡片容器只做环上定位（绕 Y 公转 + billboard 朝外），
-                // 永不绕 X/Z，卡永远正立
+    <div style={{ position: 'absolute', inset: 0, background: bg, overflow: 'hidden' }}>
+      <div style={{ position: 'absolute', left: -width * 0.2, top: (height - blockH) / 2, width: width * 1.4, height: blockH, transform: `rotate(${tilt}deg)`, WebkitMaskImage: fade, maskImage: fade }}>
+        {Array.from({ length: rows }, (_, r) => {
+          const dir = r % 2 ? 1 : -1;
+          const off = ((f * v * dir) % span + span) % span; // 0..span，一轮后回到原位（无缝）
+          return (
+            <div key={r} style={{ position: 'absolute', left: 0, top: r * (h + ROW_GAP * u), width: '100%', height: h }}>
+              {Array.from({ length: perRow }, (_, k) => (
                 <div
-                  key={i}
+                  key={k}
                   style={{
-                    position: 'absolute',
-                    left: -46,
-                    top: -62,
-                    width: 92,
-                    height: 124,
-                    transformStyle: 'preserve-3d',
-                    transform: `rotateY(${(i * 360) / N}deg) translateZ(${RADIUS}px)`,
+                    position: 'absolute', left: (k - 1) * (w + g) + (dir < 0 ? -off : off - span), top: 0, width: w, height: h,
+                    borderRadius: RADIUS * u, overflow: 'hidden', border: `1.5px solid ${stroke}`, boxShadow: '0 20px 50px rgba(0,0,0,0.5)', background: '#14161b',
                   }}
                 >
-                  <div style={faceStyle}>{face}</div>
-                  <div style={{ ...faceStyle, transform: 'rotateY(180deg)' }}>{face}</div>
+                  {card(k + r * 3)}
                 </div>
-              );
-            })}
-          </div>
-          {/* 地面反光盘 */}
-          <div
-            style={{
-              position: 'absolute',
-              left: -230,
-              top: 70,
-              width: 460,
-              height: 460,
-              borderRadius: '50%',
-              transform: 'rotateX(90deg)',
-              background: 'radial-gradient(circle,rgba(110,140,255,.14) 0%,transparent 62%)',
-            }}
-          />
-        </div>
+              ))}
+            </div>
+          );
+        })}
       </div>
-    </DesignStage>
+    </div>
   );
 };
+
+// demo：8 张示意风景（FakePhoto），三排反向横移
+export const Carousel3D: React.FC = () => (
+  <Carousel3DShot items={Array.from({ length: 8 }, (_, i) => <FakePhoto seed={i * 3 + 1} />)} />
+);
