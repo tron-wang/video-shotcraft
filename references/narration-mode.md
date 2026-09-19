@@ -300,7 +300,7 @@ node <skill>/assets/scripts/source-media.mjs --credits     # → out/CREDITS.md
 | `timeline-odometer` | text / photo | data | 「从 A 到 B」：大数字里程表滚动（只滚变动位数）+ 细时间轴两端节点；收尾 / 转折首选，取代相纸堆叠式收尾 |
 | `quote-plate` | text / photo / video | quote | 左缘直条 + 引言逐片语擦出，署名最后到；压实拍只拉局部暗幕 |
 | `chapter-slate` | text | chapter | 一章一色一线稿 + 左下角标 |
-| `clip-frame-reveal` | video / photo | broll | 实拍素材主题边框（paper / film / hairline） |
+| `clip-frame-reveal` | video / photo | broll | 实拍素材主题框：card 圆角浮卡（预设）/ hairline 细线框 / bleed 满版出血（首尾冲击镜） |
 | `photo-drift-stack` | photo | broll | 叠卡推入：2–3 张照片圆角大卡依词锚从下推上、前一张缩小后退，编号 + 大字说明 |
 
 同一句话上不要叠两种强调（`marker-sweep` 与 `ink-circle-note` 二选一）；证据镜一律配 `source-strip`。
@@ -323,7 +323,7 @@ node <skill>/assets/scripts/source-media.mjs --credits     # → out/CREDITS.md
 | 内文 / 字幕字体 | Noto Sans TC 600 | Noto Sans TC 600 | Noto Sans TC 500 | Noto Sans TC 500 |
 | 圆角 | 6 | 14 | 4 | 20 |
 | 材质 | 细网格 + 1px 发丝线 | 低对比噪点 + 柔光晕 | 纸纹 + 相框白边 | 纯色 + 柔影 |
-| 影片 / 照片框式 | 薄线框 | 薄线框 | 纸相框 | 纸相框 / 无框圆角 |
+| 影片 / 照片框式 | hairline 细线框 | hairline 细线框 | card 圆角浮卡 | card 圆角浮卡 |
 | 常用音效类别 | `ui/` `counter/` `impact/`（轻） | `data/` `ui/` `transition/` | `paper/` `camera/` `film/` | `paper/` `ui/` `fluid/` |
 
 台湾财经惯例**红涨绿跌**；文章来自欧美市场语境时对调并在 `SHOTLIST.md` 注明。

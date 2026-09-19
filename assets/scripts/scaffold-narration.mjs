@@ -34,8 +34,8 @@ const P = (...p) => path.join(out, ...p);
 const STYLES = {
   finance: { bg: '#0e1116', ink: '#f2f0ea', accent: '#e0b04b', up: '#e5484d', down: '#30a46c', plate: 'rgba(14,17,22,0.82)', radius: 6, display: '"Noto Serif TC", "Songti TC", serif', body: '"Noto Sans TC", "PingFang TC", sans-serif', frame: 'hairline' },
   tech: { bg: '#0a0c14', ink: '#eef1f7', accent: '#5b8cff', up: '#9b7bff', down: '#5b8cff', plate: 'rgba(10,12,20,0.82)', radius: 14, display: '"Noto Sans TC", "PingFang TC", sans-serif', body: '"Noto Sans TC", "PingFang TC", sans-serif', frame: 'hairline' },
-  travel: { bg: '#f4efe6', ink: '#22201c', accent: '#d2572b', up: '#d2572b', down: '#2f6f8f', plate: 'rgba(34,32,28,0.80)', radius: 4, display: '"Noto Serif TC", "Songti TC", serif', body: '"Noto Sans TC", "PingFang TC", sans-serif', frame: 'paper' },
-  life: { bg: '#faf7f2', ink: '#2a2622', accent: '#3f8f6b', up: '#e08a3c', down: '#3f8f6b', plate: 'rgba(42,38,34,0.78)', radius: 20, display: '"Noto Sans TC", "PingFang TC", sans-serif', body: '"Noto Sans TC", "PingFang TC", sans-serif', frame: 'paper' },
+  travel: { bg: '#f4efe6', ink: '#22201c', accent: '#d2572b', up: '#d2572b', down: '#2f6f8f', plate: 'rgba(34,32,28,0.80)', radius: 4, display: '"Noto Serif TC", "Songti TC", serif', body: '"Noto Sans TC", "PingFang TC", sans-serif', frame: 'card' },
+  life: { bg: '#faf7f2', ink: '#2a2622', accent: '#3f8f6b', up: '#e08a3c', down: '#3f8f6b', plate: 'rgba(42,38,34,0.78)', radius: 20, display: '"Noto Sans TC", "PingFang TC", sans-serif', body: '"Noto Sans TC", "PingFang TC", sans-serif', frame: 'card' },
 };
 if (!STYLES[style]) {
   console.error(`--style 只能是 ${Object.keys(STYLES).join(' | ')}`);
@@ -142,7 +142,7 @@ export const C = {
 };
 export const FONT = { display: '${T.display}', body: '${T.body}' };
 export const RADIUS = ${T.radius};
-export const FRAME_STYLE = '${T.frame}' as const; // clip-frame-reveal 的框式，全片只用这一种
+export const FRAME_STYLE = '${T.frame}' as const; // clip-frame-reveal 的主框，全片只用这一种（bleed 另用在开场与收尾）
 export const SOURCE_LABEL = ${JSON.stringify(article.source_label || article.site || '')};
 export const SHOW_SOURCE_STRIP = ${config.show_source_strip !== false}; // narration.config.json 的 show_source_strip
 `);
