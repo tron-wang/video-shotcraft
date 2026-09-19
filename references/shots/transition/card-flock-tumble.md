@@ -5,7 +5,7 @@ name: card-flock-tumble
 时长: 翻飞 ~1.5s + 慢转展示 ~0.3s + 收束 0.3s + 烟环+巨字 ~2s；全段 4.5s
 能量: 极高（全片能量顶点用）
 input: [video, photo, screenshot, text]
-narration: transition
+narration: broll
 ---
 
 ## 意图
@@ -16,6 +16,14 @@ narration: transition
 **不许停**（站定后保持低角速度慢转到收束，静止段被裁"不要停住，
 保持旋转"——高潮段没有静帧）、**全程清晰**（motion blur/景深糊
 全删，被裁"不要加模糊效果"）。
+
+## 两种款式
+| 款 | 做法 | 用在哪 |
+|---|---|---|
+| `card-flock-tumble`（完整版） | 翻飞 → 站定慢转 → 吸入中心 → 烟雾环 + 巨字；霓虹暗场 | 产品片的能量高潮；**不标口播**（烟雾环与巨字的语气对新闻太吵） |
+| `card-flock-stand`（前半段，口播可用） | 只有翻飞 → 站定后一直慢转到镜头结束；黑金配色（深色页卡 + 金色强调，背景金色细描边大字，文字可换或关闭） | 口播片：几个页面 / 几份文件「摊开给你看」 |
+
+`card-flock-stand` 是 2026-09 使用者看过完整版后说「前半段特效我喜欢」而拆出的独立款（`CardFlockStand.tsx`），与完整版共用同一条翻飞样条与关键姿态（`CARDS` / `FLIGHT` / `splinePose` 从 `CardFlockTumble.tsx` 汇出），手感完全一致。卡的口播角色标为 broll，只指这一款。
 
 ## 动效核心
 - 翻飞：三卡各自 k0（近 90° 侧棱薄边）→k1（翻飞中段）→k2（阶梯
@@ -52,5 +60,5 @@ narration: transition
 
 ## 参考实现
 demos/transition/card-flock-tumble/
-（CardFlockTumble.tsx）
+（CardFlockTumble.tsx 完整版；CardFlockStand.tsx 前半段黑金款——导出 `CardFlockStandShot`：`titles` / `cards`（自带 560×400 内容）/ `wallText`（空字串关闭）/ `spin`）
 原片出处：clickup-30.mp4

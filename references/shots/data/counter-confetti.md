@@ -5,7 +5,7 @@ name: counter-confetti
 时长: 约 4.6s（138f@30fps；计数 0.3–2.6s · 纸屑 2.4s 起 · 落定 3.3s）
 能量: 高（计数蓄力 + 爆点释放，标准的情绪峰值镜头）
 input: [text]
-narration: data
+narration: none
 ---
 
 ## 意图

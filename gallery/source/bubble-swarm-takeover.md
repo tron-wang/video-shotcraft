@@ -5,7 +5,7 @@ name: bubble-swarm-takeover
 时长: ~4.3s（130f：飘入 ~67f + 峰值藏切 + 散开 ~43f）
 能量: 中高（持续群体涌动，无瞬时冲击）
 input: [video, photo, screenshot, text]
-narration: transition
+narration: none
 ---
 
 ## 意图

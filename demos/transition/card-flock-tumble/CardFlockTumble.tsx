@@ -19,8 +19,8 @@ const mulberry32 = (a: number) => () => {
 const FONT = '"Avenir Next", Futura, "Helvetica Neue", sans-serif';
 
 // ---------- 时间轴（30fps / 130f） ----------
-const WALL_UP = [6, 22] as const; // 墙亮起
-const FLIGHT = [10, 54] as const; // 侧棱→翻飞→站定：一条连续样条
+export const WALL_UP = [6, 22] as const; // 墙亮起
+export const FLIGHT = [10, 54] as const; // 侧棱→翻飞→站定：一条连续样条
 const CARD_OUT = [62, 72] as const; // 收束（快！10 帧向中心聚拢）
 const RING_T0 = 70; // 波纹环自收束点扩散
 const TEXT_T0 = 84; // STRONGER 出现
@@ -199,7 +199,7 @@ const SmokeRing: React.FC<{ frame: number }> = ({ frame }) => {
 };
 
 // ---------- 卡片位姿：Catmull-Rom 样条连续插值（真 3D 丝滑转动） ----------
-type Pose = { x: number; y: number; rx: number; ry: number; rz: number; s: number };
+export type Pose = { x: number; y: number; rx: number; ry: number; rz: number; s: number };
 const POSE_KEYS: (keyof Pose)[] = ['x', 'y', 'rx', 'ry', 'rz', 's'];
 
 // Catmull-Rom（端点重复），保证经过所有关键姿态且导数连续 → 无分段突变
@@ -214,7 +214,7 @@ const catmull = (p0: number, p1: number, p2: number, p3: number, t: number): num
       (-p0 + 3 * p1 - 3 * p2 + p3) * t3)
   );
 };
-const splinePose = (keys: Pose[], u: number): Pose => {
+export const splinePose = (keys: Pose[], u: number): Pose => {
   // keys.length === 3：两段样条，0.55 处过中间关键帧
   const seg = u < 0.55 ? 0 : 1;
   const lt = seg === 0 ? u / 0.55 : (u - 0.55) / 0.45;
@@ -232,7 +232,7 @@ const splinePose = (keys: Pose[], u: number): Pose => {
 // 三卡（v4 再加码）：间距再收紧（±125/±85 级，三卡大幅重叠成一叠阶梯）
 // + 站定再放大（s≈1.5-1.6，对齐截图 3/4 里卡片群占满画面中部）
 // k0 侧棱（近 90° 薄边）→ k1 翻飞中段 → k2 阶梯站定
-const CARDS: { title: string; k: [Pose, Pose, Pose]; conv: Pose }[] = [
+export const CARDS: { title: string; k: [Pose, Pose, Pose]; conv: Pose }[] = [
   {
     title: 'Inbox',
     k: [

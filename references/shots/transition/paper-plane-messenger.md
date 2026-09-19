@@ -6,7 +6,7 @@ name: paper-plane-messenger
 能量: 中
 标签: camera
 input: [video, photo, screenshot, text]
-narration: transition
+narration: none
 ---
 
 ## 意图
