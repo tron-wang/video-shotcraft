@@ -4,8 +4,9 @@
     PY=~/.cache/shotcraft-asr/venv/bin/python
     $PY subtitle.py fetch      --url URL --out PROJ [--cookies-from-browser chrome] [--max-height 1080]
     $PY subtitle.py transcribe --out PROJ [--model large-v3-turbo] [--lang en]
+    $PY subtitle.py segment    --out PROJ [--force]     # 只重切字幕条，不重跑辨识
     #   → Agent 读 subs/cues.json，写 subs/zh.json（中文来源已预填繁体，Agent 只校对）
-    $PY subtitle.py build      --out PROJ [--style outline|plate] [--bilingual] [--position bottom|top] [--margin-v PX]
+    $PY subtitle.py build      --out PROJ [--style auto|plate|soft|light] [--bilingual] [--position bottom|top] [--margin-v PX]
     $PY subtitle.py still      --out PROJ [--t 12.5 --t 40] [--auto 4]
     $PY subtitle.py burn       --out PROJ [--crf 18]
 
@@ -29,6 +30,7 @@ import re
 import shutil
 import subprocess
 import sys
+import unicodedata
 from pathlib import Path
 
 CACHE = Path.home() / '.cache' / 'shotcraft-asr'
@@ -167,23 +169,48 @@ def segment_cues(segments: list[dict], lang: str, max_line: int) -> list[dict]:
         if text:
             cues.append({'start': buf[0]['start'], 'end': buf[-1]['end'], 'src': text})
 
-    for seg in segments:
-        words = [w for w in seg['words'] if w['word'].strip()]
-        buf: list[dict] = []
-        for k, w in enumerate(words):
-            if buf:
-                cur = joiner.join(x['word'].strip() for x in buf)
-                gap = w['start'] - buf[-1]['end']
-                dur = w['end'] - buf[0]['start']
-                prev = buf[-1]['word'].strip()
-                over = width_of(cur + w['word']) > limit
-                if (gap > GAP_BREAK or dur > CUE_MAX_DUR or over
-                        or (SENT_END.search(prev) and buf[-1]['end'] - buf[0]['start'] >= 1.0)
-                        or (CLAUSE_END.search(prev) and width_of(cur) >= limit * 0.6)):
-                    flush(buf)
-                    buf = []
-            buf.append(w)
-        flush(buf)
+    # whisper 的段落边界常落在句子中间，所以把全部词串成一条流再切，不以段落为界
+    words = [w for seg in segments for w in seg['words'] if w['word'].strip()]
+    buf: list[dict] = []
+    for w in words:
+        if buf:
+            cur = joiner.join(x['word'].strip() for x in buf)
+            gap = w['start'] - buf[-1]['end']
+            dur = w['end'] - buf[0]['start']
+            prev = buf[-1]['word'].strip()
+            over = width_of(cur + w['word']) > limit
+            if (gap > GAP_BREAK or dur > CUE_MAX_DUR or over
+                    or (SENT_END.search(prev) and buf[-1]['end'] - buf[0]['start'] >= 1.0)
+                    or (CLAUSE_END.search(prev) and width_of(cur) >= limit * 0.6)):
+                flush(buf)
+                buf = []
+        buf.append(w)
+    flush(buf)
+
+    # 碎条（< 0.8s 或不到四分之一行）并进前一条；前一条已是句尾或放不下就并进后一条
+    def tiny(c):
+        return c['end'] - c['start'] < CUE_MIN_DUR or width_of(c['src']) < limit * 0.25
+
+    def fits(a, b):
+        return b['start'] - a['end'] <= GAP_BREAK and width_of(a['src'] + b['src']) <= limit * 1.3
+
+    k = 0
+    while k < len(cues):
+        c = cues[k]
+        if tiny(c) and len(cues) > 1:
+            prev = cues[k - 1] if k > 0 else None
+            nxt = cues[k + 1] if k + 1 < len(cues) else None
+            if prev and not SENT_END.search(prev['src']) and fits(prev, c):
+                prev['src'] = joiner.join([prev['src'], c['src']])
+                prev['end'] = c['end']
+                del cues[k]
+                continue
+            if nxt and fits(c, nxt):
+                nxt['src'] = joiner.join([c['src'], nxt['src']])
+                nxt['start'] = c['start']
+                del cues[k]
+                continue
+        k += 1
 
     # 时间整理：不重叠、最短时长、句尾停留
     for k, c in enumerate(cues):
@@ -236,7 +263,22 @@ def cmd_transcribe(a):
                          'words': [{'start': w.start, 'end': w.end, 'word': w.word} for w in (s.words or [])]})
         print(f'  {s.start:7.1f}s  {text}')
     save(proj / 'subs' / 'asr.json', {'model': a.model, 'language': lang, 'segments': segments})
+    make_cues(proj, meta, a.force)
 
+
+def cmd_segment(a):
+    """只重切字幕条（改了切条规则时用，不重跑辨识）。"""
+    proj = Path(a.out).expanduser()
+    if not (proj / 'subs' / 'asr.json').exists():
+        die('找不到 subs/asr.json，先跑 transcribe')
+    if (proj / 'subs' / 'zh.json').exists() and not a.force:
+        die('subs/zh.json 已存在——重切会让编号对不上，确定要重来加 --force（中文来源会重新预填）')
+    make_cues(proj, video_info(proj), a.force)
+
+
+def make_cues(proj: Path, meta: dict, force: bool):
+    asr = load(proj / 'subs' / 'asr.json')
+    lang, segments = asr['language'], asr['segments']
     L = layout(meta['width'], meta['height'])
     cues = segment_cues(segments, lang, L['max'])
     save(proj / 'subs' / 'cues.json', {'language': lang, 'orient': L['orient'], 'max_chars': L['max'], 'cues': cues})
@@ -244,7 +286,7 @@ def cmd_transcribe(a):
 
     zh_p = proj / 'subs' / 'zh.json'
     if lang in ('zh', 'yue'):
-        if zh_p.exists() and not a.force:
+        if zh_p.exists() and not force:
             print('  subs/zh.json 已存在，不覆盖（要重来加 --force）')
         else:
             trad = to_traditional([c['src'] for c in cues])
@@ -263,7 +305,7 @@ def clean_zh(t: str) -> str:
     t = re.sub(r'。+|\.(?=\s|$)', ' ', t)  # 半形句点只在词尾删，保留 3.5、U.S. 里的点
     t = re.sub(r'…+|\.{3,}', '⋯', t)
     t = re.sub(r'\s+', ' ', t).strip()
-    t = re.sub(r'\s+(?=[」』）)])|(?<=[「『（(])\s+', '', t)
+    t = re.sub(r'\s+(?=[」』）)])|(?<=[「『（(？！])\s+', '', t)  # 全形标点自带留白，不再加空格
     return t.rstrip('⋯ ').strip() or t
 
 
@@ -298,6 +340,83 @@ def ass_time(s: float) -> str:
 
 def ass_escape(t: str) -> str:
     return t.replace('\\', '＼').replace('{', '｛').replace('}', '｝')
+
+
+# libass 排苹方的实测值（× 字级；字级在 ASS 里是整行高度，不是字宽）
+EM = 0.72         # 汉字字宽
+LINE_H = 0.96     # 行距
+INK_H = 0.66      # 单行字面高度
+INK_BOTTOM = 0.18  # 字面下缘离对齐边界的距离
+
+
+def text_width(t: str, size: int) -> float:
+    """苹方字宽估算（px）：汉字与全形标点 1em，拉丁字母 0.5em，空白 0.25em。"""
+    w = 0.0
+    for c in t:
+        if c == ' ':
+            w += 0.25
+        elif CJK.match(c) or unicodedata.east_asian_width(c) in ('W', 'F'):
+            w += 1.0
+        else:
+            w += 0.5
+    return w * size * EM
+
+
+def rounded_plate(rows, W, H, margin_v, position, r, color) -> str:
+    """字幕下方的圆角矩形（ASS 向量绘图），上下左右对字面等距留白。rows = [(文字, 字级)]。"""
+    fs = rows[0][1]
+    pad_x, pad_y = fs * 0.5, fs * 0.28
+    ink = sum(size * LINE_H for _, size in rows) - rows[-1][1] * (LINE_H - INK_H)
+    w = max(text_width(t, size) for t, size in rows) + pad_x * 2
+    h = ink + pad_y * 2
+    x = (W - w) / 2
+    if position == 'top':
+        y = margin_v + (LINE_H - INK_H) * fs * 0.5 - pad_y
+    else:
+        y = H - margin_v - rows[-1][1] * INK_BOTTOM + pad_y - h
+    r = min(r, h / 2, w / 2)
+    c = r * 0.4477  # 贝兹曲线逼近四分之一圆：控制点离角点 r·(1-0.5523)
+    path = (f'm {r:.0f} 0 l {w - r:.0f} 0 b {w - c:.0f} 0 {w:.0f} {c:.0f} {w:.0f} {r:.0f} '
+            f'l {w:.0f} {h - r:.0f} b {w:.0f} {h - c:.0f} {w - c:.0f} {h:.0f} {w - r:.0f} {h:.0f} '
+            f'l {r:.0f} {h:.0f} b {c:.0f} {h:.0f} 0 {h - c:.0f} 0 {h - r:.0f} '
+            f'l 0 {r:.0f} b 0 {c:.0f} {c:.0f} 0 {r:.0f} 0')
+    alpha, bgr = color[2:4], color[4:]
+    return (r'{\an7\pos(%.0f,%.0f)\bord0\shad0\blur0.6\1c&H%s&\1a&H%s&\p1}%s{\p0}'
+            % (x, y, bgr, alpha, path))
+
+
+STYLE_NAMES = {'plate': 'A 深色圆角底板', 'soft': 'D 白字柔光晕影', 'light': 'E 白底黑字圆角'}
+DARK_LUMA = 80    # 字幕区平均亮度低于此值算「暗」（0–255）
+BUSY_EDGE = 4.0   # 字幕区平均梯度高于此值算「花」（实测：平滑衣物 1.4、人物画格 4.6、字卡跑马灯 8–11）
+
+
+def pick_style(proj: Path, W: int, H: int, fs: int, margin_v: int, position: str) -> tuple[str, str]:
+    """按字幕区的画面挑样式：暗且干净 → D，暗但花 → E，其余 → A。"""
+    import numpy as np
+    even = lambda v: int(v) // 2 * 2  # yuv420 裁切会把奇数尺寸捨成偶数，先取偶数免得位元组数对不上
+    band_h = even(fs * 2.4)
+    y = margin_v - round(fs * 0.3) if position == 'top' else H - margin_v - band_h + round(fs * 0.3)
+    y = even(max(0, min(H - band_h, y)))
+    x, bw = even(W * 0.2), even(W * 0.6)
+    dur = video_info(proj)['duration']
+    lumas, edges = [], []
+    for k in range(12):
+        t = dur * (k + 0.5) / 12
+        raw = subprocess.run(['ffmpeg', '-v', 'error', '-ss', f'{t:.2f}', '-i', str(proj / 'source' / 'video.mp4'),
+                              '-vf', f'crop={bw}:{band_h}:{x}:{y}', '-frames:v', '1', '-f', 'rawvideo',
+                              '-pix_fmt', 'gray', '-'], capture_output=True).stdout
+        if len(raw) != bw * band_h:
+            continue
+        g = np.frombuffer(raw, np.uint8).reshape(band_h, bw).astype(np.float32)
+        lumas.append(g.mean())
+        edges.append((np.abs(np.diff(g, axis=0)).mean() + np.abs(np.diff(g, axis=1)).mean()) / 2)
+    if not lumas:
+        return 'plate', '取样失败，用预设'
+    luma, edge = float(np.median(lumas)), float(np.median(edges))
+    stat = f'字幕区亮度 {luma:.0f}、繁杂度 {edge:.1f}'
+    if luma < DARK_LUMA:
+        return ('soft', f'{stat}：暗且干净') if edge < BUSY_EDGE else ('light', f'{stat}：暗但画面花')
+    return 'plate', f'{stat}：一般画面'
 
 
 def cmd_build(a):
@@ -356,19 +475,37 @@ def cmd_build(a):
     fs = L['font']
     margin_v = a.margin_v if a.margin_v is not None else L['margin_v']
     align = 8 if a.position == 'top' else 2
-    if a.style == 'plate':  # 与 Subtitles.tsx 同色的深色字幕底板
-        style = (f'Style: Default,PingFang TC,{fs},&H00FFFFFF,&H00FFFFFF,&H2E121212,&H2E121212,-1,0,0,0,'
-                 f'100,100,0,0,3,{round(fs * 0.28)},0,{align},60,60,{margin_v},1')
-    else:  # 白字黑边 + 轻阴影，压在任何画面上都读得到
-        style = (f'Style: Default,PingFang TC,{fs},&H00FFFFFF,&H00FFFFFF,&H00000000,&H80000000,-1,0,0,0,'
-                 f'100,100,0,0,1,{max(2, round(fs * 0.075))},{max(1, round(fs * 0.04))},{align},60,60,{margin_v},1')
+    pad = round(fs * 0.28)
+    if a.style == 'auto':
+        a.style, why = pick_style(proj, W, H, fs, margin_v, a.position)
+        print(f'→ 自动选样式：{STYLE_NAMES[a.style]}（{why}）')
+    tail = f'100,100,0,0,{{bs}},{{o}},{{s}},{align},60,60,{margin_v},1'
+    # 样式名 → (主色, 边框/底板色, 阴影色, BorderStyle, 边框或底板留白, 阴影, 每条前缀)；色码 &HAABBGGRR
+    styles = {
+        'plate': ('&H00FFFFFF', '&H2E121212', '&H2E121212', 3, pad, 0, ''),          # A 深色圆角底板（同 Subtitles.tsx）
+        'soft': ('&H00FFFFFF', '&H60000000', '&H00000000', 1, round(fs * 0.14), 0, r'{\blur8}'),  # D 白字 + 柔光晕影
+        'light': ('&H00141414', '&H14F2F2F2', '&H14F2F2F2', 3, pad, 0, ''),          # E 白底黑字圆角
+    }
+    prim, edge, back, bs, o, shd, prefix = styles[a.style]
+    radius = (round(fs * 0.3) if a.radius is None else a.radius) if bs == 3 else 0
+    if radius:  # 圆角底板：ASS 的 BorderStyle 3 只有直角，改成字下面另画一层圆角矩形
+        bs, o = 1, 0
+    style = (f'Style: Default,PingFang TC,{fs},{prim},{prim},{edge},{back},-1,0,0,0,'
+             + tail.format(bs=bs, o=o, s=shd))
+    src_color = '&H505050&' if a.style == 'light' else '&HD8D8D8&'
     src_fs = round(fs * 0.6)
     body = []
     for e in events:
-        text = r'\N'.join(ass_escape(ln) for ln in e['lines'])
+        text = prefix + r'\N'.join(ass_escape(ln) for ln in e['lines'])
+        rows = [(ln, fs) for ln in e['lines']]
         if a.bilingual and e['src']:
-            text += r'\N{\fs%d\c&HD8D8D8&\b0}%s' % (src_fs, ass_escape(e['src']))
-        body.append(f'Dialogue: 0,{ass_time(e["start"])},{ass_time(e["end"])},Default,,0,0,0,,{text}')
+            text += r'\N{\fs%d\c%s\b0}%s' % (src_fs, src_color, ass_escape(e['src']))
+            rows.append((e['src'], src_fs))
+        t0, t1 = ass_time(e['start']), ass_time(e['end'])
+        if radius:
+            body.append(f'Dialogue: 0,{t0},{t1},Default,,0,0,0,,'
+                        + rounded_plate(rows, W, H, margin_v, a.position, radius, edge))
+        body.append(f'Dialogue: 1,{t0},{t1},Default,,0,0,0,,{text}')
     ass = '\n'.join([
         '[Script Info]', 'ScriptType: v4.00+', f'PlayResX: {W}', f'PlayResY: {H}',
         'WrapStyle: 0', 'ScaledBorderAndShadow: yes', '',
@@ -459,11 +596,18 @@ def main():
     p.add_argument('--force', action='store_true', help='中文来源时覆盖既有 zh.json')
     p.set_defaults(fn=cmd_transcribe)
 
+    p = sub.add_parser('segment', help='依 asr.json 重切字幕条（不重跑辨识）')
+    p.add_argument('--out', required=True)
+    p.add_argument('--force', action='store_true', help='zh.json 已存在时仍重切')
+    p.set_defaults(fn=cmd_segment)
+
     p = sub.add_parser('build', help='zh.json → ASS + SRT')
     p.add_argument('--out', required=True)
     p.add_argument('--name', help='输出档名（预设 video）')
-    p.add_argument('--style', choices=['outline', 'plate'], default='outline')
+    p.add_argument('--style', choices=['auto', 'plate', 'soft', 'light'], default='auto',
+                   help='auto 按画面自动挑；plate=A 深色圆角底板、soft=D 白字柔光、light=E 白底黑字圆角')
     p.add_argument('--bilingual', action='store_true', help='中文下方加小字原文')
+    p.add_argument('--radius', type=int, help='底板圆角（px，plate / light 适用）；预设字级的 0.3 倍，0 = 直角')
     p.add_argument('--position', choices=['bottom', 'top'], default='bottom')
     p.add_argument('--margin-v', type=int, help='字幕离画面边缘的距离（px），避开原片既有字幕时用')
     p.set_defaults(fn=cmd_build)

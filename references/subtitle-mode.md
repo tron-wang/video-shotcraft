@@ -22,8 +22,19 @@
 | 项 | 预设 | 可选 |
 |---|---|---|
 | 字幕语言 | 繁体中文（台湾用语） | — |
-| 样式 | `outline` 白字黑边 | `plate` 深色底板（原片底部很花或已有字幕时） |
+| 样式 | `auto`（按画面在 A / D / E 里自动挑） | 手动指定 `plate` / `soft` / `light` |
 | 双语 | 否 | `--bilingual` 中文下方加小字原文 |
+
+### 样式（使用者定案，只用这三种）
+
+| 代号 | `--style` | 样子 | `auto` 何时选它 |
+|---|---|---|---|
+| **A** | `plate` | 深色半透明**圆角**底板 + 白字 | 一般画面（预设） |
+| **D** | `soft` | 白字 + 柔光晕影，无底板 | 字幕区**暗且干净**（黑边、深色衣物、夜景）——深色底板在暗处会融掉 |
+| **E** | `light` | 白色**圆角**底板 + 黑字 | 字幕区**暗但很花**——反差最大 |
+
+`auto` 取 12 格字幕区的亮度与繁杂度（阈值在脚本顶部 `DARK_LUMA` / `BUSY_EDGE`），`build` 会印出选了哪种与理由。
+底板一律圆角（`--radius` 调，预设字级 0.3 倍；0 = 直角）。白字黑边、黄字等其他样式不再使用。
 | 位置 | 底部 | `--position top` / `--margin-v` 调高度 |
 
 ## 专案目录
@@ -52,9 +63,11 @@ P=~/Documents/影片專案/2026-09-19-某主題-中文字幕
 
 $PY $S fetch      --url "<URL>" --out $P          # 需登入的平台加 --cookies-from-browser chrome
 $PY $S transcribe --out $P                        # 预设 large-v3-turbo，首次下载约 1.6GB；赶时间 --model small
+$PY $S segment    --out $P [--force]              # （选用）只重切字幕条，不重跑辨识
 #   ← Agent 写 subs/zh.json（见下节）
-$PY $S build      --out $P --name <英文或拼音短名> [--style plate] [--bilingual]
+$PY $S build      --out $P --name <英文或拼音短名> [--style auto|plate|soft|light] [--bilingual] [--margin-v PX]
 $PY $S still      --out $P                        # 自动挑 4 张（含最长那条）；或 --t 秒数 指定
+#   ← 使用者要看动态：在专案目录跑 ffplay -x 1280 -y 720 -vf ass=subs/zh.ass -autoexit source/video.mp4（背景执行，不产档）
 #   ← 使用者过目、说「汇出」
 $PY $S burn       --out $P
 ```
@@ -88,7 +101,9 @@ venv 不存在时先照 `narration-mode.md` 的「环境（首次）」建好，
 `build` 会警告读速 > 9 字/秒的条目——能缩就缩（删赘字、改短说法），不行就接受。
 `still` 出的静帧要 Read 检查：
 
-- 字幕有没有压到原片既有字幕 / 字卡 / 人脸 → 改 `--margin-v`、`--position top` 或 `--style plate`
+- 字幕有没有压到原片既有字幕 / 下三分之一字卡 / 跑马灯 / 人脸 → 改 `--margin-v` 移到字卡上方，或 `--position top`
+  （新闻台、访谈节目几乎都有底部字卡，第一轮静帧就要检查）
+- `auto` 选的样式在静帧上读不清楚 → 改手动指定另外两种之一
 - 直式片字幕在画面约 80% 高度处，避开右侧与底部的平台按钮区
 - 字型是蘋方繁体中粗、没有缺字方块
 
