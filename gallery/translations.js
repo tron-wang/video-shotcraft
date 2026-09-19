@@ -184,6 +184,8 @@ window.GALLERY_I18N = {
     },
   },
   cardsZh: {
+    'map-flyover': '卫星地图航线飞越',
+    'audio-oscilloscope': '原音示波器',
     'ai-stream-response': 'AI 响应汇入',
     'beat-cut-moves': '节拍硬切',
     'before-after-slider-scrub': '前后对比拉杆',
@@ -363,6 +365,8 @@ window.GALLERY_I18N = {
     'source-strip': '来源条',
   },
   cardsEn: {
+    'map-flyover': 'A real satellite map flyover from A to B: close on the origin, pull back to show the whole great-circle route drawn in gold, then push in on the destination; night city lights by default.',
+    'audio-oscilloscope': 'An oscilloscope driven by the real audio file: a gold waveform rises and falls with the actual loudness, with phosphor trails, a label, timecode and progress bar.',
     'screen-photo-fisheye-focus': 'A real page capture is filmed like a phone pointed at a monitor — barrel distortion, beating scan-line moiré and a vignette — as the camera pushes in on one phrase and a yellow highlighter sweeps across it, bending with the lens.',
     'globe-route-flight': 'On a dark dotted globe, a great-circle route lifts off from the origin city while a lagging camera follows it, pulls back mid-flight to frame both ends, then pushes in as the destination pings and its name lands.',
     'chat-bubble-thread': 'A group chat unfolds with real messaging timing: typing dots hold the slot before each reply pops in from the avatar side, your own message is typed and sent from the composer, and the list scrolls up on the same frame.',
@@ -542,6 +546,8 @@ window.GALLERY_I18N = {
     'source-strip': 'A small bottom-left strip naming the outlet for every shot that uses an article image or page screenshot: a citation that clears subtitles and platform buttons.',
   },
   stylesZh: {
+    'map-flyover': '卫星地图航线飞越',
+    'audio-oscilloscope': '原音示波器',
     'page-anchor-tour': '长图兴趣点巡游',
     'loupe-peek': '细节原地浮起',
     'ink-circle-note': '手绘圈注与箭头',
@@ -778,6 +784,8 @@ window.GALLERY_I18N = {
     'iso-poster-stack-cycle': '等轴海报堆叠轮播',
   },
   stylesEn: {
+    'map-flyover': 'A real satellite map flyover from A to B: close on the origin, pull back to show the whole great-circle route drawn in gold, then push in on the destination; night city lights by default.',
+    'audio-oscilloscope': 'An oscilloscope driven by the real audio file: a gold waveform rises and falls with the actual loudness, with phosphor trails, a label, timecode and progress bar.',
     'card-flock-stand': 'The first half only, in black and gold: three dark UI cards tumble from edge-on into a stepped formation and keep slowly rotating until the shot ends.',
     'page-anchor-tour': 'A virtual camera visits points of interest on a long page screenshot in order, reframing and zooming for each box exactly when the narration mentions it.',
     'loupe-peek': 'The parked page dims while one small detail lifts out of its own spot as an enlarged card for about a second, then settles back: a glance, not a new scene.',

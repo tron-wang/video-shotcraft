@@ -1,6 +1,6 @@
 # video-shotcraft
 
-> video-shotcraft is an AI agent skill for Claude Code and Codex that crafts cinematic product promo videos with Remotion. It ships 176 shot recipe cards covering 234 styles with 234 motion previews, reusable Remotion components, SFX assets, a six-stage production methodology, and a production-ready 36.2-second promo template (Ink Press).
+> video-shotcraft is an AI agent skill for Claude Code and Codex that crafts cinematic product promo videos with Remotion. It ships 178 shot recipe cards covering 236 styles with 236 motion previews, reusable Remotion components, SFX assets, a six-stage production methodology, and a production-ready 36.2-second promo template (Ink Press).
 
 Each shot recipe card documents a motion technique: purpose, energy level, suggested duration, tuned parameters, implementation notes, and known pitfalls, paired with a tuned Remotion (TSX) reference implementation.
 
@@ -114,6 +114,7 @@ Each shot recipe card documents a motion technique: purpose, energy level, sugge
 - [gauge-readout-moves](https://shotcraft-gallery.nionionote.com/library.html#gauge-readout-moves): Two instrument reads: a full-range needle self-test, and a gold trend line with a price tag that climbs, sprints, overshoots and settles.
 - [globe-route-flight](https://shotcraft-gallery.nionionote.com/library.html#globe-route-flight): On a dark dotted globe, a great-circle route lifts off from the origin city while a lagging camera follows it, pulls back mid-flight to frame both ends, then pushes in as the destination pings and its name lands.
 - [hatch-depth](https://shotcraft-gallery.nionionote.com/library.html#hatch-depth): Hatched placeholder bars wipe out to length one by one, then cross-fade into solid accent-colored data bars with values popping at their tips and a LIVE header sliding in.
+- [map-flyover](https://shotcraft-gallery.nionionote.com/library.html#map-flyover): A real satellite map flyover from A to B: close on the origin, pull back to show the whole great-circle route drawn in gold, then push in on the destination; night city lights by default.
 - [odometer-digit-roll](https://shotcraft-gallery.nionionote.com/library.html#odometer-digit-roll): A full-screen metric rolls each digit like an odometer, overshoots into place, and pulses when every column locks.
 - [particle-celebrate-hits](https://shotcraft-gallery.nionionote.com/library.html#particle-celebrate-hits): Two celebration accents: crossing confetti cannons and sparks emitted when a counter passes a milestone.
 - [particle-sand-fill](https://shotcraft-gallery.nionionote.com/library.html#particle-sand-fill): Chart columns form from falling square particles, solidify when full, and finish with a value pop.
@@ -124,6 +125,7 @@ Each shot recipe card documents a motion technique: purpose, energy level, sugge
 ### Interaction & Feature Demo
 
 - [ai-stream-response](https://shotcraft-gallery.nionionote.com/library.html#ai-stream-response): A readable AI summary lands first, followed by evidence rows that stream in and resolve into a completed state.
+- [audio-oscilloscope](https://shotcraft-gallery.nionionote.com/library.html#audio-oscilloscope): An oscilloscope driven by the real audio file: a gold waveform rises and falls with the actual loudness, with phosphor trails, a label, timecode and progress bar.
 - [autolayout-gap-dial](https://shotcraft-gallery.nionionote.com/library.html#autolayout-gap-dial): A gap value dial pushes a row of blocks apart in real time while badge digits tick, then everything springs back into place.
 - [canvas-materialize-moves](https://shotcraft-gallery.nionionote.com/library.html#canvas-materialize-moves): Two materialize moves: table rows arc out of a panel and morph into canvas cards, and a typed prompt grows a cascading diagram tree.
 - [chat-bubble-thread](https://shotcraft-gallery.nionionote.com/library.html#chat-bubble-thread): A group chat unfolds with real messaging timing: typing dots hold the slot before each reply pops in from the avatar side, your own message is typed and sent from the composer, and the list scrolls up on the same frame.

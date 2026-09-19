@@ -50,6 +50,7 @@
 
 | 来源 | 卡片 |
 |---|---|
+| remotion.dev Elements（map-flyover、audio/oscilloscope）、remotionui.com（map-flight）——仅参考动效，程式为本库自写 | `map-flyover`、`audio-oscilloscope` |
 | anime.js 官网演示 | `radial-wave`、`scramble`、`svg-shape-morph`、`value-stagger-gradient` |
 | remotion-bits.dev | `basic-3d-scene`、`blur-slide`、`card-stack`、`carousel-3d`、`counter-confetti`、`cube-navigation`、`cursor-flyover`、`flying-words`、`fracture`、`glitch-cycle`、`gradient-transition`、`list-reveal`、`mosaic-reframe`、`terminal-3d`、`typing-code-block` |
 | x.com/1amanly | `avatar-bracket-carousel`、`countdown-arc-scatter`、`floating-glossy-label-pills`、`pill-chip-slot-cycle-handled`、`radial-ripple-phone-chips` |
