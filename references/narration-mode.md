@@ -299,7 +299,7 @@ node <skill>/assets/scripts/source-media.mjs --credits     # → out/CREDITS.md
 | `bar-grow-compare` | chart | data | 2–4 根长条依词锚逐根生长，零基线 |
 | `timeline-odometer` | text / photo | data | 「从 A 到 B」：大数字里程表滚动（只滚变动位数）+ 细时间轴两端节点；收尾 / 转折首选，取代相纸堆叠式收尾 |
 | `quote-plate` | text / photo / video | quote | 左缘直条 + 引言逐片语擦出，署名最后到；压实拍只拉局部暗幕 |
-| `chapter-slate` | text | chapter | 一章一色一线稿 + 左下角标 |
+| `chapter-slate` | text | chapter | 巨型编号 + 标题 + 章节进度条（预设）或文字遮罩穿越；下一镜左上挂章节胶囊角标 |
 | `clip-frame-reveal` | video / photo | broll | 实拍素材主题框：card 圆角浮卡（预设）/ hairline 细线框 / bleed 满版出血（首尾冲击镜） |
 | `photo-drift-stack` | photo | broll | 叠卡推入：2–3 张照片圆角大卡依词锚从下推上、前一张缩小后退，编号 + 大字说明 |
 
