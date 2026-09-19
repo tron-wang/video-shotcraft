@@ -301,7 +301,7 @@ node <skill>/assets/scripts/source-media.mjs --credits     # → out/CREDITS.md
 | `quote-plate` | text / photo / video | quote | 左缘直条 + 引言逐片语擦出，署名最后到；压实拍只拉局部暗幕 |
 | `chapter-slate` | text | chapter | 一章一色一线稿 + 左下角标 |
 | `clip-frame-reveal` | video / photo | broll | 实拍素材主题边框（paper / film / hairline） |
-| `photo-drift-stack` | photo | broll | 2–3 张相纸错位堆叠、极缓漂移 |
+| `photo-drift-stack` | photo | broll | 叠卡推入：2–3 张照片圆角大卡依词锚从下推上、前一张缩小后退，编号 + 大字说明 |
 
 同一句话上不要叠两种强调（`marker-sweep` 与 `ink-circle-note` 二选一）；证据镜一律配 `source-strip`。
 
