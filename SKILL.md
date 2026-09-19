@@ -1,6 +1,6 @@
 ---
 name: video-shotcraft
-description: Create cinematic product videos from shot recipe cards, a validated template, and code/audio assets (Remotion + real page screenshots + 2.5D camera moves + beat-synced cuts + sound design). Use when the user asks to turn a frontend project or webpage into a product video, says "use video-shotcraft to make a video/promo", names the Ink Press template or asks to reproduce its effect, or wants a single shot card's motion. 用镜头配方卡 + 已验收模板 + 代码/音频资产制作电影感产品视频（Remotion + 真实页面截图 + 2.5D 运镜 + 节奏卡点 + 声音设计）。当用户要求"用 video-shotcraft 做视频/宣传片"、把前端项目/网页做成产品视频、点名 Ink Press 模板或要求复刻模板片效果，或要用镜头卡做单个动效镜头时使用。 Also use for narration mode: when the user gives a news/article/blog URL, article text, a voiceover script or a voice file and wants it made into a narrated short video (script → TTS → per-character subtitles → auto-sourced licensed stock media → shot cards). 口播模式：用户给新闻/文章/部落格网址、整篇文字、口播稿或配音档，要求"做成影片/配音短片/解说视频"时也使用（口播稿 → 配音 → 逐字卡点字幕 → 自动上网采集可商用素材 → 选卡成片）。
+description: Create cinematic product videos from shot recipe cards, a validated template, and code/audio assets (Remotion + real page screenshots + 2.5D camera moves + beat-synced cuts + sound design). Use when the user asks to turn a frontend project or webpage into a product video, says "use video-shotcraft to make a video/promo", names the Ink Press template or asks to reproduce its effect, or wants a single shot card's motion. 用镜头配方卡 + 已验收模板 + 代码/音频资产制作电影感产品视频（Remotion + 真实页面截图 + 2.5D 运镜 + 节奏卡点 + 声音设计）。当用户要求"用 video-shotcraft 做视频/宣传片"、把前端项目/网页做成产品视频、点名 Ink Press 模板或要求复刻模板片效果，或要用镜头卡做单个动效镜头时使用。 Also use for narration mode: when the user gives a news/article/blog URL, article text, a voiceover script or a voice file and wants it made into a narrated short video (script → TTS → per-character subtitles → auto-sourced licensed stock media → shot cards). 口播模式：用户给新闻/文章/部落格网址、整篇文字、口播稿或配音档，要求"做成影片/配音短片/解说视频"时也使用（口播稿 → 配音 → 逐字卡点字幕 → 自动上网采集可商用素材 → 选卡成片）。 Also use for subtitle mode: when the user gives a video URL and asks to add (Chinese) subtitles. 字幕模式：用户给影片网址，要求"上字幕/加中文字幕/翻成中文字幕"时使用（下载 → 语音辨识 → 翻译或校对成繁中 → 烧录字幕成片 + SRT）。
 ---
 
 # video-shotcraft：电影感产品视频制作
@@ -11,6 +11,10 @@ description: Create cinematic product videos from shot recipe cards, a validated
 也可以单独抽卡做任意视频里的单个镜头。
 
 ## 调用时先判断模式
+
+**先看是不是字幕模式**：使用者给的是**影片**网址（YouTube / X / Threads / IG / TikTok…），要求「上字幕」
+「加中文字幕」「翻成中文字幕」，或点名「字幕模式」——即视为已选定**字幕模式**，不问问题、直接用预设开工，
+完整阅读 `references/subtitle-mode.md`。字幕文字给使用者过目一次是唯一确认点；同样遵守「不自动渲染」。
 
 **先看是不是口播模式**：使用者给的是新闻 / 文章 / 部落格网址或整篇文字，并要求「做成影片」
 「配音短片」「解说」；或给了口播稿 / 配音档；或点名「口播模式」——任一成立即视为已选定
@@ -62,7 +66,7 @@ description: Create cinematic product videos from shot recipe cards, a validated
 自主自由创作还是共同创作，只询问这两种模式，指定镜头作为后续制作约束，不自动
 等同于共同创作。
 
-## 五种用法
+## 六种用法
 
 1. **完整宣传片（模板路线）**：想要和模板片高度相似的效果 →
    读 `template/TEMPLATE.md`，按“换产品复现指南”替换素材逐镜头适配。
@@ -75,7 +79,9 @@ description: Create cinematic product videos from shot recipe cards, a validated
    `references/narration-mode.md`：取材与事实 → 口播稿 → 配音 → 逐字时间戳 →
    自动上网采集素材 → 语意分镜与选卡 → 成片（烧录字幕）。素材授权全程记在
    `assets/manifest.json`，需标注的自动产出 `out/CREDITS.md`。
-5. **单镜头/单动效**：从 `references/shots/` 选卡（或让用户在
+5. **字幕模式（影片网址 → 繁中字幕成片）**：读 `references/subtitle-mode.md`：
+   下载 → 语音辨识 → Agent 翻译 / 校对写 `subs/zh.json` → 排版 → 静帧自检 → 汇出烧录，另交付 `.srt`。
+6. **单镜头/单动效**：从 `references/shots/` 选卡（或让用户在
    `gallery/` 画廊里挑），读卡全文并按“参考实现”定位准确 demo 源码，
    适配到目标素材。
 
@@ -193,7 +199,7 @@ SFX；只有完整分镜确认后才进入最终素材采集。用户从 Gallery
 
 ### 交付收尾（所有模式共用）
 
-成片交付后**先主动打开动效工作台**（不要等用户问）：
+成片交付后**先主动打开动效工作台**（不要等用户问；字幕模式除外，它没有 Remotion 工程）：
 
 ```bash
 node workbench/scripts/open.mjs <成片工程目录>   # 链接工程 → 起 dev server（5198）→ 浏览器自动导入成片
@@ -222,6 +228,7 @@ node workbench/scripts/open.mjs <成片工程目录>   # 链接工程 → 起 de
 | 自主自由创作 | pipeline.md（Agent 自主完成阶段 0–7，不逐阶段等待确认） |
 | 共同创作 | guided-free-creation.md（确认阶段 0–3），再从 pipeline.md 阶段 4 继续 |
 | 口播模式（新闻 / 文章 / 口播稿 → 配音短片） | narration-mode.md 全文；分镜骨架 sequences/narration-news-arc.md |
+| 字幕模式（影片网址 → 加中文字幕） | subtitle-mode.md 全文（不开工作台、不导剪映） |
 | 用户已选 BGM | music-beat-sync.md（先分析再分镜） |
 | 走模板路线 | template/TEMPLATE.md 全文 |
 | 分镜设计 | sequences/ 桥段模板（全片骨架先填空）；shots/ 全部 frontmatter；选中的卡读全文 |
@@ -247,6 +254,7 @@ node workbench/scripts/open.mjs <成片工程目录>   # 链接工程 → 起 de
   `source-media.mjs`（多源素材采集 / 配额检查 / 标注清单）、`source-social.mjs`（找出并采集新闻引用的社群贴文影片）、`capture-page.mjs`（网页长图 + DOM 坐标）。
   `scaffold-narration.mjs`（专案骨架 + 生成 timeline.ts）、`anchor-lint.py`（词锚与素材机器检查）。
   `assets/lib/` 的 timing.ts / Subtitles / SlowPush / SourceStrip 由骨架脚本 copy 进专案。用法见 narration-mode.md。
+- 字幕模式同样直接从 skill 目录执行 `assets/scripts/subtitle.py`（fetch / transcribe / build / still / burn 五个子命令），用法见 subtitle-mode.md。
 - `assets/audio/` 音效直接复制使用（免费商用授权，见 audio/ATTRIBUTION.md）：
   `audio/bgm/` 是节奏感强的 BGM 备选；`audio/sfx/<类别>/` 146 个音效按场景分 16 类
   （transition impact riser camera ui text paper film light data scifi mech
