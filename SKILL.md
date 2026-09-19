@@ -177,6 +177,20 @@ SFX；只有完整分镜确认后才进入最终素材采集。用户从 Gallery
 对照 `references/aesthetic-rules.md` 自检；阶段 6 读
 `references/sound-design.md`；卡点片全程贴 `references/music-beat-sync.md`。
 
+### 成片工程放哪里（所有模式共用）
+
+建新成片工程（复制模板、跑 `scaffold-narration.mjs --out …`）之前，先读 skill 根目录的
+`shotcraft.local.json`（使用者本机设定，不进 git）：
+
+```json
+{ "projectsRoot": "~/Documents/影片專案", "naming": "YYYY-MM-DD-中文主題" }
+```
+
+- 有这个档：新工程**一律**建在 `projectsRoot` 下，目录名 = 开工日期 + 中文主题
+  （例：`2026-09-19-習近平中風謠言`；不含空格，英文专有名词用连字号连接，如 `2026-09-16-iPhone-Duo新品影片`）
+- 没有这个档：沿用旧做法（在使用者当前工作目录旁建），并在回报里提一句可以建这个档固定位置
+- 同一支片的改版、口播版等衍生工程也建在 `projectsRoot` 下，名字后缀标明（如 `…-口播版`），不要塞进原工程
+
 ### 交付收尾（所有模式共用）
 
 成片交付后**先主动打开动效工作台**（不要等用户问）：

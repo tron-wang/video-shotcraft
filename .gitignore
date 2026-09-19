@@ -31,3 +31,6 @@ gallery/templates/
 
 # 口播模式的 API 金钥（MiniMax / Pexels / Pixabay / Unsplash），绝不进库
 .env
+
+# 使用者本機设定（成片工程根目录等），不进 git
+shotcraft.local.json

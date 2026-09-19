@@ -105,7 +105,8 @@ const renderExportPlugin = (): Plugin => {
             );
             rsync.stderr.on("data", onChunk);
             rsync.on("close", (rc) => {
-              if (rc !== 0) {
+              // 24 = 同步途中有来源档案消失（例如素材资料夹正被其他作业清理）；已同步到的档案可用，不算失败
+              if (rc !== 0 && rc !== 24) {
                 dropProps();
                 job.status = "error";
                 job.lastLine = `素材同步失败（rsync 退出码 ${rc}）：${job.lastLine}`;
