@@ -1,122 +1,126 @@
-// mosaic-reframe — Mosaic Reframe 三段布局重排（motion-lab 定稿转原生 Remotion）
-// 12 张图片瓦片在三种排版间连续变形：4x3 规则网格 → 带一块 2x2 大图的 feature
-// mosaic → 对角线瀑布串（每片 -15°+i*3° 递增旋转）。位置与宽高各自独立插值，
-// 每片按 index 微 stagger，smoothstep 缓动，段间留 hold。
-// 设计坐标 480×270（DesignStage 等比放大），参数表数值以此坐标系标定。
+// mosaic-reframe — 网格 → 主图聚焦 → 换主图（2026-09 改版；卡名沿用）
+// 一组照片先以规则网格浮现；旁白点到哪张，哪张就放大成主图（横式在左、直式在上），
+// 其余缩成一旁的小图栏；再点下一张，主图换人——同一批内容，镜头跟着口播一张张聚焦。
+// 每片的 x / y / w / h 独立插值（不是整体缩放，圆角与描边不变形），逐片错开 2 帧、smoothstep，读作一波重排。
+// （旧版：12 张紫色渐层方块在网格 → feature mosaic → 旋转对角瀑布间重排；
+//   使用者从「网格→便当→斜瀑布 / 网格→主图聚焦→换主图 / 网格→便当→满版 / 网格→便当→胶卷横排」里选了主图聚焦。）
+// 以画幅比例排版，横式直式都能用。
 import React from 'react';
-import { DesignStage, E, lerp, rand, seg, useT } from '../../_fixtures/Motion';
+import { Img, staticFile, useCurrentFrame, useVideoConfig } from 'remotion';
+import { FakePhoto } from '../../_fixtures/Narration';
 
-export const MOSAIC_REFRAME_DURATION = 180; // 6000ms @30fps
+export const MOSAIC_REFRAME_DURATION = 180; // 6s @30fps
 
-// smoothstep：段内缓动（原配方即用它替代 E 表）
-const smooth = (x: number) => x * x * (3 - 2 * x);
-
-type Box = { x: number; y: number; w: number; h: number; rot: number };
-const KEYS = ['x', 'y', 'w', 'h', 'rot'] as const;
-
-// 累加式关键帧插值：各段进度独立过 ease 后按差值叠加，天然支持窗间 hold
-const acc = (t: number, base: Box, kfs: { at: [number, number]; to: Box }[], ease: (x: number) => number): Box => {
-  const out: Box = { ...base };
-  let prev = base;
-  for (const kf of kfs) {
-    const u = seg(t, kf.at[0], kf.at[1], ease);
-    for (const k of KEYS) out[k] += u * (kf.to[k] - prev[k]);
-    prev = kf.to;
-  }
-  return out;
+export type MosaicHero = {
+  /** 放大成主图的是第几张（0 起）。 */
+  index: number;
+  /** 开始换成这张的帧（成片 = 旁白点到它的词锚 − 10 左右）。 */
+  at: number;
 };
 
-// ---- layout A: 4x3 规则网格 ----
-const gw = (92 - 3 * 2) / 4, gh = (92 - 2 * 2) / 3;
-const A: Box[] = Array.from({ length: 12 }, (_, i) => {
-  const c = i % 4, r = (i / 4) | 0;
-  return { x: 4 + c * (gw + 2), y: 4 + r * (gh + 2), w: gw, h: gh, rot: 0 };
-});
+export type MosaicReframeProps = {
+  /** 照片：public/ 下的路径（字串）或任意 ReactNode。4–12 张。 */
+  items: (string | React.ReactNode)[];
+  /** 依序聚焦的主图；第一个之前是网格。 */
+  heroes: MosaicHero[];
+  /** 网格浮现的起点帧。 */
+  enterAt?: number;
+  /** 每次重排所用帧数。 */
+  moveFrames?: number;
+  /** 逐片错开帧数。 */
+  stagger?: number;
+  /** 小图栏的亮度（主图之外的照片退到背景）。 */
+  thumbOpacity?: number;
+  stroke?: string;
+  bg?: string;
+};
 
-// ---- layout B: feature mosaic（6x4 单元格，t0 占 3x2）----
-const uw = (92 - 5 * 1.2) / 6, uh = (92 - 3 * 1.2) / 4;
-const SLOTS: [number, number, number, number][] = [
-  [0, 0, 3, 2], [3, 0, 1, 1], [4, 0, 1, 1], [5, 0, 1, 1], [3, 1, 2, 1], [5, 1, 1, 1],
-  [0, 2, 1, 1], [1, 2, 2, 1], [3, 2, 1, 2], [4, 2, 2, 1], [0, 3, 3, 1], [4, 3, 2, 1],
-];
-const B: Box[] = SLOTS.map(([c, r, cw, rh]) => ({
-  x: 4 + c * (uw + 1.2), y: 4 + r * (uh + 1.2),
-  w: cw * uw + (cw - 1) * 1.2, h: rh * uh + (rh - 1) * 1.2, rot: 0,
-}));
+type R = { x: number; y: number; w: number; h: number; o: number };
+const clamp01 = (t: number) => Math.min(1, Math.max(0, t));
+const smooth = (t: number) => t * t * (3 - 2 * t);
+const mix = (a: number, b: number, t: number) => a + (b - a) * t;
+const lerpR = (a: R, b: R, t: number): R => ({ x: mix(a.x, b.x, t), y: mix(a.y, b.y, t), w: mix(a.w, b.w, t), h: mix(a.h, b.h, t), o: mix(a.o, b.o, t) });
 
-// ---- layout C: 对角线瀑布串 ----
-const C: Box[] = Array.from({ length: 12 }, (_, i) => ({
-  x: 1 + i * 6.4, y: -7 + i * 7.6, w: 23, h: 27, rot: -15 + i * 3,
-}));
+/** 规则网格：横式 4 栏、直式 3 栏，整组置中。 */
+const gridLayout = (n: number, W: number, H: number): R[] => {
+  const land = W >= H;
+  const cols = land ? 4 : 3;
+  const rows = Math.ceil(n / cols);
+  const g = Math.min(W, H) * 0.022;
+  const cw = Math.min((W * 0.82 - (cols - 1) * g) / cols, ((H * (land ? 0.8 : 0.6) - (rows - 1) * g) / rows) * 1.5);
+  const chh = cw / 1.5;
+  const x0 = (W - (cols * cw + (cols - 1) * g)) / 2;
+  const y0 = (H - (rows * chh + (rows - 1) * g)) / 2;
+  return Array.from({ length: n }, (_, i) => ({ x: x0 + (i % cols) * (cw + g), y: y0 + Math.floor(i / cols) * (chh + g), w: cw, h: chh, o: 1 }));
+};
 
-export const MosaicReframe: React.FC = () => {
-  const t = useT();
+/** 主图聚焦：横式主图在左、其余两栏小图在右；直式主图在上、其余三栏小图在下。 */
+const heroLayout = (n: number, k: number, W: number, H: number, thumbO: number): R[] => {
+  const land = W >= H;
+  const g = Math.min(W, H) * 0.015;
+  if (land) {
+    const hero = { x: W * 0.0625, y: H * 0.111, w: W * 0.615, h: H * 0.778, o: 1 };
+    const tx0 = hero.x + hero.w + W * 0.026, tw = (W * 0.94 - tx0 - g) / 2;
+    const rows = Math.ceil((n - 1) / 2);
+    const th = Math.min(tw * 0.6, (hero.h - (rows - 1) * g) / rows);
+    let j = 0;
+    return Array.from({ length: n }, (_, i) => {
+      if (i === k) return hero;
+      const c = j % 2, r = Math.floor(j / 2); j++;
+      return { x: tx0 + c * (tw + g), y: hero.y + r * (th + g), w: tw, h: th, o: thumbO };
+    });
+  }
+  const hero = { x: W * 0.056, y: H * 0.09, w: W * 0.888, h: H * 0.42, o: 1 };
+  const cols = 3, tw = (hero.w - (cols - 1) * g) / cols;
+  const rows = Math.ceil((n - 1) / cols);
+  const th = Math.min(tw * 0.66, (H * 0.74 - (hero.y + hero.h + g * 2) - (rows - 1) * g) / rows);
+  let j = 0;
+  return Array.from({ length: n }, (_, i) => {
+    if (i === k) return hero;
+    const c = j % cols, r = Math.floor(j / cols); j++;
+    return { x: hero.x + c * (tw + g), y: hero.y + hero.h + g * 2 + r * (th + g), w: tw, h: th, o: thumbO };
+  });
+};
+
+export const MosaicReframeShot: React.FC<MosaicReframeProps> = ({
+  items, heroes, enterAt = 0, moveFrames = 27, stagger = 2, thumbOpacity = 0.75, stroke = 'rgba(224,176,75,0.45)', bg = '#0b0c0f',
+}) => {
+  const f = useCurrentFrame();
+  const { width: W, height: H } = useVideoConfig();
+  const n = items.length;
+  const u = Math.min(W, H) / 1080;
+  const layouts = [gridLayout(n, W, H), ...heroes.map((h) => heroLayout(n, h.index, W, H, thumbOpacity))];
+  // 当前主图抬高层级（换主图时新主图压在上面）
+  let top = -1;
+  heroes.forEach((h) => { if (f >= h.at) top = h.index; });
   return (
-    <DesignStage bg="#0a0b10" raster="zoom">
-      {A.map((base, i) => {
-        const hue = 198 + i * 13;
-        const st = i * 0.007; // ≈ index*2 帧微 stagger
-        const v = acc(t, base, [
-          { at: [0.26 + st, 0.42 + st], to: B[i] }, // A → B
-          { at: [0.62 + st, 0.80 + st], to: C[i] }, // hold 后 B → C
-        ], smooth);
-        const pop = seg(t, i * 0.012, i * 0.012 + 0.14, E.outCubic); // 开场逐片浮现
+    <div style={{ position: 'absolute', inset: 0, background: bg, overflow: 'hidden' }}>
+      {items.map((it, i) => {
+        let r = layouts[0][i];
+        heroes.forEach((h, s) => { r = lerpR(r, layouts[s + 1][i], smooth(clamp01((f - h.at - i * stagger) / moveFrames))); });
+        const inT = clamp01((f - enterAt - i * stagger) / 16);
+        const e = 1 - Math.pow(1 - inT, 3);
         return (
           <div
             key={i}
             style={{
-              position: 'absolute',
-              borderRadius: 7,
-              overflow: 'hidden',
-              background: `linear-gradient(${140 + i * 9}deg,hsl(${hue},58%,42%),hsl(${hue + 26},64%,20%))`,
-              boxShadow: `0 8px 22px rgba(0,0,0,.45),inset 0 0 0 1px hsla(${hue},70%,72%,.22)`,
-              left: `${v.x}%`,
-              top: `${v.y}%`,
-              width: `${v.w}%`,
-              height: `${v.h}%`,
-              transform: `rotate(${v.rot}deg) scale(${lerp(pop, 0.82, 1)})`,
-              opacity: pop,
-              zIndex: 10 + (i === 0 ? 5 : 0),
+              position: 'absolute', left: r.x, top: r.y, width: r.w, height: r.h, borderRadius: 16 * u, overflow: 'hidden',
+              border: `1.5px solid ${stroke}`, boxShadow: '0 16px 40px rgba(0,0,0,0.5)', background: '#14161b',
+              transform: `scale(${mix(0.82, 1, e)})`, opacity: e * r.o, zIndex: i === top ? 5 : 1,
             }}
           >
-            {/* 占位"图片"内容：一枚圆点 + 两条信息条 */}
-            <div
-              style={{
-                position: 'absolute',
-                left: 9,
-                top: 9,
-                width: 9,
-                height: 9,
-                borderRadius: '50%',
-                background: `hsla(${hue + 40},90%,78%,.95)`,
-                boxShadow: `0 0 10px hsla(${hue + 40},90%,70%,.7)`,
-              }}
-            />
-            <div
-              style={{
-                position: 'absolute',
-                left: 9,
-                bottom: 16,
-                height: 5,
-                width: `${34 + rand(i) * 30}%`,
-                borderRadius: 3,
-                background: 'hsla(0,0%,100%,.6)',
-              }}
-            />
-            <div
-              style={{
-                position: 'absolute',
-                left: 9,
-                bottom: 8,
-                height: 4,
-                width: `${20 + rand(i + 7) * 24}%`,
-                borderRadius: 2,
-                background: 'hsla(0,0%,100%,.28)',
-              }}
-            />
+            {typeof it === 'string' ? <Img src={staticFile(it)} style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : it}
           </div>
         );
       })}
-    </DesignStage>
+    </div>
   );
 };
+
+// demo：12 张示意风景（FakePhoto）；网格 → 第 1 张当主图 → 换第 6 张
+export const MosaicReframe: React.FC = () => (
+  <MosaicReframeShot
+    items={Array.from({ length: 12 }, (_, i) => <FakePhoto seed={i * 5 + 1} />)}
+    heroes={[{ index: 0, at: 48 }, { index: 5, at: 111 }]}
+  />
+);
