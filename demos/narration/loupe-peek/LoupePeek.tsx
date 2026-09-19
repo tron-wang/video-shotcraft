@@ -1,9 +1,10 @@
-// loupe-peek — 放大镜瞥一眼（口播模式 · evidence）
-// 来源页（或一张照片）已停靠不动，只有 slowPush。旁白点到某个小细节的那一帧，一只圆形放大镜弹出来，
-// 把那一小块放大给观众看约一秒，随即收走——「瞄一眼，继续讲」。它不是新的一镜：底图不换、不移、不暗，
-// 放大镜在句子讲完之前就已经消失。
-// 放大镜里是**同一份内容再渲染一次**（放大 zoom 倍、裁成圆），不用 canvas、不量 DOM：
-// 所有位置都由「内容坐标 → 舞台坐标」的纯算式得出，所以底图被 slowPush 推着走，镜内画面也一起走。
+// loupe-peek — 原地浮起瞥一眼（口播模式 · evidence）
+// 来源页（或一张照片）已停靠，只有 slowPush。旁白点到某个小细节时，页面压暗一半，那一小块像一张卡从原位浮起、
+// 放大到读得清（预设 2.4 倍、水平置中），停约一秒，再落回原位、页面恢复——「瞄一眼，继续讲」。它不是新的一镜：
+// 底图不换、不移，浮起的卡落回去之后画面完全回到原样。
+// （2026-09 改版：原圆形玻璃放大镜太拟物，使用者从「放大框＋引线 / 原地浮起 / 镜头推近 / 细节抽屉」四案里选了原地浮起。）
+// 浮起卡里是**同一份内容再渲染一次**（以放大后的实际尺寸排版，不是点阵放大，字保持锐利），不用 canvas、不量 DOM：
+// 所有位置都由「内容坐标 → 舞台坐标」的纯算式得出，底图被 slowPush 推着走，浮起卡的起点也跟着走。
 // 设计坐标 1080×1920（NarrationStage），不含舞台，成片可直接用 LoupePeekShot。
 import React from 'react';
 import { useCurrentFrame } from 'remotion';
@@ -11,40 +12,35 @@ import { E, lerp, seg } from '../../_fixtures/Motion';
 import { FakeArticle, N, NarrationStage, PAGE, PAGE_BOXES, SAFE, slowPush } from '../../_fixtures/Narration';
 
 export type LoupeTarget = { x: number; y: number; w: number; h: number };
-export type LoupeOffset = { dx: number; dy: number };
 export type LoupeGlance = {
   /** 要放大的那一小块，内容坐标（boxes.json 的矩形，或在照片上自己选）。 */
   target: LoupeTarget;
-  /** 放大镜**完全张开**的那一帧（相对本镜起点）。成片 = f(tWord(i, '词')) - shotFrom。 */
+  /** 浮起卡**完全放大**的那一帧（相对本镜起点）。成片 = f(tWord(i, '词')) - shotFrom。 */
   at: number;
-  /** 张开后停留的帧数；缺省取卡的 hold。 */
+  /** 放大后停留的帧数；缺省取卡的 hold。 */
   hold?: number;
-  /** 这一瞥单独的摆位；缺省取卡的 offset。 */
-  offset?: LoupeOffset;
 };
 
 export type LoupePeekProps = {
   /** 单瞥写法：目标框（内容坐标）。给了 peeks 就忽略 target / at。 */
   target?: LoupeTarget;
-  /** 单瞥写法：放大镜完全张开的帧。 */
+  /** 单瞥写法：完全放大的帧。 */
   at?: number;
-  /** 多瞥写法（一镜最多两瞥）。相邻两瞥的 at 至少相隔 hold + outFrames + MIN_GAP + inFrames（预设 30+7+6+8 = 51f）。 */
+  /** 多瞥写法（一镜最多两瞥）。相邻两瞥的 at 至少相隔 hold + outFrames + MIN_GAP + inFrames（预设 30+10+6+12 = 58f）。 */
   peeks?: LoupeGlance[];
-  /** 张开后停留的帧数。 */
+  /** 放大后停留的帧数。 */
   hold?: number;
-  /** 张开用几帧（at - inFrames 之前完全不渲染）。 */
+  /** 浮起用几帧（at - inFrames 之前完全不渲染）。 */
   inFrames?: number;
-  /** 收走用几帧（比张开快）。 */
+  /** 落回用几帧。 */
   outFrames?: number;
-  /** 镜内相对底图的放大倍率（上限）。目标框放大后放不进镜面时会自动降到刚好放得下，最低 1.4。 */
+  /** 相对底图的放大倍率（上限）。放大后宽度超过面板宽 − 80 时自动降到刚好放得下。 */
   zoom?: number;
-  /** 放大镜外径（含镜框），舞台 px。 */
-  diameter?: number;
-  /** 放大镜圆心相对目标中心的位移（舞台 px）。预设右上；放不进 SAFE 或压到右缘按钮区会自动翻面。 */
-  offset?: LoupeOffset;
+  /** 浮起期间页面压暗的程度（黑幕不透明度峰值）。 */
+  dim?: number;
   /** 镜头总帧数（只用来算 slowPush）。 */
   duration?: number;
-  /** 内容本体（内容坐标系、原点左上）。会被渲染两次：底图一次、镜内一次。 */
+  /** 内容本体（内容坐标系、原点左上）。会被渲染两次：底图一次、浮起卡一次。 */
   content?: React.ReactNode;
   contentW?: number;
   contentH?: number;
@@ -52,58 +48,32 @@ export type LoupePeekProps = {
   contentY?: number;
   /** 内容在面板里的缩放；缺省 = 铺满面板（cover），水平置中。 */
   contentScale?: number;
-  /** 面板与镜内的垫底色（内容没盖到的地方）。照片请给深色。 */
+  /** 面板与浮起卡的垫底色（内容没盖到的地方）。照片请给深色。 */
   backdrop?: string;
-  /** 引线与目标环的颜色。 */
-  color?: string;
 };
 
 // ───────── 几何与手感常量（蒙皮时不动）─────────
 const PANEL_RADIUS = 28;
-const RIM = 6; // 镜框宽
-const RING_PAD = 8; // 目标环比目标框各边多出
-const RING_W = 3;
-const LEADER_W = 3;
-const OPEN_FROM = 0.6; // 张开：0.6 → 1
-const OPEN_BACK = 1.4; // outBack 回弹量：峰值约 +2.5%，只过冲一次
-const CLOSE_TO = 0.85; // 收走：1 → 0.85 + 淡出
+const CARD_PAD = 14; // 浮起卡比目标框各边多出的留白（内容 px，用垫底色补，不多带邻字——多带会切进半个邻字）
+const CLIP_Y = 4; // 内容只在上下多露这么多（行距里的空白），左右严格裁在目标框上
+const CARD_RADIUS = 18; // 完全浮起时的圆角（原位时 4）
+const SIDE_MARGIN = 40; // 浮起卡离面板左右缘至少这么多
 const PUSH_TO = 1.04;
-const FIT = 0.9; // 目标框对角线放大后最多占镜面直径的几成
-const MIN_ZOOM = 1.4; // 自动降倍率的下限；再低就不像放大镜了——改选更小的目标框
-/** 前一瞥收完到后一瞥开始张开之间至少空几帧。不足时前一瞥的 hold 会被自动截短，绝不同屏两只放大镜。 */
+/** 前一瞥落回到后一瞥开始浮起之间至少空几帧。不足时前一瞥的 hold 会被自动截短，绝不同屏两张浮起卡。 */
 export const LOUPE_MIN_GAP = 6;
-// 右缘平台按钮区（narration-mode 版面表）：放大镜的外接框不进这一块
-const BUTTON_ZONE = { x: 900, y0: 900, y1: 1700 };
 
-type Resolved = { target: LoupeTarget; start: number; at: number; closeStart: number; end: number; offset: LoupeOffset };
+type Resolved = { target: LoupeTarget; start: number; at: number; closeStart: number; end: number };
 
 /** 把 props 摊平成按时间排序、互不重叠的瞥。 */
-const resolvePeeks = (
-  raw: LoupeGlance[], hold: number, inFrames: number, outFrames: number, offset: LoupeOffset,
-): Resolved[] => {
+const resolvePeeks = (raw: LoupeGlance[], hold: number, inFrames: number, outFrames: number): Resolved[] => {
   const sorted = [...raw].sort((a, b) => a.at - b.at);
   return sorted.map((p, i) => {
     const start = p.at - inFrames;
     let closeStart = p.at + (p.hold ?? hold);
     const next = sorted[i + 1];
     if (next) closeStart = Math.max(p.at, Math.min(closeStart, next.at - inFrames - LOUPE_MIN_GAP - outFrames));
-    return { target: p.target, start, at: p.at, closeStart, end: closeStart + outFrames, offset: p.offset ?? offset };
+    return { target: p.target, start, at: p.at, closeStart, end: closeStart + outFrames };
   });
-};
-
-const fits = (cx: number, cy: number, r: number) =>
-  cx - r >= SAFE.x && cx + r <= SAFE.x + SAFE.w && cy - r >= SAFE.y && cy + r <= SAFE.y + SAFE.h;
-const hitsButtons = (cx: number, cy: number, r: number) =>
-  cx + r > BUTTON_ZONE.x && cy + r > BUTTON_ZONE.y0 && cy - r < BUTTON_ZONE.y1;
-
-/** 选摆位：原样 → 左右翻 → 上下翻 → 都翻；先求「在 SAFE 内且不压按钮区」，退而求「在 SAFE 内」，再不行用原样（之后会被夹回 SAFE）。 */
-const pickOffset = (tx: number, ty: number, o: LoupeOffset, r: number): LoupeOffset => {
-  const cands: LoupeOffset[] = [o, { dx: -o.dx, dy: o.dy }, { dx: o.dx, dy: -o.dy }, { dx: -o.dx, dy: -o.dy }];
-  return (
-    cands.find((c) => fits(tx + c.dx, ty + c.dy, r) && !hitsButtons(tx + c.dx, ty + c.dy, r)) ??
-    cands.find((c) => fits(tx + c.dx, ty + c.dy, r)) ??
-    o
-  );
 };
 
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
@@ -118,10 +88,10 @@ const DEMO_CAPTION: LoupeTarget = {
   x: PAGE_BOXES.chart.x + 18 + 3 * 24 - 4, y: PAGE_BOXES.chart.y + PAGE_BOXES.chart.h - 56, w: 7 * 24 + 8, h: 42,
 };
 const DEMO_PEEKS: LoupeGlance[] = [
-  { target: DEMO_DIGITS, at: 34, hold: 34 },
-  { target: DEMO_CAPTION, at: 100, hold: 30 },
+  { target: DEMO_DIGITS, at: 38, hold: 30 },
+  { target: DEMO_CAPTION, at: 108, hold: 26 },
 ];
-const DEMO_CONTENT_Y = 1120; // 两个目标都落在面板中段偏下，放大镜预设摆右上放得进 SAFE
+const DEMO_CONTENT_Y = 1120;
 
 export const LOUPE_PEEK_DURATION = 150; // 5s @30fps
 
@@ -130,11 +100,10 @@ export const LoupePeekShot: React.FC<LoupePeekProps> = ({
   at,
   peeks,
   hold = 30,
-  inFrames = 8,
-  outFrames = 7,
-  zoom = 2.2,
-  diameter = 440,
-  offset = { dx: 170, dy: -280 },
+  inFrames = 12,
+  outFrames = 10,
+  zoom = 2.4,
+  dim = 0.5,
   duration = LOUPE_PEEK_DURATION,
   content = <FakeArticle />,
   contentW = PAGE.w,
@@ -142,13 +111,12 @@ export const LoupePeekShot: React.FC<LoupePeekProps> = ({
   contentY = DEMO_CONTENT_Y,
   contentScale,
   backdrop = N.paper,
-  color = N.accent,
 }) => {
   const frame = useCurrentFrame();
   const raw: LoupeGlance[] = peeks ?? (target && at !== undefined ? [{ target, at }] : DEMO_PEEKS);
-  const list = resolvePeeks(raw, hold, inFrames, outFrames, offset);
+  const list = resolvePeeks(raw, hold, inFrames, outFrames);
 
-  // ── 内容坐标 → 舞台坐标（纯算式，底图与镜内共用）──
+  // ── 内容坐标 → 面板坐标（纯算式，底图与浮起卡共用）──
   const s = contentScale ?? Math.max(SAFE.w / contentW, SAFE.h / contentH);
   const left = (SAFE.w - contentW * s) / 2;
   const cy0 = clamp(contentY, 0, Math.max(0, contentH - SAFE.h / s));
@@ -158,127 +126,61 @@ export const LoupePeekShot: React.FC<LoupePeekProps> = ({
   const ox = centres.length ? centres.reduce((a, c) => a + c.x, 0) / centres.length : SAFE.w / 2;
   const oy = centres.length ? centres.reduce((a, c) => a + c.y, 0) / centres.length : SAFE.h / 2;
   const push = slowPush(frame, duration, 1, PUSH_TO);
-  const stagePt = (x: number, y: number, k: number) => {
-    const p = panelPt(x, y);
-    return { x: SAFE.x + ox + (p.x - ox) * k, y: SAFE.y + oy + (p.y - oy) * k };
+  const pushed = (x: number, y: number) => {
+    const q = panelPt(x, y);
+    return { x: ox + (q.x - ox) * push, y: oy + (q.y - oy) * push };
   };
 
-  // 当前这一帧活着的那一瞥（resolvePeeks 保证至多一个）
-  const live = list.find((p) => frame > p.start && frame < p.end);
+  // 每一瞥的进度：0（原位）→ 1（完全浮起）→ 0（落回）
+  const progress = (p: Resolved) =>
+    frame < p.start || frame >= p.end ? 0 : seg(frame, p.start, p.at, E.outCubic) * (1 - seg(frame, p.closeStart, p.end, E.inOutCubic));
+  const dimNow = Math.max(0, ...list.map(progress)) * dim;
 
-  let overlay: React.ReactNode = null;
-  if (live) {
-    const R = diameter / 2;
-    const t = live.target;
-    const tcx = t.x + t.w / 2;
-    const tcy = t.y + t.h / 2;
-    // 摆位用镜尾（推到最满）时的目标位置来决定，整镜不会中途翻面
-    const endPt = stagePt(tcx, tcy, PUSH_TO);
-    const off = pickOffset(endPt.x, endPt.y, live.offset, R);
-    const c = stagePt(tcx, tcy, push);
-    const lx = clamp(c.x + off.dx, SAFE.x + R, SAFE.x + SAFE.w - R);
-    const ly = clamp(c.y + off.dy, SAFE.y + R, SAFE.y + SAFE.h - R);
-
-    // 时间轴：张开（outBack 小过冲一次）→ 停 → 收走（更快，缩到 0.85 + 淡出）
-    const open = seg(frame, live.start, live.at, (x) => E.outBack(x, OPEN_BACK));
-    const closing = seg(frame, live.closeStart, live.end, E.inQuad);
-    const scale = lerp(open, OPEN_FROM, 1) * lerp(closing, 1, CLOSE_TO);
-    const alpha = seg(frame, live.start, live.start + inFrames * 0.6, E.outCubic) * (1 - seg(frame, live.closeStart, live.end, E.outQuad));
-    const grow = seg(frame, live.start, live.at, E.outCubic);
-
-    // 目标环（舞台坐标，跟着 push）
-    const k = s * push;
-    const hw = (t.w * k) / 2 + RING_PAD;
-    const hh = (t.h * k) / 2 + RING_PAD;
-    const ringScale = lerp(grow, 1.12, 1);
-    // 引线：从环的边缘沿「环心 → 镜心」方向走到镜框外缘
-    const dx = lx - c.x;
-    const dy = ly - c.y;
-    const dist = Math.max(1, Math.hypot(dx, dy));
-    const ux = dx / dist;
-    const uy = dy / dist;
-    const exit = Math.min(Math.abs(ux) > 1e-6 ? hw / Math.abs(ux) : Infinity, Math.abs(uy) > 1e-6 ? hh / Math.abs(uy) : Infinity);
-    const rim = dist - R * scale;
-    const hasLeader = rim > exit + 4;
-    const tip = lerp(grow, exit, rim);
-
-    // 镜内总缩放：目标框放大后要整块落在镜面里（留 FIT 的边），放不下就自动降倍率，但不低于 MIN_ZOOM
-    const inner = diameter - RIM * 2;
-    const fitZoom = (FIT * inner) / Math.max(1, Math.hypot(t.w, t.h) * k);
-    const Z = k * Math.max(MIN_ZOOM, Math.min(zoom, fitZoom));
-
-    overlay = (
-      <div style={{ position: 'absolute', inset: 0, opacity: alpha, pointerEvents: 'none' }}>
-        <div
-          style={{
-            position: 'absolute', left: c.x - hw, top: c.y - hh, width: hw * 2, height: hh * 2, boxSizing: 'border-box',
-            border: `${RING_W}px solid ${color}`, borderRadius: Math.min(hh, 18),
-            transform: `scale(${ringScale})`,
-          }}
-        />
-        {hasLeader && (
-          <svg width={1080} height={1920} style={{ position: 'absolute', left: 0, top: 0 }}>
-            <line
-              x1={c.x + ux * exit} y1={c.y + uy * exit} x2={c.x + ux * tip} y2={c.y + uy * tip}
-              stroke={color} strokeWidth={LEADER_W} strokeLinecap="round"
-            />
-          </svg>
-        )}
-        {/* 放大镜：整只一起缩放（镜框 + 镜内），圆心固定 */}
-        <div
-          style={{
-            position: 'absolute', left: lx - R, top: ly - R, width: diameter, height: diameter, borderRadius: '50%',
-            transform: `scale(${scale})`, background: N.paper,
-            boxShadow: '0 0 0 1px rgba(0,0,0,0.55), 0 22px 48px rgba(0,0,0,0.36), 0 4px 10px rgba(0,0,0,0.22)',
-          }}
-        >
-          <div style={{ position: 'absolute', left: RIM, top: RIM, width: inner, height: inner, borderRadius: '50%', overflow: 'hidden', background: backdrop }}>
-            {/* 同一份内容的第二次渲染：放大 Z 倍，目标中心对到圆心 */}
-            <div
-              style={{
-                position: 'absolute', left: inner / 2 - tcx * Z, top: inner / 2 - tcy * Z, width: contentW, height: contentH,
-                transform: `scale(${Z})`, transformOrigin: '0 0',
-              }}
-            >
-              {content}
-            </div>
-            {/* 极淡的内缘暗角 + 内侧发丝线，把镜面和纸面分开；不做反光、不做模糊 */}
-            <div
-              style={{
-                position: 'absolute', inset: 0, borderRadius: '50%',
-                background: 'radial-gradient(circle, rgba(0,0,0,0) 68%, rgba(0,0,0,0.10) 100%)',
-                boxShadow: 'inset 0 0 0 1px rgba(0,0,0,0.28)',
-              }}
-            />
-          </div>
-        </div>
-      </div>
-    );
-  }
+  const renderContent = (sc: number, dx: number, dy: number) => (
+    <div style={{ position: 'absolute', left: dx, top: dy, width: contentW, height: contentH, transform: `scale(${sc})`, transformOrigin: '0 0' }}>{content}</div>
+  );
 
   return (
-    <>
-      <div
-        style={{
-          position: 'absolute', left: SAFE.x, top: SAFE.y, width: SAFE.w, height: SAFE.h,
-          borderRadius: PANEL_RADIUS, overflow: 'hidden', background: backdrop,
-          boxShadow: `0 0 0 2px ${N.line}33`,
-        }}
-      >
-        {/* 底图：整镜只有这一条极缓推近，不位移、不变暗 */}
+    <div style={{ position: 'absolute', left: SAFE.x, top: SAFE.y, width: SAFE.w, height: SAFE.h }}>
+      {/* 底图面板 */}
+      <div style={{ position: 'absolute', inset: 0, borderRadius: PANEL_RADIUS, overflow: 'hidden', background: backdrop }}>
         <div style={{ position: 'absolute', inset: 0, transform: `scale(${push})`, transformOrigin: `${ox}px ${oy}px` }}>
+          {renderContent(s, left, -cy0 * s)}
+        </div>
+        <div style={{ position: 'absolute', inset: 0, background: '#000', opacity: dimNow }} />
+      </div>
+
+      {/* 浮起卡：从目标原位（面板坐标）插值到放大后的水平置中位置 */}
+      {list.map((p, i) => {
+        const t = progress(p);
+        if (t <= 0) return null;
+        const tp = { x: p.target.x - CARD_PAD, y: p.target.y - CARD_PAD, w: p.target.w + CARD_PAD * 2, h: p.target.h + CARD_PAD * 2 };
+        const a = pushed(tp.x, tp.y);
+        const sc0 = s * push;
+        const r0 = { x: a.x, y: a.y, w: tp.w * sc0, h: tp.h * sc0 };
+        const sc1 = Math.min(s * zoom, (SAFE.w - SIDE_MARGIN * 2) / tp.w);
+        const w1 = tp.w * sc1;
+        const h1 = tp.h * sc1;
+        const r1 = { x: (SAFE.w - w1) / 2, y: clamp(r0.y + r0.h / 2 - h1 / 2, SIDE_MARGIN, SAFE.h - SIDE_MARGIN - h1), w: w1, h: h1 };
+        const sc = lerp(t, sc0, sc1);
+        const x = lerp(t, r0.x, r1.x);
+        const y = lerp(t, r0.y, r1.y);
+        return (
           <div
+            key={i}
             style={{
-              position: 'absolute', left, top: -cy0 * s, width: contentW, height: contentH,
-              transform: `scale(${s})`, transformOrigin: '0 0',
+              position: 'absolute', left: x, top: y, width: tp.w * sc, height: tp.h * sc,
+              borderRadius: lerp(t, 4, CARD_RADIUS), overflow: 'hidden', background: backdrop,
+              boxShadow: `0 ${lerp(t, 0, 24)}px ${lerp(t, 0, 60)}px rgba(0,0,0,${lerp(t, 0, 0.5)})`,
             }}
           >
-            {content}
+            <div style={{ position: 'absolute', left: CARD_PAD * sc, top: (CARD_PAD - CLIP_Y) * sc, width: p.target.w * sc, height: (p.target.h + CLIP_Y * 2) * sc, overflow: 'hidden' }}>
+              {renderContent(sc, -p.target.x * sc, -(p.target.y - CLIP_Y) * sc)}
+            </div>
           </div>
-        </div>
-      </div>
-      {overlay}
-    </>
+        );
+      })}
+    </div>
   );
 };
 

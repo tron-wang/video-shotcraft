@@ -292,7 +292,7 @@ node <skill>/assets/scripts/source-media.mjs --credits     # → out/CREDITS.md
 | `page-anchor-tour` | screenshot | evidence | 相机依序巡游兴趣点，位置与缩放都变；长距离跳转用它 |
 | `marker-sweep` | screenshot / text | evidence | 荧光笔按词锚逐词扫过一句 |
 | `ink-circle-note` | screenshot / photo | evidence | 手绘圈注 + 箭头 + 短注，钉在内容坐标系 |
-| `loupe-peek` | screenshot / photo | evidence | 圆形放大镜看一眼即撤 |
+| `loupe-peek` | screenshot / photo | evidence | 原地浮起：页面压暗、细节从原位浮起放大读一眼，再落回 |
 | `post-focus-card` | screenshot | evidence | 社群贴文整则置中留白，立体浮入 + 随旁白轻推到重点画一笔；**X / Threads 贴文画面首选** |
 | `source-strip` | text | evidence | 来源条（生产用 `assets/lib/SourceStrip.tsx`） |
 | `stat-punch` | text / video / photo | data | 词锚处大数字砸入 |
