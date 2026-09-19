@@ -19,7 +19,7 @@ name: narration-news-arc
 | ② 事件脉络 | ~20% | context | 谁、在哪、何时、发生什么；一镜一件事 | photo / video / 文章头图 | photo-drift-stack、clip-frame-reveal、chapter-slate（长片分章时） |
 | ③ 证据段 | 30–35% | evidence | 把来源「拍」给观众看：原文页面、贴文、公告；讲到哪句画到哪句 | screenshot（capture-page） | page-scroll-read、page-anchor-tour、marker-sweep、ink-circle-note、loupe-peek + source-strip |
 | ④ 数据段 | ~20% | data | 片中最重要的 1–2 个数字，各占一个词锚；对比用长条 | chart / text（数字出自 facts.md） | stat-punch、bar-grow-compare |
-| ⑤ 影响 / 收尾 | ~15% | impact → outro | 对观众意味着什么；一句收束，来源与品牌落版 | photo / video → text | quote-plate、photo-drift-stack；outro 可用产品运镜卡 |
+| ⑤ 影响 / 收尾 | ~15% | impact → outro | 对观众意味着什么；一句收束，来源与品牌落版 | photo / video → text | timeline-odometer（有日期 / 数字推移时首选）、quote-plate、photo-drift-stack；outro 可用产品运镜卡 |
 
 纯动效镜（只有 chart / text、没有实拍 / 图片 / 截图）全片 ≤ 1/3——④ 与 ⑤ 的落版通常就占满这个配额，
 所以 ①②③ 必须都有素材。
