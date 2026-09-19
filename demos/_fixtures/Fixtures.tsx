@@ -16,9 +16,30 @@ export const G = {
   sideBar: '#5a5a58',
 };
 
+/** 黑金占位色（与 G 同键名）：口播 / 财经风格的 demo 用 `import { GD as G }` 一行换皮，动效与几何不动。 */
+export const GD: typeof G = {
+  bg: '#0e1116',
+  panel: '#15171c',
+  line: '#2a2d33',
+  bar: '#3a3d44',
+  ink: '#f2f0ea',
+  mid: '#8a8780',
+  card: '#181a1f',
+  border: '#2c2f36',
+  side: '#0a0b0e',
+  sideBar: '#2a2d33',
+};
+/** 黑金 demo 的强调色（取代灰阶 demo 里的琥珀橘 #b45309）。 */
+export const GOLD = '#e0b04b';
+
+const G_DEFAULT = G;
+
 export const Card: React.FC<{
   w: number; h: number; seed?: number; style?: React.CSSProperties;
-}> = ({ w, h, seed = 0, style }) => {
+  /** 调色盘，预设灰阶 G；黑金 demo 传 GD。 */
+  palette?: typeof G;
+}> = ({ w, h, seed = 0, style, palette }) => {
+  const G = palette ?? G_DEFAULT;
   const titleW = 45 + ((seed * 37) % 40); // 45–85%
   const lines = 2 + (seed % 3);
   return (
@@ -76,8 +97,8 @@ export const FakeDashboard: React.FC<{ variant?: 'A' | 'B' }> = ({ variant = 'A'
   </div>
 );
 
-export const TitleBlock: React.FC<{ text: string; size?: number }> = ({ text, size = 88 }) => (
-  <div style={{ fontFamily: 'Helvetica, Arial, sans-serif', fontWeight: 800, fontSize: size, color: G.ink, letterSpacing: -1 }}>
+export const TitleBlock: React.FC<{ text: string; size?: number; color?: string }> = ({ text, size = 88, color = G.ink }) => (
+  <div style={{ fontFamily: 'Helvetica, Arial, "PingFang TC", "Noto Sans TC", sans-serif', fontWeight: 800, fontSize: size, color, letterSpacing: -1 }}>
     {text}
   </div>
 );

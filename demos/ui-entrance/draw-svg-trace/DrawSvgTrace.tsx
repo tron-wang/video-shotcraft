@@ -9,7 +9,7 @@
 // 54–64 描边淡出 / 自身 border 淡入 → 68–86 下划线短版生长 → 90–140 真静止 50f。
 import React from 'react';
 import { useCurrentFrame, interpolate, Easing } from 'remotion';
-import { G, TitleBlock } from '../../_fixtures/Fixtures';
+import { GD as G, GOLD, TitleBlock } from '../../_fixtures/Fixtures';
 
 const CW = 560;
 const CH = 380;
@@ -39,7 +39,7 @@ export const DrawSvgTrace: React.FC = () => {
   });
   const flash = frame < 50 ? flashUp : flashDown;
   const strokeW = 4 + flash * 4;
-  const strokeColor = flash > 0.5 ? '#000000' : G.ink;
+  const strokeColor = flash > 0.5 ? GOLD : G.ink;
 
   // 内容淡入：48–56（8f）
   const contentOp = interpolate(frame, [48, 56], [0, 1], {
@@ -70,7 +70,7 @@ export const DrawSvgTrace: React.FC = () => {
   return (
     <div style={{ width: 1920, height: 1080, background: G.bg, position: 'relative', overflow: 'hidden' }}>
       <div style={{ position: 'absolute', left: 120, top: 96 }}>
-        <TitleBlock text="DRAW SVG TRACE" size={54} />
+        <TitleBlock text="流程示意" size={54} color={G.ink} />
       </div>
 
       {/* 卡片内容（手写灰阶块：标题条/下划线位/文字行/头像行），闭合后 8f 淡入 */}

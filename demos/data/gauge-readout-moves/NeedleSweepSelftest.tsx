@@ -5,10 +5,10 @@
 // 帧确定性：纯 interpolate 分段，全部 clamp，settle 后每帧输出常数。
 import React from 'react';
 import { useCurrentFrame, interpolate, Easing } from 'remotion';
-import { G, TitleBlock } from '../../_fixtures/Fixtures';
+import { GD as G, GOLD, TitleBlock } from '../../_fixtures/Fixtures';
 
-const AMBER = '#b45309';
-const RED = '#7c2d12';
+const AMBER = GOLD; // 黑金 demo：强调色取金（原灰阶 demo 为琥珀橘 #b45309）
+const RED = '#c2562e'; // 深底上看得出的暖红
 
 const CARD_W = 1500;
 const CARD_H = 640;
@@ -127,7 +127,7 @@ export const NeedleSweepSelftest: React.FC = () => {
   return (
     <div style={{ width: 1920, height: 1080, background: G.bg, position: 'relative', overflow: 'hidden' }}>
       <div style={{ position: 'absolute', top: 110, width: '100%', textAlign: 'center' }}>
-        <TitleBlock text="NEEDLE SWEEP SELF-TEST" size={72} />
+        <TitleBlock text="市場情緒指數" size={72} color={G.ink} />
       </div>
       <div style={{
         position: 'absolute', left: CARD_X, top: CARD_Y, width: CARD_W, height: CARD_H,

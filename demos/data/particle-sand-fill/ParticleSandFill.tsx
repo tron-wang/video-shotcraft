@@ -6,9 +6,9 @@
 // 帧确定性：sin 散列派生每颗出发帧抖动/起点错高，落地帧由高度差闭式反解。
 import React from 'react';
 import { useCurrentFrame, interpolate, Easing } from 'remotion';
-import { G, TitleBlock } from '../../_fixtures/Fixtures';
+import { GD as G, GOLD, TitleBlock } from '../../_fixtures/Fixtures';
 
-const AMBER = '#b45309';
+const AMBER = GOLD; // 黑金 demo：强调色取金（原灰阶 demo 为琥珀橘 #b45309）
 const frac = (x: number) => x - Math.floor(x);
 const rnd = (i: number, salt: number) => frac(Math.sin(i * 12.9898 + salt * 78.233) * 43758.5453);
 
@@ -38,7 +38,7 @@ export const ParticleSandFill: React.FC = () => {
   return (
     <div style={{ width: 1920, height: 1080, background: G.bg, position: 'relative', overflow: 'hidden' }}>
       <div style={{ position: 'absolute', top: 110, width: '100%', textAlign: 'center' }}>
-        <TitleBlock text="PARTICLE SAND FILL" size={72} />
+        <TitleBlock text="各區報名人數" size={72} color={G.ink} />
       </div>
 
       {/* 图表卡 */}

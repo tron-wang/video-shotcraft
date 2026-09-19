@@ -7,9 +7,9 @@
 // 帧确定性：伪随机全用 sin 散列，无 Math.random / Date.now。
 import React from 'react';
 import { useCurrentFrame, spring, interpolate } from 'remotion';
-import { G, TitleBlock } from '../../_fixtures/Fixtures';
+import { GD as G, GOLD, TitleBlock } from '../../_fixtures/Fixtures';
 
-const AMBER = '#b45309';
+const AMBER = GOLD; // 黑金 demo：强调色取金（原灰阶 demo 为琥珀橘 #b45309）
 const FPS = 30;
 const N = 320;
 const DOT_R = 9;
@@ -147,7 +147,7 @@ export const UnitDotSwarmRegroupV2: React.FC = () => {
   return (
     <div style={{ width: 1920, height: 1080, background: G.bg, position: 'relative', overflow: 'hidden' }}>
       <div style={{ position: 'absolute', top: 110, width: '100%', textAlign: 'center' }}>
-        <TitleBlock text="UNIT DOT SWARM REGROUP V2" size={72} />
+        <TitleBlock text="選民分布" size={72} color={G.ink} />
       </div>
 
       {/* 图例：每点的含义（全程挂角） */}

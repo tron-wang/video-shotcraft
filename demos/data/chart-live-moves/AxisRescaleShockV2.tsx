@@ -7,9 +7,9 @@
 // 帧确定性：数据硬编码，全部 frame 派生，无 Math.random / Date.now。
 import React from 'react';
 import { useCurrentFrame, interpolate, Easing } from 'remotion';
-import { G, TitleBlock } from '../../_fixtures/Fixtures';
+import { GD as G, GOLD, TitleBlock } from '../../_fixtures/Fixtures';
 
-const AMBER = '#b45309';
+const AMBER = GOLD; // 黑金 demo：强调色取金（原灰阶 demo 为琥珀橘 #b45309）
 
 const CARD_W = 1060;
 const CARD_H = 600;
@@ -130,7 +130,7 @@ export const AxisRescaleShockV2: React.FC = () => {
   return (
     <div style={{ width: 1920, height: 1080, background: G.bg, position: 'relative', overflow: 'hidden' }}>
       <div style={{ position: 'absolute', top: 100, width: '100%', textAlign: 'center' }}>
-        <TitleBlock text="AXIS RESCALE SHOCK V2" size={72} />
+        <TitleBlock text="比特幣價格急漲" size={72} color={G.ink} />
       </div>
 
       <div

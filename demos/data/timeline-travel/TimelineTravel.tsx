@@ -5,7 +5,7 @@
 // f0–12 初始静置；f118 起真静止 ≥42f（160f 总长）。
 import React from 'react';
 import { useCurrentFrame, interpolate, Easing, spring } from 'remotion';
-import { G, Card, TitleBlock } from '../../_fixtures/Fixtures';
+import { GD as G, Card, TitleBlock } from '../../_fixtures/Fixtures';
 
 const W = 1920;
 const AXIS_Y = 700;
@@ -80,7 +80,7 @@ const TickStop: React.FC<{ i: number; frame: number }> = ({ i, frame }) => {
             opacity: Math.min(1, s * 2),
           }}
         >
-          <Card w={CARD_W} h={CARD_H} seed={i + 2} />
+          <Card palette={G} w={CARD_W} h={CARD_H} seed={i + 2} />
         </div>
       )}
     </div>
@@ -116,7 +116,7 @@ export const TimelineTravel: React.FC = () => {
         </div>
       </div>
       <div style={{ position: 'absolute', top: 90, width: '100%', textAlign: 'center' }}>
-        <TitleBlock text="TIMELINE TRAVEL" size={64} />
+        <TitleBlock text="事件時間軸" size={64} color={G.ink} />
       </div>
     </div>
   );

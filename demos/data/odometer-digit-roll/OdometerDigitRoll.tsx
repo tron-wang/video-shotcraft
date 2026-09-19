@@ -9,7 +9,7 @@
 // 附 1.035 微缩放加码）→ 66–84 下方标签条淡入 → 84–150 全静止（66f ≥45f）。
 import React from 'react';
 import { useCurrentFrame, interpolate, interpolateColors, Easing } from 'remotion';
-import { G, TitleBlock } from '../../_fixtures/Fixtures';
+import { GD as G, GOLD, TitleBlock } from '../../_fixtures/Fixtures';
 
 const ROW = 210; // 数位行高（overflow 盒高）
 const DW = 126; // 数位盒宽
@@ -119,7 +119,7 @@ const StaticGlyph: React.FC<{ ch: string; color: string; w?: number }> = ({ ch, 
 export const OdometerDigitRoll: React.FC = () => {
   const frame = useCurrentFrame();
   // 全位锁定于 63f：整体加深脉冲 ink→#000→ink（8f），附微缩放加码可感性
-  const inkNow = interpolateColors(frame, [63, 67, 71], [G.ink, '#000000', G.ink]);
+  const inkNow = interpolateColors(frame, [63, 67, 71], [G.ink, GOLD, G.ink]);
   const pulseScale = interpolate(frame, [63, 67, 71], [1, 1.035, 1], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
@@ -134,7 +134,7 @@ export const OdometerDigitRoll: React.FC = () => {
   return (
     <div style={{ width: 1920, height: 1080, background: G.bg, position: 'relative', overflow: 'hidden' }}>
       <div style={{ position: 'absolute', left: 120, top: 96 }}>
-        <TitleBlock text="ODOMETER DIGIT ROLL" size={54} />
+        <TitleBlock text="年增率" size={54} color={G.ink} />
       </div>
       <div
         style={{

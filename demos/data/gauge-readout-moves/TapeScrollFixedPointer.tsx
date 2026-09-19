@@ -6,9 +6,9 @@
 // 帧确定性：value(frame) 纯分段 interpolate 全 clamp，带偏移 = value 线性映射。
 import React from 'react';
 import { useCurrentFrame, interpolate, Easing } from 'remotion';
-import { G, TitleBlock } from '../../_fixtures/Fixtures';
+import { GD as G, GOLD, TitleBlock } from '../../_fixtures/Fixtures';
 
-const AMBER = '#b45309';
+const AMBER = GOLD; // 黑金 demo：强调色取金（原灰阶 demo 为琥珀橘 #b45309）
 
 const PXU = 3; // px per unit：500 量程 → 1500px 长带
 const CENTER_Y = 590; // 取景窗中线（屏幕坐标）
@@ -72,7 +72,7 @@ export const TapeScrollFixedPointer: React.FC = () => {
   return (
     <div style={{ width: 1920, height: 1080, background: G.bg, position: 'relative', overflow: 'hidden' }}>
       <div style={{ position: 'absolute', top: 90, width: '100%', textAlign: 'center' }}>
-        <TitleBlock text="TAPE SCROLL · FIXED POINTER" size={68} />
+        <TitleBlock text="即時匯率" size={68} color={G.ink} />
       </div>
 
       {/* 刻度带容器（世界层：整体在动） */}

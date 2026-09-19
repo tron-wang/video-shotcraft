@@ -6,9 +6,9 @@
 // 帧确定性：波形与尖峰包络都是纯 worldX 函数，无 Math.random / Date.now。
 import React from 'react';
 import { useCurrentFrame, interpolate, Easing } from 'remotion';
-import { G, TitleBlock } from '../../_fixtures/Fixtures';
+import { GD as G, GOLD, TitleBlock } from '../../_fixtures/Fixtures';
 
-const AMBER = '#b45309';
+const AMBER = GOLD; // 黑金 demo：强调色取金（原灰阶 demo 为琥珀橘 #b45309）
 
 const CARD_W = 1080;
 const CARD_H = 560;
@@ -109,7 +109,7 @@ export const OscilloscopeStreamV2: React.FC = () => {
   return (
     <div style={{ width: 1920, height: 1080, background: G.bg, position: 'relative', overflow: 'hidden' }}>
       <div style={{ position: 'absolute', top: 110, width: '100%', textAlign: 'center' }}>
-        <TitleBlock text="OSCILLOSCOPE STREAM V2" size={72} />
+        <TitleBlock text="每秒交易量" size={72} color={G.ink} />
       </div>
 
       <div
@@ -194,7 +194,7 @@ export const OscilloscopeStreamV2: React.FC = () => {
             {/* 写入点亮点（1.5×） */}
             {!frozen && glowOp > 0 && (
               <>
-                <circle cx={PLOT_W} cy={headY} r={24} fill={spikeK > 0.15 ? AMBER : '#8f8f8d'} opacity={0.35 * glowOp} style={{ filter: 'blur(5px)' }} />
+                <circle cx={PLOT_W} cy={headY} r={24} fill={spikeK > 0.15 ? AMBER : G.mid} opacity={0.35 * glowOp} style={{ filter: 'blur(5px)' }} />
                 <circle cx={PLOT_W} cy={headY} r={10.5} fill={dotColor} opacity={glowOp} />
               </>
             )}

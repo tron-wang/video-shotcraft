@@ -8,7 +8,7 @@
 //   卡1: 28–46–54，卡2: 38–56–64 → 64–145 三卡全静止（81f ≥ 40f）。
 import React from 'react';
 import { useCurrentFrame, interpolate, Easing } from 'remotion';
-import { G, Card, TitleBlock } from '../../_fixtures/Fixtures';
+import { GD as G, Card, TitleBlock } from '../../_fixtures/Fixtures';
 
 const CW = 440;
 const CH = 300;
@@ -86,7 +86,7 @@ const FlipCard: React.FC<{ i: number; frame: number }> = ({ i, frame }) => {
       >
         {/* 正面：占位卡 */}
         <div style={{ position: 'absolute', inset: 0, backfaceVisibility: 'hidden' }}>
-          <Card w={CW} h={CH} seed={i + 1} />
+          <Card palette={G} w={CW} h={CH} seed={i + 1} />
           <Sheen angle={angle} />
         </div>
         {/* 背面：白卡 + 大号结论数字（预先转 180°，翻满后正读） */}
@@ -129,7 +129,7 @@ export const CardFlipReveal: React.FC = () => {
   return (
     <div style={{ width: 1920, height: 1080, background: G.bg, position: 'relative', overflow: 'hidden' }}>
       <div style={{ position: 'absolute', left: 120, top: 96 }}>
-        <TitleBlock text="CARD FLIP REVEAL" size={54} />
+        <TitleBlock text="三大關鍵數字" size={54} color={G.ink} />
       </div>
       {[0, 1, 2].map((i) => (
         <FlipCard key={i} i={i} frame={frame} />
