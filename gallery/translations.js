@@ -184,6 +184,9 @@ window.GALLERY_I18N = {
     },
   },
   cardsZh: {
+    'cursor-follow-typing': '游标跟随打字',
+    'search-reveal': '搜寻框揭露',
+    'ai-prompt-composer': 'AI 对话框问答',
     'map-flyover': '卫星地图航线飞越',
     'audio-oscilloscope': '原音示波器',
     'ai-stream-response': 'AI 响应汇入',
@@ -365,6 +368,9 @@ window.GALLERY_I18N = {
     'source-strip': '来源条',
   },
   cardsEn: {
+    'cursor-follow-typing': 'A sentence types out while the camera stays locked on the gold cursor at high zoom, then pulls back to reveal the whole line; key words turn gold as they appear.',
+    'search-reveal': 'Construction rings expand, a short line grows into a search field, the query types in and a results panel unfolds with the keyword highlighted and a trending badge; brand-neutral.',
+    'ai-prompt-composer': 'A brand-neutral AI chat box: the question types in, the mic button morphs into a gold send button, the prompt flies up as a bubble and the answer streams in.',
     'map-flyover': 'A real satellite map flyover from A to B: close on the origin, pull back to show the whole great-circle route drawn in gold, then push in on the destination; night city lights by default.',
     'audio-oscilloscope': 'An oscilloscope driven by the real audio file: a gold waveform rises and falls with the actual loudness, with phosphor trails, a label, timecode and progress bar.',
     'screen-photo-fisheye-focus': 'A real page capture is filmed like a phone pointed at a monitor — barrel distortion, beating scan-line moiré and a vignette — as the camera pushes in on one phrase and a yellow highlighter sweeps across it, bending with the lens.',
@@ -546,6 +552,9 @@ window.GALLERY_I18N = {
     'source-strip': 'A small bottom-left strip naming the outlet for every shot that uses an article image or page screenshot: a citation that clears subtitles and platform buttons.',
   },
   stylesZh: {
+    'cursor-follow-typing': '游标跟随打字',
+    'search-reveal': '搜寻框揭露',
+    'ai-prompt-composer': 'AI 对话框问答',
     'map-flyover': '卫星地图航线飞越',
     'audio-oscilloscope': '原音示波器',
     'page-anchor-tour': '长图兴趣点巡游',
@@ -784,6 +793,9 @@ window.GALLERY_I18N = {
     'iso-poster-stack-cycle': '等轴海报堆叠轮播',
   },
   stylesEn: {
+    'cursor-follow-typing': 'A sentence types out while the camera stays locked on the gold cursor at high zoom, then pulls back to reveal the whole line; key words turn gold as they appear.',
+    'search-reveal': 'Construction rings expand, a short line grows into a search field, the query types in and a results panel unfolds with the keyword highlighted and a trending badge; brand-neutral.',
+    'ai-prompt-composer': 'A brand-neutral AI chat box: the question types in, the mic button morphs into a gold send button, the prompt flies up as a bubble and the answer streams in.',
     'map-flyover': 'A real satellite map flyover from A to B: close on the origin, pull back to show the whole great-circle route drawn in gold, then push in on the destination; night city lights by default.',
     'audio-oscilloscope': 'An oscilloscope driven by the real audio file: a gold waveform rises and falls with the actual loudness, with phosphor trails, a label, timecode and progress bar.',
     'card-flock-stand': 'The first half only, in black and gold: three dark UI cards tumble from edge-on into a stepped formation and keep slowly rotating until the shot ends.',
