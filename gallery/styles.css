@@ -319,7 +319,32 @@ main {
   vertical-align: 0.2em;
   white-space: nowrap;
 }
-.category-link[data-filter="narration"] > span:first-child::before { content: '🎙 '; }
+/* 口播区：与上方产品片分类分开的一块——橘色描边底板 + 橘色小标，选中态是橘色胶囊；
+   角色子项只缩进（不加色点），扫一眼就知道是另一套分类 */
+.narration-nav {
+  --narr: #d9822b;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  margin-top: 1.4rem;
+  padding: 0.55rem 0.4rem 0.5rem;
+  border: 1px solid color-mix(in srgb, var(--narr) 30%, transparent);
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--narr) 7%, transparent);
+}
+.narration-nav__heading {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  margin: 0.15rem 0 0.4rem;
+  padding-left: 0.6rem;
+  /* 与正文色混一点：浅色主题下加深、深色主题下提亮，小字对比才够 */
+  color: color-mix(in srgb, var(--narr) 75%, var(--text));
+}
+.narration-link { padding: 0.5rem 0.6rem 0.5rem 0.75rem; }
+.narration-link.is-active { background: var(--narr); color: #fff; }
+.narration-link:not(.is-active):hover { background: color-mix(in srgb, var(--narr) 14%, transparent); }
+.narration-link--role { padding-left: 1.6rem; font-size: 0.83rem; }
 .category-link .count { flex: none; }
 .category-link.is-active .new-badge { background: #e5484d; color: #fff; }
 
@@ -915,6 +940,10 @@ kbd { padding: 0.2rem 0.34rem; border: 1px solid var(--line); border-radius: 5px
   }
   .category-nav::-webkit-scrollbar { display: none; }
   .category-link { flex-shrink: 0; padding: 0.5rem 0.85rem; font-size: 0.8rem; }
+  /* 窄屏：口播区摊平进横向列，但保留橘色描边以示是另一套分类 */
+  .narration-nav { display: contents; }
+  .narration-link { border: 1px solid color-mix(in srgb, #d9822b 45%, transparent); }
+  .narration-link--role { padding-left: 0.85rem; }
   .intro { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.5rem; }
   .stats { width: fit-content; }
   .controls { top: 124px; }

@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark light">
   <meta name="google-site-verification" content="Qu8vMAC99goV9xnwf_0ZlGGimtmj24TWFNVUiTz2mhM">
-  <meta name="description" content="video-shotcraft is an AI agent skill for Claude Code &amp; Codex that makes cinematic product promo videos with Remotion. Browse 174 shot recipe cards and 231 motion previews.">
+  <meta name="description" content="video-shotcraft is an AI agent skill for Claude Code &amp; Codex that makes cinematic product promo videos with Remotion. Browse 176 shot recipe cards and 233 motion previews.">
   <link rel="canonical" href="https://shotcraft-gallery.nionionote.com/library.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="video-shotcraft">
   <meta property="og:title" content="video-shotcraft — AI Video Skill for Claude Code &amp; Codex">
-  <meta property="og:description" content="An agent skill for crafting cinematic product videos with Remotion: 174 shot recipe cards, 231 motion previews, and a production-ready promo template.">
+  <meta property="og:description" content="An agent skill for crafting cinematic product videos with Remotion: 176 shot recipe cards, 233 motion previews, and a production-ready promo template.">
   <meta property="og:url" content="https://shotcraft-gallery.nionionote.com/library.html">
   <meta property="og:image" content="https://shotcraft-gallery.nionionote.com/og-image.jpg?v=20260726b">
   <meta property="og:image:width" content="1280">
@@ -18,7 +18,7 @@
   <meta property="og:image:alt" content="video-shotcraft Gallery — shot recipes and motion samples">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="video-shotcraft — AI Video Skill for Claude Code &amp; Codex">
-  <meta name="twitter:description" content="An agent skill for crafting cinematic product videos with Remotion: 174 shot recipe cards, 231 motion previews, and a production-ready promo template.">
+  <meta name="twitter:description" content="An agent skill for crafting cinematic product videos with Remotion: 176 shot recipe cards, 233 motion previews, and a production-ready promo template.">
   <meta name="twitter:image" content="https://shotcraft-gallery.nionionote.com/og-image.jpg?v=20260726b">
   <link rel="icon" href="./logo-mark.svg" type="image/svg+xml">
   <title>video-shotcraft — AI Video Skill for Claude Code &amp; Codex | Remotion Shot Library</title>
@@ -27,7 +27,7 @@
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "video-shotcraft",
-    "description": "An AI agent skill for Claude Code and Codex that crafts cinematic product promo videos with Remotion: 174 shot recipe cards, 231 styles, 231 motion previews, and a production-ready 36.2-second video template.",
+    "description": "An AI agent skill for Claude Code and Codex that crafts cinematic product promo videos with Remotion: 176 shot recipe cards, 233 styles, 233 motion previews, and a production-ready 36.2-second video template.",
     "url": "https://shotcraft-gallery.nionionote.com/",
     "sameAs": ["https://github.com/tron-wang/video-shotcraft"],
     "applicationCategory": "MultimediaApplication",
@@ -95,7 +95,17 @@
         <button class="category-link" type="button" data-filter="rhythm"><span data-i18n="catRhythm">Rhythm</span></button>
         <button class="category-link" type="button" data-filter="effects"><span data-i18n="catEffects">Light &amp; Emphasis</span></button>
         <button class="category-link" type="button" data-filter="outro"><span data-i18n="catOutro">Outro</span></button>
-        <button class="category-link" type="button" data-filter="narration"><span data-i18n="catNarration">Narration</span></button>
+        <!-- 口播区：口播模式（新闻 / 文章 → 配音短片）可用的卡，按在口播片里担任的段落角色细分；与上方产品片分类在视觉上分开 -->
+        <div class="narration-nav" role="group" aria-labelledby="narrationNavHeading">
+          <p class="sidebar-heading narration-nav__heading" id="narrationNavHeading"><span aria-hidden="true">🎙</span><span data-i18n="narrHeading">Narration</span></p>
+          <button class="category-link narration-link" type="button" data-filter="narration"><span data-i18n="narrAll">All narration cards</span></button>
+          <button class="category-link narration-link narration-link--role" type="button" data-filter="narration:chapter" data-role="chapter"><span data-i18n="narrNav_chapter">Chapters</span></button>
+          <button class="category-link narration-link narration-link--role" type="button" data-filter="narration:evidence" data-role="evidence"><span data-i18n="narrNav_evidence">Evidence</span></button>
+          <button class="category-link narration-link narration-link--role" type="button" data-filter="narration:data" data-role="data"><span data-i18n="narrNav_data">Data</span></button>
+          <button class="category-link narration-link narration-link--role" type="button" data-filter="narration:quote" data-role="quote"><span data-i18n="narrNav_quote">Quotes</span></button>
+          <button class="category-link narration-link narration-link--role" type="button" data-filter="narration:broll" data-role="broll"><span data-i18n="narrNav_broll">B-roll</span></button>
+          <button class="category-link narration-link narration-link--role" type="button" data-filter="narration:transition" data-role="transition"><span data-i18n="narrNav_transition">Transitions</span></button>
+        </div>
         <!-- 模板区：成品视频范例（gallery/templates/templates.json，不进库；读不到时整段隐藏） -->
         <p class="sidebar-heading sidebar-heading--section" data-i18n="templatesHeading" data-template-nav hidden>Templates</p>
         <button class="category-link" type="button" data-filter="templates" data-template-nav hidden><span data-i18n="allTemplates">Finished videos</span></button>
@@ -110,9 +120,9 @@
         </div>
 
         <dl class="stats" aria-label="Shot library statistics" data-i18n-aria-label="statsLabel">
-          <div><dt data-i18n="cards">Cards</dt><dd id="cardCount">174</dd></div>
-          <div><dt data-i18n="styles">Styles</dt><dd id="styleCount">231</dd></div>
-          <div><dt data-i18n="samples">Samples</dt><dd id="previewCount">231</dd></div>
+          <div><dt data-i18n="cards">Cards</dt><dd id="cardCount">176</dd></div>
+          <div><dt data-i18n="styles">Styles</dt><dd id="styleCount">233</dd></div>
+          <div><dt data-i18n="samples">Samples</dt><dd id="previewCount">233</dd></div>
         </dl>
       </section>
 
@@ -687,6 +697,11 @@
         <p>A support platform establishes first, two subjects hinge upward from adjacent lower pivots, and a restrained outcome wedge rises last to turn evidence into a conclusion.</p>
         <p>Styles: platform-hinge-rise</p>
       </article>
+      <article class="shot-card" id="post-focus-card">
+        <h3>post-focus-card</h3>
+        <p>A social post screenshot sits whole in the centre with breathing room, floats up in 3D, then the camera eases toward the narrated line while a highlighter or ink loop marks it.</p>
+        <p>Styles: post-focus-card</p>
+      </article>
       <article class="shot-card" id="print-texture-transitions">
         <h3>print-texture-transitions</h3>
         <p>A print-based reveal: ink bleeding outward from a drop point to consume the old scene.</p>
@@ -704,7 +719,7 @@
       </article>
       <article class="shot-card" id="quote-plate">
         <h3>quote-plate</h3>
-        <p>A quotation card where the sentence appears phrase by phrase in step with the narration, with one emphasised word and the attribution arriving last.</p>
+        <p>A quotation card: an accent bar grows down the left edge, the sentence wipes in phrase by phrase with the narration, and the attribution arrives last; over footage only a local side scrim darkens the frame.</p>
         <p>Styles: quote-plate</p>
       </article>
       <article class="shot-card" id="radial-ripple-phone-chips">
@@ -891,6 +906,11 @@
         <h3>theme-switch-moves</h3>
         <p>Two theme-change patterns: a diagonal sweep that recolors content in place, and a command-palette ripple with a clear cause and effect.</p>
         <p>Styles: theme-sweep-toggle, palette-theme-ripple</p>
+      </article>
+      <article class="shot-card" id="timeline-odometer">
+        <h3>timeline-odometer</h3>
+        <p>A from-A-to-B card: the big number rolls like an odometer (only the changing digits turn), while a thin timeline draws from the start node to the end node beneath a photo that fades out through a mask.</p>
+        <p>Styles: timeline-odometer</p>
       </article>
       <article class="shot-card" id="timeline-travel">
         <h3>timeline-travel</h3>

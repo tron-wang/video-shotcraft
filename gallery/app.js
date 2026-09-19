@@ -256,6 +256,8 @@ function cardMatches(card) {
   ].join(' ').toLowerCase();
 
   if (state.query && !searchable.includes(state.query.toLowerCase())) return false;
+  // 口播区的角色子筛选：narration:<role> 只看这张卡在口播片里担任的段落角色
+  if (state.filter.startsWith('narration:')) return narrationRole(card) === state.filter.slice('narration:'.length);
   // tags = 主类别（目录）+ frontmatter 标签，一张卡可命中多个筛选类
   if (state.filter !== 'all' && !(card.tags || [card.category]).includes(state.filter)) return false;
   return true;
@@ -351,7 +353,7 @@ function render() {
   const focusMark = captureFocus();
   const cards = state.library.cards.filter(cardMatches);
   // 口播筛选下，专用卡排最前（其余维持原顺序；sort 是稳定排序）
-  if (state.filter === 'narration') cards.sort((x, y) => Number(isNarrationCard(y)) - Number(isNarrationCard(x)));
+  if (state.filter === 'narration' || state.filter.startsWith('narration:')) cards.sort((x, y) => Number(isNarrationCard(y)) - Number(isNarrationCard(x)));
   // 跨类标签之后按主类别分组名不副实：All 视图就是一整片按字母序的平铺
   elements.library.innerHTML = cards.map((card, index) => cardMarkup(card, index)).join('');
   elements.library.setAttribute('aria-busy', 'false');
@@ -459,6 +461,11 @@ function renderCategoryCounts() {
       counts[tag] = (counts[tag] || 0) + 1;
       if (isNewCard(card)) hasNew[tag] = true;
     });
+    const role = narrationRole(card);
+    if (role) {
+      counts[`narration:${role}`] = (counts[`narration:${role}`] || 0) + 1;
+      if (isNewCard(card)) hasNew[`narration:${role}`] = true;
+    }
   });
   elements.filters.querySelectorAll('[data-filter]').forEach((button) => {
     const key = button.dataset.filter;
